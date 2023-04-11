@@ -1,15 +1,6 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Images } from "./images.entity";
-import { Model } from "./model.entity";
-import { Year } from "./year.entity";
-import { Fuel } from "./fuel.entity";
-import { Color } from "./color.entity";
+import { Brand, FuelType, Year } from "../enum/carAds.enum";
 
 @Entity("cars_ads")
 export class CarAds {
@@ -23,24 +14,18 @@ export class CarAds {
   isActive: boolean;
   @Column({ length: 256 })
   description: string;
+  @Column({ length: 25 })
+  color: string;
+  @Column({ length: 256 })
+  model: string;
+  @Column({ type: "enum", enum: Brand })
+  brand: Brand;
+  @Column({ type: "enum", enum: Year })
+  year: Year;
+  @Column({ type: "enum", enum: FuelType })
+  fuel_type: FuelType;
   @OneToMany(() => Images, (Images) => Images, {
     eager: true,
   })
   images: Images[];
-  @OneToOne(() => Model, (model) => model, {
-    eager: true,
-  })
-  model: Model;
-  @OneToOne(() => Year, (year) => year, {
-    eager: true,
-  })
-  year: Year;
-  @OneToOne(() => Fuel, (fuel) => fuel, {
-    eager: true,
-  })
-  fuel_type: Fuel;
-  @OneToOne(() => Color, (color) => color, {
-    eager: true,
-  })
-  color: Color;
 }
