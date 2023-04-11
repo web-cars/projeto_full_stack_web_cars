@@ -58,6 +58,20 @@ export const theme = extendTheme({
             random10: '#6100FF',
             random11: '#5700E3',
             random12: '#30007D'
-        }
+        },
+        fontSizes: {
+          '6xl': '48px',
+          '5xl': '36px',
+          '4xl': '30px',
+          xl: '20px',
+          lg: '18px',
+          md: '16px',
+        },
+        fontWeights: {
+          light: 300,
+          normal: 500,
+          bold: 600,
+          bolder: 700,
+        },
     }
 })
