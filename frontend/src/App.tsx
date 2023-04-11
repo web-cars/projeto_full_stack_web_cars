@@ -1,13 +1,14 @@
 
 import { ChakraProvider } from '@chakra-ui/react'
+import { theme } from './style/theme'
+import { ButtonMode } from './components/DarkMode/index';
 function App() {
 
 
   return (
-    <ChakraProvider>
-      <h1>Hello</h1>
+    <ChakraProvider theme={theme}>
+      <ButtonMode/>
     </ChakraProvider>
-
   )
 }
 
