@@ -2,7 +2,7 @@ import { Flex, HStack, Button, useColorMode, LightMode } from '@chakra-ui/react'
 
 export const ButtonMode = () => {
 
-    const { colorMode, toggleColorMode } = useColorMode()
+    const { toggleColorMode } = useColorMode()
 
     return (
         <Flex height={'10vh'} justifyContent={'flex-end'} alignItems={'center'} >
