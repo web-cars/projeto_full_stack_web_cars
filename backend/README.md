@@ -26,7 +26,7 @@ Principais tecnologias utilizadas.
 
 Diagrama ER da API definindo as relações entre as entidades do banco de dados.
 
-![Diagrama ER](https://github.com/web-cars/projeto_full_stack_web_cars/blob/docs/readme/backend/DER.png?raw=true?s=600)
+![Diagrama ER]<img src="https://github.com/web-cars/projeto_full_stack_web_cars/blob/docs/readme/backend/DER.png?raw=true" alt="Diagrama ER" width="500px"/>
 
 ## 3. Rodando localmente
 
