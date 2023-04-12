@@ -4,7 +4,10 @@ import "dotenv/config";
 
 const setDataSourceConfig = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, "./entities/**.{js,ts}");
-  const migrationsPath: string = path.join(__dirname, "./migrations/**.{js,ts}");
+  const migrationsPath: string = path.join(
+    __dirname,
+    "./migrations/**.{js,ts}"
+  );
 
   const nodeEnv = process.env.NODE_ENV;
 
@@ -28,11 +31,11 @@ const setDataSourceConfig = (): DataSourceOptions => {
 
   return {
     type: "postgres",
-    host: process.env.HOST,
-    username: process.env.DB_USER,
-    password: process.env.DB_PWD,
+    host: process.env.PGHOST,
+    username: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
     port: parseInt(process.env.PGPORT),
-    database: process.env.DB_DB,
+    database: process.env.PGDATABASE,
     synchronize: false,
     logging: false,
     entities: [entitiesPath],
@@ -42,5 +45,3 @@ const setDataSourceConfig = (): DataSourceOptions => {
 
 const AppDataSource = new DataSource(setDataSourceConfig());
 export default AppDataSource;
-
-
