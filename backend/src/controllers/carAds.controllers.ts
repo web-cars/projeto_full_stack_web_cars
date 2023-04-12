@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import listCarAdService from "../services/carAds/listCarAd.service";
 import { updateCarAdService } from "../services/carAds/updateCarAd.service";
+import listCarAdByIdService from "../services/carAds/listCarAdById.service";
 
 
-export const listCarAdController = async (req: Request, res: Response): Promise<Response>=>{
-    const carAds = await listCarAdService()
+export const listCarAdByIdController = async (req: Request, res: Response): Promise<Response>=>{
+    const idCarAds = req.params.id
+    const carAds = await listCarAdByIdService(idCarAds)
     return res.json(carAds)
 }
 
