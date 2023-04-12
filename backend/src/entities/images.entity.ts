@@ -5,6 +5,7 @@ import { CarAds } from "./carAds.entity";
 export class Images {
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
   @Column()
   file: string;
   @ManyToOne(() => CarAds, (car) => car.images)
