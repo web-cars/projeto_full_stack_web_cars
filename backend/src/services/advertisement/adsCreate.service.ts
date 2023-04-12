@@ -1,8 +1,8 @@
 import { IAdvertisementRequest } from "../../interfaces/advertisement";
 import { AppError } from "../../errors/errors";
-import { DataSource } from "typeorm";
 import { Advertisements } from "../../entities/adversitements.entity";
-import { AppDataSource } from "../../data-source";
+import AppDataSource  from "../../data-source";
+import { Images } from "../../entities/images.entity";
 
 
 const advertisementsCreateService = async ({
@@ -28,8 +28,7 @@ const advertisementsCreateService = async ({
         !price ||
         !isActive ||
         !description ||
-        !vehicle_type ||
-        !images 
+        !vehicle_type 
     ) {
         throw new AppError(
             "Fields: brand, model, year, fuel_type, color, fipePrice, price, isActive, description, and vehicle_type are necessary",
@@ -45,6 +44,7 @@ const advertisementsCreateService = async ({
     }
 
     const advertisementRepository = AppDataSource.getRepository(Advertisements);
+    const imagesRepositry = AppDataSource.getRepository(Images)
 
     const newAdvertisement = advertisementRepository.create({
         brand,
@@ -56,15 +56,21 @@ const advertisementsCreateService = async ({
         price,
         isActive,
         description,
-        vehicle_type,
-        images
+        vehicle_type
       });
+      
+    const completeAdvertisement = await advertisementRepository.save(
+      newAdvertisement
+    );
+
+    if(images.length > 0){
+      images.forEach(image => {
+        const newImages = {...image,ads_id:completeAdvertisement.ads_id} 
+        imagesRepositry.save(newImages)
+      })
+    }
     
-      const completeAdvertisement = await advertisementRepository.save(
-        newAdvertisement
-      );
-    
-      return completeAdvertisement;
+    return completeAdvertisement;
 };
 
 export default advertisementsCreateService;

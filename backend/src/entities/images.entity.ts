@@ -6,15 +6,15 @@ import { Advertisements } from "./adversitements.entity";
 @Entity("images")
 export class Images {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  img_id: string;
 
   @Column()
   file: string;
   
-  @Column({ name: 'id' })
+  @Column({ name: 'ads_id' })
   ads_id: string;
 
-  @OneToOne(() => Advertisements, ads => ads.id)
-  @JoinColumn({name:'id'})
-    ads: Advertisements;
+  @OneToOne(() => Advertisements, ads => ads.ads_id)
+  @JoinColumn({name:'ads_id'})
+  ads: Advertisements;
 }                                                                                                                                                                                                        

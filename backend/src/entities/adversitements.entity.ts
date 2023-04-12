@@ -12,7 +12,7 @@ import { Images } from "./images.entity";
   @Entity()
   export class Advertisements{
     @PrimaryGeneratedColumn("uuid")
-      id: string;
+      ads_id: string;
 
       @Column({ type: "decimal", precision: 10, scale: 2 })
       fipePrice: number;
@@ -44,9 +44,4 @@ import { Images } from "./images.entity";
       @Column({ length: 256 })
       vehicle_type: string;
       
-      @OneToMany(() => Images, (Images) => Images, {
-        eager: true,
-      })
-      images: Images[];
-
   }
