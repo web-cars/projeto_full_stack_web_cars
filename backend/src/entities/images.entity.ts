@@ -7,6 +7,6 @@ export class Images {
   id: string;
   @Column()
   file: string;
-  @ManyToOne(() => CarAds, (car) => car)
-  car: string;
+  @ManyToOne(() => CarAds, (car) => car.images)
+  car: CarAds;
 }
