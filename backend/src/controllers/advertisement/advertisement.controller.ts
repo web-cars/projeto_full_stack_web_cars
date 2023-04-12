@@ -3,6 +3,7 @@ import advertisementsCreateService from "../../services/advertisement/adsCreate.
 import { instanceToPlain } from "class-transformer";
 import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
 import listCarAdByIdService from "../../services/advertisement/listCarAdById.service";
+import listAllCarAdsService from './../../services/advertisement/listAllCars.service';
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
   try {
@@ -26,6 +27,11 @@ export const updateCarAdController = async (
 };
 export const getSpecificCarController = async (req: Request, res: Response) => {
   const data = await listCarAdByIdService(req.params.id);
+  return res.status(200).json(data);
+};
+
+export const listAllCarAdsController = async (req: Request, res: Response) => {
+  const data = await listAllCarAdsService();
   return res.status(200).json(data);
 };
 
