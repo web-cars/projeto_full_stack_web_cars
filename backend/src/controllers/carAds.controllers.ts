@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { updateCarAdService } from "../services/carAds/updateCarAd.service";
+import { updateCarAdService } from "../services/carAds/updateCarAd.services";
 
 export const updateCarAdController = async (
   request: Request,
