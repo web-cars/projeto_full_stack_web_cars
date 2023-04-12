@@ -20,7 +20,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
 
     const createAd = (data: FieldValues) => {
         instance
-            .post("carads", data)
+            .post("advertisements", data)
             .then(response => {
                 getCarAds()
             })
@@ -30,7 +30,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     }
     const getCarAds = () => {
         instance
-            .get("carads")
+            .get("advertisements")
             .then((response) => {
                 setCarAds(response.data)
             })
@@ -41,7 +41,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     }
     const getSpecificCarAds = (id: string) => {
         instance
-            .get(`carads/${id}`)
+            .get(`advertisements/${id}`)
             .then((response) => {
                 setCarAds(response.data)
             })
@@ -53,7 +53,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     const editSpecificAd = (id: string, data: FieldValues) => {
 
         instance
-            .patch(`carads/${id}`, data)
+            .patch(`advertisements/${id}`, data)
             .then((response) => {
                 getCarAds()
                 setSpecificAd(response.data)
@@ -67,7 +67,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     }
     const deleteSpecificCarAd = (id: string) => {
         instance
-            .delete(`carads/${id}`)
+            .delete(`advertisements/${id}`)
             .then((response) => {
                 getCarAds()
             })
