@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import advertisementsCreateService from "../../services/advertisement/adsCreate.service";
 import { instanceToPlain } from "class-transformer";
-import { updateCarAdService } from "../../services/advertisement/updateCarAd.service";
+import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
   try {
