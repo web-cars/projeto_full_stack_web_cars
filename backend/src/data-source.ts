@@ -31,11 +31,11 @@ const setDataSourceConfig = (): DataSourceOptions => {
 
   return {
     type: "postgres",
-    host: process.env.PGHOST,
-    username: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
+    host: process.env.HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PWD,
     port: parseInt(process.env.PGPORT),
-    database: process.env.DB,
+    database: process.env.DB_DB,
     synchronize: false,
     logging: false,
     entities: [entitiesPath],
@@ -44,4 +44,6 @@ const setDataSourceConfig = (): DataSourceOptions => {
 };
 
 const dataSourceConfig = setDataSourceConfig();
-export default new DataSource(dataSourceConfig);
+export const AppDataSource = new DataSource(dataSourceConfig);
+
+
