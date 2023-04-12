@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import { AppDataSource } from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import { ICarAdUpdateRequest } from "../../interfaces/carAds.interfaces";
 
