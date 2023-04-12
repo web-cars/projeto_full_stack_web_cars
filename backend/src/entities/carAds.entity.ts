@@ -24,7 +24,7 @@ export class CarAds {
   year: Year;
   @Column({ type: "enum", enum: FuelType })
   fuel_type: FuelType;
-  @OneToMany(() => Images, (Images) => Images, {
+  @OneToMany(() => Images, (Images) => Images.car, {
     eager: true,
   })
   images: Images[];
