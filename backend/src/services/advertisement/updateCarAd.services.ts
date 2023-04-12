@@ -1,12 +1,13 @@
 import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import { Images } from "../../entities/images.entity";
+import { ICarAdResponse } from "../../interfaces/carAds.interfaces";
 import { ICarAdUpdateRequest } from "../../interfaces/carAds.interfaces";
 
 export const updateCarAdService = async (
   payload: ICarAdUpdateRequest,
   id: string
-) => {
+): Promise<ICarAdResponse> => {
   const carAdRepository = AppDataSource.getRepository(CarAds);
   const imagesRepository = AppDataSource.getRepository(Images);
 
