@@ -1,4 +1,6 @@
-import advertisementsCreateController from "../../controllers/advertisement/advertisement.controller";
+import advertisementsCreateController, {
+  getSpecificCarController,
+} from "../../controllers/advertisement/advertisement.controller";
 import { Router } from "express";
 import { verifyIfCarAdExistsMiddleware } from "../../middlewares/verifyIfCarAdExists.middleware";
 import { validSerializerMiddleware } from "../../middlewares/validSerializer.middleware";
@@ -15,5 +17,7 @@ advertisementRoutes.patch(
   validSerializerMiddleware(carAdUpdateSerializer),
   updateCarAdController
 );
+
+advertisementRoutes.get("/:id", getSpecificCarController);
 
 export default advertisementRoutes;
