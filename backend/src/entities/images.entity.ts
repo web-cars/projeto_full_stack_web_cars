@@ -4,7 +4,7 @@ import { CarAds } from "./carAds.entity";
 @Entity("images")
 export class Images {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  img_id: string;
 
   @Column()
   file: string;

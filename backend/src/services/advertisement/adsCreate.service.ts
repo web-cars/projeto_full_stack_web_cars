@@ -1,7 +1,8 @@
 import { AppError } from "../../errors/errors";
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import { ICreateCarAdResponse } from "../../interfaces/carAds.interfaces";
+import { Images } from "../../entities/images.entity";
 
 const advertisementsCreateService = async ({
   brand,
@@ -34,7 +35,7 @@ const advertisementsCreateService = async ({
   }
 
   const advertisementRepository = AppDataSource.getRepository(CarAds);
-
+  const imagesRepositry = AppDataSource.getRepository(Images);
   const newAdvertisement = advertisementRepository.create({
     brand,
     model,
@@ -45,12 +46,18 @@ const advertisementsCreateService = async ({
     price,
     isActive,
     description,
-    images,
   });
 
   const completeAdvertisement = await advertisementRepository.save(
     newAdvertisement
   );
+
+  if (images.length > 0) {
+    images.forEach((image) => {
+      const newImages = { ...image, car: completeAdvertisement };
+      imagesRepositry.save(newImages);
+    });
+  }
 
   return completeAdvertisement;
 };
