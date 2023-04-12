@@ -1,7 +1,5 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
-//import { CarAds } from "./carAds.entity";
-import { Advertisements } from "./adversitements.entity";
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CarAds } from "./carAds.entity";
 
 @Entity("images")
 export class Images {
@@ -10,11 +8,6 @@ export class Images {
 
   @Column()
   file: string;
-  
-  @Column({ name: 'ads_id' })
-  ads_id: string;
-
-  @OneToOne(() => Advertisements, ads => ads.ads_id)
-  @JoinColumn({name:'ads_id'})
-  ads: Advertisements;
-}                                                                                                                                                                                                        
+  @ManyToOne(() => CarAds, (car) => car.images)
+  car: CarAds;
+}

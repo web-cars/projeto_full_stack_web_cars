@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import '@fontsource/lexend/latin.css'
 
 export const theme = extendTheme({
     config: {
@@ -20,7 +21,7 @@ export const theme = extendTheme({
             brand1: '#4529E6',
             brand2: '#5126EA',
             brand3: '#B0A6F0',
-            brand: '#EDEAFD'
+            brand4: '#EDEAFD'
         },
         greyScale: {
             grey0: '#0B0D0D',

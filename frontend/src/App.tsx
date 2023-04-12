@@ -1,14 +1,21 @@
 
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, DarkMode } from '@chakra-ui/react'
 import { theme } from './style/theme'
-import { ButtonMode } from './components/DarkMode/index';
+import { AdsProvider } from './context/carAds.context'
+import { StyleModal } from './components/Modal/index';
+import { Image } from '@chakra-ui/react';
+
 function App() {
 
 
   return (
-    <ChakraProvider theme={theme}>
-      <ButtonMode/>
-    </ChakraProvider>
+
+    <AdsProvider>
+      <ChakraProvider theme={theme}>
+        <h1>Hello</h1>
+      </ChakraProvider>
+    </AdsProvider>
+
   )
 }
 

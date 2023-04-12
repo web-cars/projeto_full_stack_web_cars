@@ -1,46 +1,27 @@
 import { Request, Response } from "express";
 import advertisementsCreateService from "../../services/advertisement/adsCreate.service";
 import { instanceToPlain } from "class-transformer";
-
+import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
-    const {
-    brand,
-    model,
-    year,
-    fuel_type,
-    color,
-    fipePrice,
-    price,
-    isActive,
-    description,
-    vehicle_type,
-    images
-} = req.body;
-
-try {
-    const newAdvertisement = await advertisementsCreateService({
-    brand,
-    model,
-    year,
-    fuel_type,
-    color,
-    fipePrice,
-    price,
-    isActive,
-    description,
-    vehicle_type,
-    images
-    });
+  try {
+    const newAdvertisement = await advertisementsCreateService(req.body);
 
     return res.status(201).json(instanceToPlain(newAdvertisement));
-} catch (error) {
-  if (error instanceof Error) {
-    return res.status(403).json({
-      message: error.message,
-    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(403).json({
+        message: error.message,
+      });
+    }
   }
-}
+};
+export const updateCarAdController = async (
+  request: Request,
+  response: Response
+) => {
+  const data = await updateCarAdService(request.body, request.params.id);
+  return response.status(200).json(data);
 };
 
 export default advertisementsCreateController;
