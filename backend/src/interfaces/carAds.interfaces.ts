@@ -26,5 +26,16 @@ interface ICarAdUpdateRequest {
   fuel_type?: FuelType;
   images?: Images[];
 }
-
-export { ICarAdResponse, ICarAdUpdateRequest };
+interface ICreateCarAdResponse {
+  fipePrice: number;
+  price: number;
+  isActive: boolean;
+  description: string;
+  color: string;
+  model: string;
+  brand: Brand;
+  year: Year;
+  fuel_type: FuelType;
+  images: Images[];
+}
+export { ICarAdResponse, ICarAdUpdateRequest, ICreateCarAdResponse };

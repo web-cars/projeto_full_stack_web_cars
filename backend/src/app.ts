@@ -1,13 +1,13 @@
 import "express-async-errors";
 import "reflect-metadata";
-import express from "express";
+import express, { Request, Response } from "express";
+import advertisementRoutes from "./routes/advertisement/vehicle.routes";
 import cors from "cors";
 import { errorHandler } from "./errors/errorHandler";
-import { carAdsRoutes } from "./routes/carAds.routes";
 
 const app = express();
 app.use(express.json());
-app.use("/carads", carAdsRoutes);
-app.use(errorHandler);
+app.use(cors());
+app.use("/advertisements", advertisementRoutes);
 
 export default app;
