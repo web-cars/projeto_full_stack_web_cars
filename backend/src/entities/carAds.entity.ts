@@ -10,9 +10,9 @@ export class CarAds {
   fipePrice: number;
   @Column({ type: "decimal", precision: 10, scale: 2 })
   price: number;
-  @Column()
+  @Column({ default: true })
   isActive: boolean;
-  @Column({ length: 256 })
+  @Column({ length: 256, nullable: true })
   description: string;
   @Column({ length: 25 })
   color: string;
@@ -24,7 +24,7 @@ export class CarAds {
   year: Year;
   @Column({ type: "enum", enum: FuelType })
   fuel_type: FuelType;
-  @OneToMany(() => Images, (Images) => Images.car, {
+  @OneToMany(() => Images, (image) => image.car, {
     eager: true,
   })
   images: Images[];

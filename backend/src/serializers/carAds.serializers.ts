@@ -22,4 +22,3 @@ export const carAdUpdateSerializer = z.object({
   fuel_type: z.nativeEnum(FuelType).optional(),
   images: imagesUpdateSerializer.array().optional(),
 });
-

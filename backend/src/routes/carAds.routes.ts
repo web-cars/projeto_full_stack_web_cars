@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { listCarAdController } from "../controllers/carAds.controllers";
+import { validSerializerMiddleware } from "../middlewares/validSerializer.middleware";
+import { updateCarAdController } from "../controllers/carAds.controllers";
+import { carAdUpdateSerializer } from "../serializers/carAds.serializers";
+import { verifyIfCarAdExistsMiddleware } from "../middlewares/verifyIfCarAdExists.middleware";
 
-const carAdsRoutes : Router = Router()
+export const carAdsRoutes = Router();
 
-carAdsRoutes .get('', listCarAdController)
-
-export  { carAdsRoutes } 
+carAdsRoutes.patch(
+  "/:id",
+  verifyIfCarAdExistsMiddleware,
+  validSerializerMiddleware(carAdUpdateSerializer),
+  updateCarAdController
+);
