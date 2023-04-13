@@ -11,7 +11,9 @@ export const validSerializerMiddleware =
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        throw new AppError("Please verify if all fields are valid");
+        throw new AppError(
+          "Please verify if all fields are being sent or are valid"
+        );
         return response.json(error.issues).status(400);
       }
       next();
