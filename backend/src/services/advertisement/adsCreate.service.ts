@@ -3,6 +3,7 @@ import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import { ICreateCarAdResponse } from "../../interfaces/carAds.interfaces";
 import { Images } from "../../entities/images.entity";
+import { returnCarAdSerializer } from "../../serializers/carAds.serializers";
 
 const advertisementsCreateService = async ({
   brand,
@@ -51,15 +52,22 @@ const advertisementsCreateService = async ({
   const completeAdvertisement = await advertisementRepository.save(
     newAdvertisement
   );
-
   if (images.length > 0) {
-    images.forEach((image) => {
-      const newImages = { ...image, car: completeAdvertisement };
-      imagesRepositry.save(newImages);
-    });
+    for (let i = 0; i < images.length; i++) {
+      const newImages = { ...images[i], car: completeAdvertisement };
+      await imagesRepositry.save(newImages);
+    }
   }
 
-  return completeAdvertisement;
+  const imagesToAd = await imagesRepositry.find({
+    where: { car: { id: newAdvertisement.id } },
+    relations: { car: false },
+  });
+
+  return {
+    ...completeAdvertisement,
+    images: imagesToAd,
+  };
 };
 
 export default advertisementsCreateService;
