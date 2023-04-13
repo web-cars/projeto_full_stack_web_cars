@@ -36,5 +36,7 @@ export const updateCarAdService = async (
   });
 
   await carAdRepository.save(updatedCarAd);
-  return updatedCarAd;
+
+  const returnCarAd = carAdRepository.findOneBy({ id: id });
+  return returnCarAd;
 };

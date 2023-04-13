@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { verifyIfCarAdExistsMiddleware } from "../../middlewares/verifyIfCarAdExists.middleware";
 import { validSerializerMiddleware } from "../../middlewares/validSerializer.middleware";
-import { carAdUpdateSerializer } from "../../serializers/carAds.serializers";
+import {
+  carAdCreateSerializer,
+  carAdUpdateSerializer,
+} from "../../serializers/carAds.serializers";
 import {
   advertisementsCreateController,
   deleteCarAdController,
@@ -12,7 +15,11 @@ import { listAllCarAdsController } from "./../../controllers/advertisement/adver
 
 const advertisementRoutes = Router();
 
-advertisementRoutes.post("", advertisementsCreateController);
+advertisementRoutes.post(
+  "",
+  // validSerializerMiddleware(carAdCreateSerializer),
+  advertisementsCreateController
+);
 
 advertisementRoutes.patch(
   "/:id",

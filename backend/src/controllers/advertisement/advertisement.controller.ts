@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import advertisementsCreateService from "../../services/advertisement/adsCreate.service";
-import { instanceToPlain } from "class-transformer";
 import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
 import listCarAdByIdService from "../../services/advertisement/listCarAdById.service";
 import listAllCarAdsService from "./../../services/advertisement/listAllCars.service";
@@ -13,7 +12,7 @@ export const advertisementsCreateController = async (
   try {
     const newAdvertisement = await advertisementsCreateService(req.body);
 
-    return res.status(201).json(instanceToPlain(newAdvertisement));
+    return res.status(201).json(newAdvertisement);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(403).json({
