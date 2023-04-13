@@ -53,10 +53,10 @@ const advertisementsCreateService = async ({
   );
 
   if (images.length > 0) {
-    images.forEach((image) => {
-      const newImages = { ...image, car: completeAdvertisement };
-      imagesRepositry.save(newImages);
-    });
+    for (let i = 0; i < images.length; i++) {
+      const newImages = { ...images[i], car: completeAdvertisement };
+      await imagesRepositry.save(newImages);
+    }
   }
 
   return completeAdvertisement;
