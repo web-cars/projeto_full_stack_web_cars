@@ -43,9 +43,9 @@ const Sidebar = () => {
         </ListItem>
       </List>
       <Box display={isLargerThan768 ? "none" : "block"}>
-          <Flex justifyContent="center" align="center">
-            <Button colorScheme="purple" top="0" left="-8" p="4" w="73%" borderRadius="0">Ver anúncios</Button>
-               </Flex>
+        <Flex justifyContent="center" align="center">
+            <Button bg ="#5126EA" color="white" top="0" left="-8" p="4" w="73%" borderRadius="3">Ver anúncios</Button>
+        </Flex>
       </Box>
     </Box>
   );
