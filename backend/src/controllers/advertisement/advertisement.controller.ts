@@ -4,6 +4,7 @@ import { instanceToPlain } from "class-transformer";
 import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
 import listCarAdByIdService from "../../services/advertisement/listCarAdById.service";
 import listAllCarAdsService from './../../services/advertisement/listAllCars.service';
+import { deleteCarAdService } from "../../services/advertisement/deleteCarAd.service";
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
   try {
@@ -30,9 +31,16 @@ export const getSpecificCarController = async (req: Request, res: Response) => {
   return res.status(200).json(data);
 };
 
+
 export const listAllCarAdsController = async (req: Request, res: Response) => {
   const data = await listAllCarAdsService();
   return res.status(200).json(data);
+
+
+export const deleteCarAdController = async (req: Request, res: Response) => {
+  await deleteCarAdService(req.params.id);
+  return res.status(204).json();
+
 };
 
 export default advertisementsCreateController;

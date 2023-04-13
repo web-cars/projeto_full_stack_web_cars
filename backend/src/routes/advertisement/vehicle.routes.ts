@@ -1,4 +1,5 @@
 import advertisementsCreateController, {
+  deleteCarAdController,
   getSpecificCarController,
 } from "../../controllers/advertisement/advertisement.controller";
 import { Router } from "express";
@@ -22,5 +23,12 @@ advertisementRoutes.patch(
 advertisementRoutes.get("/:id", getSpecificCarController);
 
 advertisementRoutes.get("", listAllCarAdsController);
+
+advertisementRoutes.delete(
+  "/:id",
+  verifyIfCarAdExistsMiddleware,
+  deleteCarAdController
+);
+
 
 export default advertisementRoutes;
