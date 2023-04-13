@@ -12,9 +12,9 @@ export interface IInfoAd{
 }
 
 export interface ICardProfile{
-  image: string
-  name: string
-  description: string
+  image?: string
+  name?: string 
+  description?: string
 }
 
 export interface IUser {
@@ -29,4 +29,5 @@ export interface IUser {
   description: string
   addressID: number
   image: string
+
 }
