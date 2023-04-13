@@ -13,3 +13,13 @@ export interface IAdvertisementRequest {
     vehicle_type: string;
     images: Images[]
   }
+
+export interface IAdsCharactersResponse {
+characters:{
+    colors:string[],
+    years:number[],
+    fuels_type:string[],
+    models:string[],
+    brands:string[]
+}
+}
