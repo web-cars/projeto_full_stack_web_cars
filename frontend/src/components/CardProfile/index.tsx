@@ -1,4 +1,7 @@
+
 import { ICardProfile } from './../../interface/index';
+import Mock from '../../mock/mock.json'
+
 import { 
   Card, 
   CardBody, 
@@ -8,6 +11,7 @@ import {
   Text,  
   CardFooter,  
   Button,
+
   Box
 } from '@chakra-ui/react'
 
@@ -34,3 +38,4 @@ export const CardProfile = ({image, name, description}: ICardProfile) => {
     </Box>
   )
 }
+

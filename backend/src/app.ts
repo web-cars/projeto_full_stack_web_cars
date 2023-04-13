@@ -1,7 +1,7 @@
 import "express-async-errors";
 import "reflect-metadata";
-import express, { Request, Response } from "express";
-import advertisementRoutes from "./routes/advertisement/vehicle.routes";
+import express from "express";
+import advertisementRoutes from "./routes/advertisement/advertisement.routes";
 import cors from "cors";
 import { errorHandler } from "./errors/errorHandler";
 

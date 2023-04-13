@@ -16,3 +16,18 @@ export interface ICardProfile{
   name?: string 
   description?: string
 }
+
+export interface IUser {
+  id: number
+  name: string
+  email: string
+  cpf: string
+  cellphone: string
+  password: string
+  isAdmin: boolean
+  birthDate: string
+  description: string
+  addressID: number
+  image: string
+
+}

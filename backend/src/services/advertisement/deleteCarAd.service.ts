@@ -3,11 +3,11 @@ import { CarAds } from "../../entities/carAds.entity";
 import { Images } from "../../entities/images.entity";
 
 export const deleteCarAdService = async (id: string): Promise<void> => {
-  const carAdRepository = AppDataSource.getRepository(CarAds);
+  const advertisementsRepository = AppDataSource.getRepository(CarAds);
   const imagesRepository = AppDataSource.getRepository(Images);
 
-  const carAdvertisement = await carAdRepository.findOneBy({ id });
+  const carAdvertisement = await advertisementsRepository.findOneBy({ id });
 
   await imagesRepository.delete({ car: carAdvertisement });
-  await carAdRepository.delete({ id });
+  await advertisementsRepository.delete({ id });
 };
