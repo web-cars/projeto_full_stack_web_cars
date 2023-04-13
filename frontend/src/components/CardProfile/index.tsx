@@ -9,7 +9,6 @@ import {
   CardFooter,  
   Button,
   Box,
-  DarkMode
 } from '@chakra-ui/react'
 
 
@@ -20,7 +19,7 @@ export const CardProfile = () => {
 
   return (
     <Box display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'}>
-      <Card width={{base: '90%', md: '30%'}} h={{base: '20em', md: '18em'}}>
+      <Card width={{base: '90%', md: '20%'}} h={{base: '20em', md: '18em'}}>
         <CardBody display={'flex'} alignItems={'center'} flexDirection={'column'} justifyContent={'center'}>
           <Avatar name={name} src={image} />
           <Stack mt='6' spacing='3' display={'flex'} alignItems={'center'} flexDirection={'column'} justifyContent={'center'}>
