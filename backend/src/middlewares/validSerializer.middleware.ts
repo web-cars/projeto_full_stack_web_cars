@@ -6,8 +6,8 @@ export const validSerializerMiddleware =
   (request: Request, response: Response, next: NextFunction) => {
     try {
       const validatedBody = schema.parse(request.body);
-
       request.body = validatedBody;
+      
       next();
     } catch (error) {
       if (error instanceof ZodError) {
