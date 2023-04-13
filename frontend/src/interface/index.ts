@@ -10,3 +10,9 @@ export interface IInfoAd{
   km: string
   price: string
 }
+
+export interface ICardProfile{
+  image?: string
+  name?: string 
+  description?: string
+}
