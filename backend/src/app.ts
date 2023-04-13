@@ -3,7 +3,6 @@ import "reflect-metadata";
 import express, { Request, Response } from "express";
 import advertisementRoutes from "./routes/advertisement/vehicle.routes";
 import cors from "cors";
-import { errorHandler } from "./errors/errorHandler";
 
 const app = express();
 app.use(express.json());
