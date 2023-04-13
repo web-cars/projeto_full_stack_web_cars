@@ -11,15 +11,16 @@ import {
   getSpecificCarController,
   updateCarAdController,
 } from "../../controllers/advertisement/advertisement.controller";
-import { listAllCarAdsController } from "./../../controllers/advertisement/advertisement.controller";
+import { listAllCarAdsController } from "../../controllers/advertisement/advertisement.controller";
 
 const advertisementRoutes = Router();
 
 advertisementRoutes.post(
   "",
-  // validSerializerMiddleware(carAdCreateSerializer),
+  validSerializerMiddleware(carAdCreateSerializer),
   advertisementsCreateController
 );
+advertisementRoutes.get("", listAllCarAdsController);
 
 advertisementRoutes.patch(
   "/:id",
@@ -28,9 +29,11 @@ advertisementRoutes.patch(
   updateCarAdController
 );
 
-advertisementRoutes.get("/:id", getSpecificCarController);
-
-advertisementRoutes.get("", listAllCarAdsController);
+advertisementRoutes.get(
+  "/:id",
+  verifyIfCarAdExistsMiddleware,
+  getSpecificCarController
+);
 
 advertisementRoutes.delete(
   "/:id",
