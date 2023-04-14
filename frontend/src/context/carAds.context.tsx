@@ -1,37 +1,39 @@
 import { createContext, useEffect, useState } from "react";
-import { iCarAdsContextInterface, iCarAdsInterface, iErrorAxios, iFipeResponseInterface, iProviderProps } from "../interfaces/carAds.interface";
+import { IAdswithPagination, iCarAdsContextInterface, iCarAdsInterface, iErrorAxios, iFipeResponseInterface, iProviderProps } from "../interfaces/carAds.interface";
 import { fipeInstance, instance } from "../services/instance";
 import { FieldValues } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 
 
 export const CarAdsContext = createContext({} as iCarAdsContextInterface);
 
 export const AdsProvider = ({ children }: iProviderProps) => {
-    const [carAds, setCarAds] = useState<iCarAdsInterface[] | []>([])
+    const [carAds, setCarAds] = useState<IAdswithPagination | null>(null)
     const [specificAd, setSpecificAd] = useState<iCarAdsInterface | null>(null)
     const [fipe, setFipe] = useState<iFipeResponseInterface | null>(null)
-
     const onSubmitCarAd = (data: FieldValues) => createAd(data)
     const onDeleteCarAd = (id: string) => deleteSpecificCarAd(id)
     const onGetSpecificAd = (id: string) => getSpecificCarAds(id)
     const onUpdateCarAd = (id: string, data: FieldValues) => editSpecificAd(id, data)
     const onFipeRequest = (brand: string, name: string, year: number, fuel: number) => getFipeCar(brand, name, year, fuel)
 
+
     const createAd = (data: FieldValues) => {
         instance
             .post("advertisements", data)
             .then(response => {
-                getCarAds()
+                getCarAds(1)
             })
             .catch((err: iErrorAxios) => {
                 console.log(err)
             })
     }
-    const getCarAds = () => {
+    const getCarAds = (page: number) => {
         instance
-            .get("advertisements")
+            .get("advertisements", { params: { page: page } })
             .then((response) => {
+
                 setCarAds(response.data)
             })
             .catch((err) =>
@@ -44,6 +46,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
             .get(`advertisements/${id}`)
             .then((response) => {
                 setCarAds(response.data)
+
             })
             .catch((err) =>
                 console.log(err)
@@ -55,7 +58,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         instance
             .patch(`advertisements/${id}`, data)
             .then((response) => {
-                getCarAds()
+                getCarAds(1)
                 setSpecificAd(response.data)
 
             })
@@ -69,7 +72,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         instance
             .delete(`advertisements/${id}`)
             .then((response) => {
-                getCarAds()
+                getCarAds(1)
             })
             .catch((err) => {
                 console.log(err)
@@ -88,7 +91,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     }
 
     useEffect(() => {
-        getCarAds()
+        getCarAds(1)
     }, [])
 
 
@@ -106,7 +109,8 @@ export const AdsProvider = ({ children }: iProviderProps) => {
                 onGetSpecificAd,
                 onUpdateCarAd,
                 onFipeRequest,
-                fipe
+                fipe,
+                getCarAds
             }}
         >
             {children}
