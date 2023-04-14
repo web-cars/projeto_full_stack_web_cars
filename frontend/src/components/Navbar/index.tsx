@@ -23,8 +23,8 @@ const Navbar = () => {
     <NavStyled>
       <NavContent>
         <Logotipo className="logo">
-          <Link to="/home">
-              <img src={logo} alt="" />
+          <Link to="/">
+            <img src={logo} alt="" />
           </Link>
         </Logotipo>
 
@@ -34,24 +34,14 @@ const Navbar = () => {
 
         <MenuLinks visible={visible}>
           <IoClose size={28} onClick={() => setVisible(false)} />
-          <li>
-            <a href={"#cars"}>Carros</a>
-          </li>
-          <li>
-            <a href={"#motorcycle"}>Motos</a>
-          </li>
-          <li>
-            <a href={"auction"}>Leilão</a>
-          </li>
 
           <DivLineHeaderStyled></DivLineHeaderStyled>
 
-          <Link to="/login">
+          <Link to="/">
             <ButtonLoginStyled>Fazer Login</ButtonLoginStyled>
           </Link>
 
-          <Link to="/register">
-            {" "}
+          <Link to="/">
             <ButtonRegisterStyled>Cadastrar</ButtonRegisterStyled>
           </Link>
         </MenuLinks>

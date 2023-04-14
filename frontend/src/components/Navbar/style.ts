@@ -59,7 +59,7 @@ export const MenuIconStyled = styled.div.attrs((props: PropTypeBg) => ({
 `;
 
 export const MenuLinks = styled.ul<PropTypeBg>`
-  width: 700px;
+  width: 320px;
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
@@ -104,7 +104,7 @@ export const MenuLinks = styled.ul<PropTypeBg>`
     top: 20px;
     right: 40px;
     overflow: hidden;
-    height: 430px;
+    height: max-content;
     width: 300px;
     padding: 15px;
     border-radius: 5px;
