@@ -38,4 +38,19 @@ interface ICreateCarAdResponse {
   fuel_type: FuelType;
   images: Images[];
 }
-export { ICarAdResponse, ICarAdUpdateRequest, ICreateCarAdResponse };
+interface IPagination {
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  total: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  nextPage?: string;
+  previousPage?: string;
+}
+export {
+  ICarAdResponse,
+  ICarAdUpdateRequest,
+  ICreateCarAdResponse,
+  IPagination,
+};
