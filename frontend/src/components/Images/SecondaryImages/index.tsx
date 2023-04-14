@@ -10,7 +10,10 @@ export const SecondaryImages = () => {
       backgroundColor={"greyScale.grey10"}
       padding={"36px 44px"}
       borderRadius={"4px"}
-      width={"60%"}
+      width={"30%"}
+      h={"48%"}
+      mb={"12px"}
+      zIndex={1}
     >
       <Heading
         marginBottom={"32px"}
@@ -21,8 +24,8 @@ export const SecondaryImages = () => {
       </Heading>
 
       <Flex max-width={"440px"} flexWrap={"wrap"} gap={"14px"}>
-        {specificAd?.image &&
-          specificAd?.image.map((image) => [
+        {specificAd?.images &&
+          specificAd?.images.map((image) => [
             <Flex
               alignItems={"center"}
               backgroundColor={"greyScale.grey7"}

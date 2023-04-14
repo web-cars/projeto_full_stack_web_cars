@@ -19,7 +19,7 @@ const getSpecificCarController = async (req: Request, res: Response) => {
 };
 
 const listAllCarAdsController = async (req: Request, res: Response) => {
-  const data = await listAllCarAdsService();
+  const data = await listAllCarAdsService(+req.query.page || 1);
   return res.status(200).json(data);
 };
 

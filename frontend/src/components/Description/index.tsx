@@ -10,6 +10,8 @@ export const Description = () => {
       borderRadius={"4px"}
       justifyContent={"center"}
       border={"none"}
+      w={"55%"}
+      zIndex={1}
     >
       <Heading
         color={"greyScale.grey1"}

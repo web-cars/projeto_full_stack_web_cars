@@ -17,6 +17,7 @@ const carAdUpdateSerializer = z.object({
   model: z.string().max(256).optional(),
   brand: z.nativeEnum(Brand).optional(),
   year: z.nativeEnum(Year).optional(),
+  kilometers: z.number().optional(),
   fuel_type: z.nativeEnum(FuelType).optional(),
   images: imagesUpdateSerializer.array().optional(),
 });
@@ -34,6 +35,7 @@ const carAdCreateSerializer = z.object({
   year: z.nativeEnum(Year),
   fuel_type: z.nativeEnum(FuelType),
   images: z.array(imagesCreateSerializer).nonempty(),
+  kilometers: z.number(),
   fipePrice: z
     .number()
     .nonnegative()

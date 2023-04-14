@@ -18,6 +18,8 @@ export class CarAds {
   color: string;
   @Column({ length: 256 })
   model: string;
+  @Column()
+  kilometers: number;
   @Column({ type: "enum", enum: Brand })
   brand: Brand;
   @Column({ type: "enum", enum: Year })
