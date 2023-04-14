@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { Homepage } from '../pages/homepage';
-import { SpecificAd } from '../pages/specificAd';
+import { Homepage } from '../Pages/homepage';
+import { SpecificAd } from '../Pages/specificAd';
+
 
 export const RoutesMain = () => {
   return (

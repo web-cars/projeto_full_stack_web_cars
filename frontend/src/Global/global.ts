@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 
 * {
-    width: 100%;
     margin:0;
     padding: 0;
     outline:0;
@@ -73,9 +72,7 @@ export default createGlobalStyle`
     text-decoration: none; 
   }
 
-  body, input, button, textarea {
-    font-family: 'Poppins';
-  }
+
   
   button {
     text-align: center;

@@ -8,6 +8,7 @@ import { Description } from "../components/Description";
 import { CardProfile } from "../components/CardProfile";
 import Footer from "../components/Footer";
 import { InfoAd } from "../components/InfoAd";
+import Navbar from "../components/Navbar";
 
 
 export const SpecificAd = () => {
@@ -17,8 +18,8 @@ export const SpecificAd = () => {
   const car = `${specificAd?.brand} ${specificAd?.model}`
   return (
     <>
+      <Navbar />
       <Flex w={"100%"} bgColor=' greyScale.grey8' justify={"center"}>
-
         <Flex h={"90vh"} direction={"column"} wrap={"wrap"} w={"80%"} justify={"flex-start"} p="20px" align={"center"}>
           <PrimaryImage />
           <InfoAd car={car} year={specificAd?.year} price={specificAd?.price} km={specificAd?.kilometers} />

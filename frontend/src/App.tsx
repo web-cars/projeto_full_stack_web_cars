@@ -9,9 +9,7 @@ function App() {
   return (
     <AdsProvider>
       <ChakraProvider theme={theme}>
-        <Router>
-          <RoutesMain />
-        </Router>
+        <RoutesMain />
       </ChakraProvider>
     </AdsProvider>
   )

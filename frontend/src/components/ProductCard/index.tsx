@@ -20,8 +20,8 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
   return (
     <>
       {isActive ? (
-        <Link to={`/adCar/${id}`}>
-          <Card backgroundColor={"transparent"} maxW="sm" onClick={() => onGetSpecificAd(id)}>
+        <Link to={`/adCar/${id}`} style={{ width: "30%" }}>
+          <Card backgroundColor={"transparent"} margin={"0"} maxW="sm" onClick={() => onGetSpecificAd(id)}>
             <CardBody
               borderRadius={"4px"}
               backgroundColor={"white"}
