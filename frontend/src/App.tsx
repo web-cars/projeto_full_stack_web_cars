@@ -1,23 +1,22 @@
 
-import { ChakraProvider, DarkMode } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from './style/theme'
 import { AdsProvider } from './context/carAds.context'
-import { StyleModal } from './components/Modal/index';
-import { Image } from '@chakra-ui/react';
-import Banner from './components/Banner';
+import { RoutesMain } from './routes';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 
 function App() {
-
-
   return (
-
     <AdsProvider>
       <ChakraProvider theme={theme}>
-        <Banner/>
+        <Router>
+          <RoutesMain />
+        </Router>
       </ChakraProvider>
     </AdsProvider>
-
   )
 }
 
 export default App
+

@@ -9,6 +9,7 @@ interface ICarAdResponse {
   description: string;
   color: string;
   model: string;
+  kilometers: number;
   brand: Brand;
   year: Year;
   fuel_type: FuelType;
@@ -21,6 +22,7 @@ interface ICarAdUpdateRequest {
   description?: string;
   color?: string;
   model?: string;
+  kilometers?: number;
   brand?: Brand;
   year?: Year;
   fuel_type?: FuelType;
@@ -33,9 +35,25 @@ interface ICreateCarAdResponse {
   description: string;
   color: string;
   model: string;
+  kilometers: number;
   brand: Brand;
   year: Year;
   fuel_type: FuelType;
   images: Images[];
 }
-export { ICarAdResponse, ICarAdUpdateRequest, ICreateCarAdResponse };
+interface IPagination {
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  total: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  nextPage?: string;
+  previousPage?: string;
+}
+export {
+  ICarAdResponse,
+  ICarAdUpdateRequest,
+  ICreateCarAdResponse,
+  IPagination,
+};

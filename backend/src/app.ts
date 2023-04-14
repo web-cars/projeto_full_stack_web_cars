@@ -1,13 +1,24 @@
 import "express-async-errors";
 import "reflect-metadata";
-import express, { Request, Response } from "express";
-import advertisementRoutes from "./routes/advertisement/vehicle.routes";
+import express from "express";
+import advertisementRoutes from "./routes/advertisement/advertisement.routes";
 import cors from "cors";
 import { errorHandler } from "./errors/errorHandler";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    allowedHeaders: [
+      "sessionId",
+      "Content-Type",
+      "Authorization",
+      "authorization",
+    ],
+    origin: ["http://localhost:5173"],
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  })
+);
 app.use("/advertisements", advertisementRoutes);
 app.use(errorHandler);
 

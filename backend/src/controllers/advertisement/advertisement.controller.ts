@@ -1,44 +1,37 @@
 import { Request, Response } from "express";
-import advertisementsCreateService from "../../services/advertisement/adsCreate.service";
-import { updateCarAdService } from "../../services/advertisement/updateCarAd.services";
+import { updateCarAdService } from "../../services/advertisement/updateCarAd.service";
 import listCarAdByIdService from "../../services/advertisement/listCarAdById.service";
-import listAllCarAdsService from "./../../services/advertisement/listAllCars.service";
+import listAllCarAdsService from "../../services/advertisement/listAllCarAds.service";
 import { deleteCarAdService } from "../../services/advertisement/deleteCarAd.service";
+import createCarAdService from "../../services/advertisement/createCarAd.service";
 
-export const advertisementsCreateController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const newAdvertisement = await advertisementsCreateService(req.body);
-
-    return res.status(201).json(newAdvertisement);
-  } catch (error) {
-    if (error instanceof Error) {
-      return res.status(403).json({
-        message: error.message,
-      });
-    }
-  }
+const advertisementsCreateController = async (req: Request, res: Response) => {
+  const newAdvertisement = await createCarAdService(req.body);
+  return res.status(201).json(newAdvertisement);
 };
-export const updateCarAdController = async (
-  request: Request,
-  response: Response
-) => {
+const updateCarAdController = async (request: Request, response: Response) => {
   const data = await updateCarAdService(request.body, request.params.id);
   return response.status(200).json(data);
 };
-export const getSpecificCarController = async (req: Request, res: Response) => {
+const getSpecificCarController = async (req: Request, res: Response) => {
   const data = await listCarAdByIdService(req.params.id);
   return res.status(200).json(data);
 };
 
-export const listAllCarAdsController = async (req: Request, res: Response) => {
-  const data = await listAllCarAdsService();
+const listAllCarAdsController = async (req: Request, res: Response) => {
+  const data = await listAllCarAdsService(+req.query.page || 1);
   return res.status(200).json(data);
 };
 
-export const deleteCarAdController = async (req: Request, res: Response) => {
+const deleteCarAdController = async (req: Request, res: Response) => {
   await deleteCarAdService(req.params.id);
   return res.status(204).json();
+};
+
+export {
+  advertisementsCreateController,
+  listAllCarAdsController,
+  getSpecificCarController,
+  updateCarAdController,
+  deleteCarAdController,
 };

@@ -8,16 +8,31 @@ export interface iErrorAxios {
     message: string;
 }
 export interface iCarAdsContextInterface {
-    carAds: iCarAdsInterface[] | [];
-    setCarAds: React.Dispatch<React.SetStateAction<iCarAdsInterface[] | []>>;
+    carAds: IAdswithPagination | null;
+    setCarAds: React.Dispatch<React.SetStateAction<IAdswithPagination | null>>;
     specificAd: iCarAdsInterface | null;
     setSpecificAd: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
     fipe: iFipeResponseInterface | null;
+    getCarAds: (page: number) => void;
     onSubmitCarAd: (data: FieldValues) => void;
     onDeleteCarAd: (id: string) => void;
     onGetSpecificAd: (id: string) => void;
     onUpdateCarAd: (id: string, data: FieldValues) => void;
     onFipeRequest: (brand: string, name: string, year: number, fuel: number) => void
+}
+export interface IAdswithPagination {
+    ads: iCarAdsInterface[];
+    pagination: IPagination
+}
+interface IPagination {
+    currentPage: number;
+    totalPages: number;
+    pageSize: number;
+    total: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    nextPage?: string;
+    previousPage?: string;
 }
 export interface iCarAdsInterface {
     id: string;
@@ -25,39 +40,22 @@ export interface iCarAdsInterface {
     price: number;
     isActive: boolean;
     description: string;
-    brand: iBrandInterface;
-    image: iImageInterface[];
-    model: iModelInterface;
-    year: iYearInterface;
-    fuel_type: iFuelTypeInterface;
-    iColor: iColorInterface;
+    brand: string;
+    kilometers: number;
+    images: iImageInterface[];
+    model: string;
+    year: number;
+    fuel_type: number;
+    iColor: string;
 }
 
-export interface iBrandInterface {
-    id: string;
-    name: string;
-}
+
 export interface iImageInterface {
     id: string;
     file: string;
     carId: string;
 }
-export interface iModelInterface {
-    id: string;
-    name: string;
-}
-export interface iYearInterface {
-    id: string;
-    year: number;
-}
-export interface iFuelTypeInterface {
-    id: string;
-    type: string;
-}
-export interface iColorInterface {
-    id: string;
-    name: string;
-}
+
 export interface iProviderProps {
     children: React.ReactNode;
 }

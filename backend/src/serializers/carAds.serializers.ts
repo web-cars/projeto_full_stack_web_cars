@@ -1,17 +1,15 @@
 import { Brand, FuelType, Year } from "../enum/carAds.enum";
 import { z } from "zod";
-import { imagesUpdateSerializer } from "./images.serializers";
+import {
+  imagesCreateSerializer,
+  imagesUpdateSerializer,
+} from "./images.serializers";
 
-const priceRegex = /^\d+(?:\.\d{1,2})?$/;
-
-export const carAdUpdateSerializer = z.object({
+const carAdUpdateSerializer = z.object({
   price: z
-    .string()
-    .regex(
-      priceRegex,
-      "Price must be a number with a maximum of 2 decimal places"
-    )
-    .transform((value) => parseFloat(value))
+    .number()
+    .nonnegative()
+    .transform((value) => parseFloat(value.toFixed(2)))
     .optional(),
   isActive: z.boolean().optional(),
   description: z.string().max(256).optional(),
@@ -19,22 +17,16 @@ export const carAdUpdateSerializer = z.object({
   model: z.string().max(256).optional(),
   brand: z.nativeEnum(Brand).optional(),
   year: z.nativeEnum(Year).optional(),
+  kilometers: z.number().optional(),
   fuel_type: z.nativeEnum(FuelType).optional(),
   images: imagesUpdateSerializer.array().optional(),
 });
 
-export const imagesCreateSerializer = z.object({
-  file: z.string(),
-});
-
-export const carAdCreateSerializer = z.object({
+const carAdCreateSerializer = z.object({
   price: z
-    .string()
-    .regex(
-      priceRegex,
-      "Price must be a number with a maximum of 2 decimal places"
-    )
-    .transform((value) => parseFloat(value)),
+    .number()
+    .nonnegative()
+    .transform((value) => parseFloat(value.toFixed(2))),
   isActive: z.boolean().default(true),
   description: z.string().max(256).optional(),
   color: z.string().max(25),
@@ -43,46 +35,11 @@ export const carAdCreateSerializer = z.object({
   year: z.nativeEnum(Year),
   fuel_type: z.nativeEnum(FuelType),
   images: z.array(imagesCreateSerializer).nonempty(),
+  kilometers: z.number(),
   fipePrice: z
-    .string()
-    .regex(
-      priceRegex,
-      "Price must be a number with a maximum of 2 decimal places"
-    )
-    .transform((value) => parseFloat(value)),
+    .number()
+    .nonnegative()
+    .transform((value) => parseFloat(value.toFixed(2))),
 });
 
-export const returnImageSerializer = z
-  .object({
-    file: z.string(),
-    id: z.string().max(50),
-  })
-  .required();
-
-export const returnCarAdSerializer = z
-  .object({
-    price: z
-      .string()
-      .regex(
-        priceRegex,
-        "Price must be a number with a maximum of 2 decimal places"
-      )
-      .transform((value) => parseFloat(value)),
-    isActive: z.boolean().default(true),
-    description: z.string().max(256).optional(),
-    color: z.string().max(25),
-    model: z.string().max(256),
-    brand: z.nativeEnum(Brand),
-    year: z.nativeEnum(Year),
-    fuel_type: z.nativeEnum(FuelType),
-    images: z.array(returnImageSerializer).nonempty(),
-    fipePrice: z
-      .string()
-      .regex(
-        priceRegex,
-        "Price must be a number with a maximum of 2 decimal places"
-      )
-      .transform((value) => parseFloat(value)),
-    id: z.string().max(50),
-  })
-  .required();
+export { carAdCreateSerializer, carAdUpdateSerializer };
