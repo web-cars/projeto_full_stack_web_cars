@@ -1,11 +1,13 @@
-
+import Sidebar from '../components/Sidebar/index'
 
 export const Homepage = () => {
 
 
   return (
     <>
-      <h1>hi</h1>
+      <main>
+        <Sidebar />
+      </main>
     </>
   );
 };
