@@ -9,6 +9,7 @@ interface ICarAdResponse {
   description: string;
   color: string;
   model: string;
+  kilometers: number;
   brand: Brand;
   year: Year;
   fuel_type: FuelType;
@@ -21,6 +22,7 @@ interface ICarAdUpdateRequest {
   description?: string;
   color?: string;
   model?: string;
+  kilometers?: number;
   brand?: Brand;
   year?: Year;
   fuel_type?: FuelType;
@@ -33,6 +35,7 @@ interface ICreateCarAdResponse {
   description: string;
   color: string;
   model: string;
+  kilometers: number;
   brand: Brand;
   year: Year;
   fuel_type: FuelType;
