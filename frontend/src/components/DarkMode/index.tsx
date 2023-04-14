@@ -1,4 +1,10 @@
-import { Flex, HStack, Button, useColorMode, LightMode } from '@chakra-ui/react'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
+import { 
+  Flex,
+  HStack, 
+  useColorMode, 
+  Button 
+} from '@chakra-ui/react'
 
 export const ButtonMode = () => {
 
@@ -7,11 +13,17 @@ export const ButtonMode = () => {
     return (
         <Flex height={'10vh'} justifyContent={'flex-end'} alignItems={'center'} >
             <HStack gap={'5'} marginEnd={'10px'}>
-                <LightMode>
-                    <Button colorScheme={'purple'} onClick={toggleColorMode}>
-                        Change Theme
-                    </Button>
-                </LightMode>
+              <Button 
+                onClick={() => toggleColorMode()}
+                pos={'absolute'}
+                top={'0'}
+                right={'0'}
+                m={'1rem'}
+              >
+                {colorMode === 'dark' 
+                  ? <SunIcon/> 
+                  : <MoonIcon/>}
+              </Button>
             </HStack>
         </Flex>
         )
