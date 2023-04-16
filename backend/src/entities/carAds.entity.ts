@@ -1,6 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Images } from "./images.entity";
 import { Brand, FuelType, Year } from "../enum/carAds.enum";
+import { User } from "./user.entity";
+
 
 @Entity("cars_ads")
 export class CarAds {
@@ -30,4 +32,6 @@ export class CarAds {
     eager: true,
   })
   images: Images[];
+  @ManyToOne(() => User, (user) => user.id)
+  user: User;
 }

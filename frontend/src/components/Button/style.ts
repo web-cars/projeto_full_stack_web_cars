@@ -16,186 +16,188 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 4px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
+  width: 315px;
+  height: 48px;
 
   ${(props) => {
     switch (props.colorbutton) {
       case "Grey":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--grey-01);
-          border: 1px solid var(--grey-01);
+          color: #ffffff;
+          background-color: #212529;
+          border: 1px solid #212529;
 
           &:hover {
-            background-color: var(--grey-02);
-            border: 1px solid var(--grey-01);
+            background-color: #495057;
+            border: 1px solid #212529;
           }
         `;
 
       case "Negative":
         return css`
-          color: var(--grey2);
-          background-color: var(--grey-06);
-          border: 1px solid var(--grey-06);
+          color: #495057;
+          background-color: #DEE2E6;
+          border: 1px solid #DEE2E6;
 
           &:hover {
-            background-color: var(--grey-05);
-            border: 1px solid var(--grey-05);
+            background-color: #CED4DA;
+            border: 1px solid #CED4DA;
           }
         `;
 
       case "Disable":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--grey-05);
-          border: 1px solid var(--grey-05);
+          color: #ffffff;
+          background-color: #CED4DA;
+          border: 1px solid #CED4DA;
           cursor: not-allowed;
         `;
 
       case "Brand":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--brand-01);
+          color: #ffffff;
+          background-color: #4529e6;
           border: none;
 
           &:hover {
-            background-color: var(--brand-04);
-            color: var(--brand-01);
+            background-color: #ADB5BD;
+            color: #4529e6;
           }
         `;
 
       case "Brand2":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--brand-02);
-          border: 1px solid var(--grey-10);
+          color: #ffffff;
+          background-color: #5126ea;
+          border: 1px solid #FDFDFD;
 
           &:hover {
-            background-color: var(--grey-10);
-            border: 1px solid var(--grey-10);
+            background-color: #FDFDFD;
+            border: 1px solid #FDFDFD;
 
             a {
-              color: var(--grey-01);
+              color: #212529;
             }
           }
         `;
 
       case "BrandNew":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--brand-01);
-          border: 1px solid var(--grey-10);
+          color: #ffffff;
+          background-color: #4529e6;
+          border: 1px solid #FDFDFD;
 
           &:hover {
-            background-color: var(--brand-02);
-            border: 1px solid var(--brand-02);
+            background-color: #5126ea;
+            border: 1px solid #5126ea;
           }
         `;
 
       case "BrandOpacity":
         return css`
-          color: var(--brand1);
-          background-color: var(--brand-04);
-          border: 1px solid var(--brand-04);
+          color: #4529e6;
+          background-color: #edeafd;
+          border: 1px solid #edeafd;
 
           &:hover {
-            background-color: var(--grey-01);
-            border: 1px solid var(--grey-01);
+            background-color: #212529;
+            border: 1px solid #212529;
           }
         `;
 
       case "Light":
         return css`
-          color: var(--grey1);
-          background-color: var(--grey-10);
-          border: 1px solid var(--grey-10);
+          color: #212529;
+          background-color: #FDFDFD;
+          border: 1px solid #FDFDFD;
         `;
 
       case "LightLogin":
         return css`
-          color: var(--grey-02);
+          color: #495057;
           justify-content: flex-end;
-          background-color: var(--grey-10);
-          border: 1px solid var(--grey-10);
+          background-color: #FDFDFD;
+          border: 1px solid #FDFDFD;
         `;
 
       case "Outline1":
         return css`
-          color: var(--grey-00);
+          color: #0B0D0D;
           background-color: transparent;
-          border: 1px solid var(--grey-00);
+          border: 1px solid #0B0D0D;
 
           &:hover {
-            background-color: var(--grey-01);
-            color: var(--whiteFixed);
-            border: 1px solid var(--grey-01);
+            background-color: #212529;
+            color: #ffffff;
+            border: 1px solid #212529;
           }
         `;
 
       case "Outline2":
         return css`
-          color: var(--grey-00);
+          color: #0B0D0D;
           background-color: transparent;
-          border: 1px solid var(--grey-04);
+          border: 1px solid #ADB5BD;
 
           &:hover {
-            background-color: var(--brand-04);
-            border: 1px solid var(--brand-01);
+            background-color: #edeafd;
+            border: 1px solid #4529e6;
           }
         `;
 
       case "OutlineBrand":
         return css`
-          color: var(--brand1);
-          background-color: var(--whiteFixed);
-          border: 1px solid var(--brand-01);
+          color: #4529e6;
+          background-color: #ffffff;
+          border: 1px solid #4529e6;
 
           &:hover {
-            background-color: var(--brand-04);
-            border: 1px solid var(--brand-01);
+            background-color: #edeafd;
+            border: 1px solid #4529e6;
           }
         `;
 
       case "Link":
         return css`
-          color: var(--grey1);
-          background-color: var(--whiteFixed);
-          border: 1px solid var(--whiteFixed);
+          color: #212529;
+          background-color: #ffffff;
+          border: 1px solid #ffffff;
 
           &:hover {
-            background-color: var(--grey-08);
-            border: 1px solid var(--grey-08);
+            background-color: #F1F3F5;
+            border: 1px solid #F1F3F5;
           }
         `;
 
       case "Alert":
         return css`
-          color: var(--alert1);
-          background-color: var(--alert-3);
-          border: 1px solid var(--alert-3);
+          color: #CD2B31;
+          background-color: #FFE5E5;
+          border: 1px solid #FFE5E5;
 
           &:hover {
-            background-color: var(--alert-2);
-            border: 1px solid var(--alert-2);
+            background-color: #FDD8D8;
+            border: 1px solid #FDD8D8;
           }
         `;
 
       case "Sucess":
         return css`
-          color: var(--sucess-1);
-          background-color: var(--sucess-3);
-          border: 1px solid var(--sucess-3);
+          color: #18794E;
+          background-color: #DDF3E4;
+          border: 1px solid #DDF3E4;
 
           &:hover {
-            background-color: var(--sucess-2);
-            border: 1px solid var(--sucess-2);
+            background-color: #CCEBD7;
+            border: 1px solid #CCEBD7;
           }
         `;
 
       case "BrandDisable":
         return css`
-          color: var(--whiteFixed);
-          background-color: var(--brand-03);
-          border: 1px solid var(--brand-03);
+          color: #ffffff;
+          background-color: #b0a6f0;
+          border: 1px solid #b0a6f0;
           cursor: not-allowed;
         `;
 

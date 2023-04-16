@@ -1,6 +1,11 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
 import "dotenv/config";
+import { User } from "./entities/user.entity";
+import { Address } from "./entities/addresses.entity";
+import { CarAds } from "./entities/carAds.entity";
+import { Images } from "./entities/images.entity";
+
 
 const setDataSourceConfig = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, "./entities/**.{js,ts}");
@@ -34,11 +39,11 @@ const setDataSourceConfig = (): DataSourceOptions => {
     host: process.env.PGHOST,
     username: process.env.PGUSER,
     password: process.env.PGPASSWORD,
-    port: parseInt(process.env.PGPORT),
+    port: parseInt(process.env.PGPORT || '5432'),
     database: process.env.PGDATABASE,
     synchronize: false,
     logging: false,
-    entities: [entitiesPath],
+    entities: [User,Address,CarAds,Images],
     migrations: [migrationsPath],
   };
 };

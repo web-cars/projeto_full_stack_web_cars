@@ -34,10 +34,10 @@ export const Homepage = () => {
               fuel_type={ad.fuel_type}
               iColor={ad.iColor}></ProductCard>))}
         </UnorderedList>
-      </Flex>
+      </Flex> 
       <Wrap display={"flex"} align='center' direction={"row"} bg='greyScale.whiteFixed' alignSelf={"center"}>
         {!carAds?.pagination.hasPreviousPage ? (<Container w={"97.73px"}></Container>) : (<Button onClick={() => getCarAds(carAds?.pagination.currentPage - 1)} color='brand.brand2'>Anterior</Button>)}
-        <Text textAlign={"center"} h={"max-content"} fontSize='sm' color={"greyScale.grey2"}>{carAds?.pagination.currentPage} de {carAds?.pagination.totalPages} </Text>
+        <Text textAlign={"center"} h={"max-content"} fontSize='sm' color={"greyScale.grey2"}>{carAds?.pagination.currentPage} {carAds?.pagination.totalPages} </Text>
         {!carAds?.pagination.hasNextPage ? (<Container w={"102.41px"}></Container>) : (<Button onClick={() => getCarAds(carAds?.pagination.currentPage + 1)} color='brand.brand2'>Seguinte</Button>)}
       </Wrap>
       <Footer />

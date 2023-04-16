@@ -46,7 +46,7 @@ export const MenuIconStyled = styled.div.attrs((props: PropTypeBg) => ({
   position: absolute;
   z-index: 4;
   height: 40px;
-  color: var(--grey-03);
+  color: #868e96;
   overflow: hidden;
   display: none;
 
@@ -79,7 +79,7 @@ export const MenuLinks = styled.ul<PropTypeBg>`
 
   a {
     font-weight: 400;
-    color: var(--grey-02);
+    color: #495057;
     cursor: pointer;
     outline: none;
   }
@@ -131,7 +131,7 @@ export const ButtonLoginStyled = styled.button`
   font-family: "Inter";
   border: none;
   font-weight: 400;
-  color: var(--brand-01);
+  color: #495057;
   background-color: transparent;
   gap: 1rem;
   padding: 0 1rem;
@@ -146,16 +146,18 @@ export const ButtonRegisterStyled = styled.button`
   font-size: 1rem;
   font-family: "Inter";
   font-weight: 600;
-  border: 2px solid var(--grey-04);
+  border: 2px solid #ADB5BD;
   padding: 10px;
-  color: var(--grey-02);
+  color: #0B0D0D;
   border-radius: 5px;
   background-color: transparent;
+  width: 146px;
+  height: 48px;
 
   &:hover {
-    color: var(--brand-01);
-    border: 2px solid var(--brand-01);
-    background-color: var(--brand-04);
+    color: #4529e6;
+    border: 2px solid #4529e6;
+    background-color: #edeafd;
   }
 
   @media ${device.laptop} {
@@ -166,7 +168,7 @@ export const ButtonRegisterStyled = styled.button`
 export const DivLineHeaderStyled = styled.div`
   width: 1px;
   height: 85px;
-  border: 1px solid var(--grey-07);
+  border: 1px solid #E9ECEF;
   @media ${device.laptop} {
     width: 270px;
     align-items: center;
