@@ -5,19 +5,32 @@ import { useContext } from 'react';
 import { CarAdsContext } from '../context/carAds.context'
 import { iCarAdsInterface } from '../interfaces/carAds.interface';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import { Navbar } from '../components/Navbar';
 import Banner from '../components/Banner';
+import { css } from '@emotion/react';
 
 export const Homepage = () => {
   const { carAds, getCarAds } = useContext(CarAdsContext)
-
+  const mobile = css`
+    @media(max-width:1024px){
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow-x:auto;
+      justify-content: flex-start;
+    }
+  `
+  const mobilePage = css`
+   @media(max-width:1024px){
+    height: 100vh;
+   }
+  `
   return (
-    <Flex id='topo' direction="column" bg='greyScale.whiteFixed'>
+    <Flex css={mobilePage} id='topo' direction="column" bg='greyScale.whiteFixed' h={"100%"} justify={"space-between"}>
       <Navbar />
       <Banner />
       <Flex w='100%' direction='row' bg='greyScale.whiteFixed' justify="space-between" wrap='wrap' p='20px'>
         <Sidebar />
-        <UnorderedList w='67%' spacing={3} display='flex' flexDirection='row' flexWrap='wrap' gap="10px">
+        <UnorderedList css={mobile} w='66%' spacing={3} display='flex' flexDirection='row' flexWrap='wrap' gap="10px" ml={"0"} alignItems={"flex-end"}>
           {carAds?.ads.map((ad: iCarAdsInterface) => (
             <ProductCard
               key={ad.id}

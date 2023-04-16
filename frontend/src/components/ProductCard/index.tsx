@@ -8,20 +8,25 @@ import {
   Divider,
   Box,
   Flex,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { iCarAdsInterface } from "../../interfaces/carAds.interface";
 import { CarAdsContext } from "../../context/carAds.context";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { css } from '@emotion/react';
+
 
 export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, iColor }: iCarAdsInterface) => {
   const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
+  const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
+
 
   return (
     <>
       {isActive ? (
-        <Link to={`/adCar/${id}`} style={{ width: "30%" }}>
-          <Card backgroundColor={"transparent"} margin={"0"} maxW="sm" onClick={() => onGetSpecificAd(id)}>
+        <Link to={`/adCar/${id}`} style={{ width: isLargerThan1024 ? "100%" : "32%" }}>
+          <Card backgroundColor={"transparent"} marginTop={"0"} maxW="sm" onClick={() => onGetSpecificAd(id)}>
             <CardBody
               borderRadius={"4px"}
               backgroundColor={"white"}

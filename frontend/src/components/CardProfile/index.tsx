@@ -14,9 +14,15 @@ import {
 
   Box
 } from '@chakra-ui/react'
+import { css } from '@emotion/react';
 
 export const CardProfile = ({ image, name, description }: ICardProfile) => {
-
+  const divMobile = css`
+  @media (max-width:1024px) {
+     width: 100%;
+    padding: 15px
+  }
+  `
   //Dados vindo da API, serão utilizados as props do ICardProfile
 
   return (
@@ -26,6 +32,7 @@ export const CardProfile = ({ image, name, description }: ICardProfile) => {
       borderRadius={"4px"}
       width={"30%"}
       zIndex={1}
+      css={divMobile}
     >
       <Card maxW='sm' bgColor={"transparent"} color={"greyScale.grey0"} boxShadow={"none"}>
         <CardBody display={'flex'} alignItems={'center'} flexDirection={'column'}>
@@ -36,7 +43,7 @@ export const CardProfile = ({ image, name, description }: ICardProfile) => {
           </Stack>
         </CardBody>
         <CardFooter>
-          <Button variant='solid' colorScheme='gray'>
+          <Button variant='solid' bgColor={"greyScale.grey0"} color={"greyScale.grey10"}>
             Ver todos os anuncios
           </Button>
         </CardFooter>

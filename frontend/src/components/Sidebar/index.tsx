@@ -1,14 +1,16 @@
 import { Box, List, ListItem, Input, Flex, Text, useMediaQuery, Button } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 
 const Sidebar = () => {
-    const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+    const [isLargerThan768] = useMediaQuery("(max-width: 1024px)");
+
     const brands = ["Fiat", "Ford", "Volkswagen", "Chevrolet", "Renault"];
     const models = ["Civic", "Corolla", "Cruze", "Fit", "Gol", "Ka", "Onix", "Pulse"]
     const colors = ["Azul", "Branca", "Cinza", "Prata", "Preta", "Verde"]
     const years = ["2022", "2021", "2018", "2015", "2013"]
     return (
-        <Box bg="white" color="black" w="400px" h="100vh" left="0" p="4">
-            <Flex justifyContent="space-around" align="center" display={isLargerThan768 ? "none" : "block"}>
+        <Box bg="white" color="black" w="25%" h="100vh" left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
+            <Flex justifyContent="space-around" align="center" >
                 <Text >Filtros</Text>
                 <Text color="gray.300">x</Text>
             </Flex>
