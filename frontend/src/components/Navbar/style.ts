@@ -7,9 +7,9 @@ export const NavStyled = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid var(--grey-07);
+  border-bottom: 2px solid #E9ECEF;
   font-family: "Inter";
-  background-color: var(--white);
+  background-color: #ffffff;
 `;
 
 export const NavContent = styled.div`
@@ -85,7 +85,7 @@ export const MenuLinks = styled.ul<PropTypeBg>`
   }
 
   a:hover {
-    color: var(--brand-01);
+    color: #4529e6;
   }
 
   @media ${device.laptop} {
@@ -131,7 +131,7 @@ export const ButtonLoginStyled = styled.button`
   font-family: "Inter";
   border: none;
   font-weight: 400;
-  color: #495057;
+  color: #4529e6;
   background-color: transparent;
   gap: 1rem;
   padding: 0 1rem;

@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import { Input } from "@chakra-ui/react";
 
 interface InputProps {
   width: string;
 }
 
-export const InputStyled = styled.input<InputProps>`
+export const InputStyled = styled(Input)<InputProps>`
   width: ${(props) => props.width};
   padding: 0.6rem;
-  background-color: var(--whiteFixed);
-  color: var(--grey0);
-  border: 0.12rem solid var(--grey-07);
+  background-color: #ffffff;
+  color: #0B0D0D;
+  border: 0.12rem solid #E9ECEF;
   border-radius: 0.2rem;
   margin-bottom: 20px;
 
@@ -17,12 +18,12 @@ export const InputStyled = styled.input<InputProps>`
   font-family: "Inter";
 
   &:hover {
-    background-color: var(--grey-08);
-    border: 0.1rem solid var(--grey-08);
+    background-color: #F1F3F5;
+    border: 0.1rem solid #F1F3F5;
   }
 
   &:focus {
-    outline: 0.1rem solid var(--brand-02);
+    outline: 0.1rem solid #5126ea;
   }
 `;
 
@@ -51,7 +52,7 @@ export const StyledDiv = styled.div<InputProps>`
 
   .label--error > label > p {
     font-size: 0.875rem;
-    color: var(--alert-1);
+    color: #CD2B31;
     font-style: italic;
   }
 `;

@@ -18,6 +18,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const handlerRegister = () => {
+    navigate("/register")
+  }
+
   const [visible, setVisible] = useState(false);
   return (
     <NavStyled>
@@ -41,9 +45,8 @@ const Navbar = () => {
             <ButtonLoginStyled>Fazer Login</ButtonLoginStyled>
           </Link>
 
-          <Link to="/">
-            <ButtonRegisterStyled>Cadastrar</ButtonRegisterStyled>
-          </Link>
+            <ButtonRegisterStyled onClick={handlerRegister} >Cadastrar</ButtonRegisterStyled>
+            
         </MenuLinks>
       </NavContent>
     </NavStyled>
