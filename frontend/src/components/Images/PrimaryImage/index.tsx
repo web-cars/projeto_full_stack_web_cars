@@ -1,13 +1,19 @@
 import { Box, Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CarAdsContext } from "../../../context/carAds.context";
+import { css } from "@emotion/react";
 
 export const PrimaryImage = () => {
   const { specificAd } = useContext(CarAdsContext);
-  console.log(specificAd);
-
+  const divMobile = css`
+  @media (max-width:1024px) {
+     width: 100%;
+    
+  }
+  `
   return (
     <Box
+      css={divMobile}
       backgroundColor={"greyScale.grey10"}
       borderRadius={"4px"}
       boxSize={"sm"}

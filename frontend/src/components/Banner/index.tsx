@@ -5,7 +5,9 @@ const Banner = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const imageStyle = css`
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 400px;
   background-image: url('${bannerImage}');
@@ -30,7 +32,7 @@ const Banner = () => {
       <Box
         css={imageStyle}
       >
-        <Text color="white" position="absolute" top="35%" left={"35%"} align="center" mt={isLargerThan768 ? '0' : '-20'} p={isLargerThan768 ? '0' : '1'}>
+        <Text color="white" zIndex={3} align="center" mt={isLargerThan768 ? '0' : '-20'} p={isLargerThan768 ? '0' : '1'}>
           <Text as="span" fontWeight="bold" fontSize="3xl"> Motors Shop</Text>
           <Box as="br" />
           <Text fontSize="2xl">A melhor plataforma de anúncios de carros do país</Text>
