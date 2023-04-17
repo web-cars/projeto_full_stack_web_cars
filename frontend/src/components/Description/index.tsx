@@ -1,8 +1,16 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 
 export const Description = () => {
+  const divMobile = css`
+  @media (max-width:1024px) {
+     width: 100%;
+    
+  }
+  `
   return (
     <Flex
+      css={divMobile}
       backgroundColor={"greyScale.grey10"}
       flexDirection={"column"}
       padding={"36px 44px"}

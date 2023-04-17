@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react'
-import Navbar from '../components/Navbar'
 import RegisterUser from '../components/RegisterUser';
 import Footer from '../components/Footer';
+import { Navbar } from '../components/Navbar';
 
 
 

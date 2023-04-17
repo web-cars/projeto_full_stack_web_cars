@@ -1,12 +1,19 @@
 import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CarAdsContext } from "../../../context/carAds.context";
+import { css } from "@emotion/react";
 
 export const SecondaryImages = () => {
   const { specificAd } = useContext(CarAdsContext);
-
+  const divMobile = css`
+  @media (max-width:1024px) {
+     width: 100%;
+    padding: 15px
+  }
+  `
   return (
     <Box
+      css={divMobile}
       backgroundColor={"greyScale.grey10"}
       padding={"36px 44px"}
       borderRadius={"4px"}
