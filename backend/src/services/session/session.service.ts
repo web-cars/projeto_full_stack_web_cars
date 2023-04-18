@@ -13,9 +13,9 @@ export const SessionService = async ({
 
   if (!user) throw new AppError("Invalid email or password.");
 
-  // const isPasswordValid = await compare(password, user.password);
+  const isPasswordValid = await compare(password, user.password);
 
-  // if (!isPasswordValid) throw new AppError("Invalid email or password.");
+  if (!isPasswordValid) throw new AppError("Invalid email or password.");
 
   const token = jwt.sign(
     { isAdm: user.isAdmin },
