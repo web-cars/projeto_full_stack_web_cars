@@ -35,7 +35,7 @@ export class Users {
   isAdmin: boolean;
 
   @Column()
-  birthDate: Date;
+  birthDate: string;
 
   @Column({ nullable: true })
   description: string;
