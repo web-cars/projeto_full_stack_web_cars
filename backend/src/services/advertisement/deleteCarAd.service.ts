@@ -7,7 +7,10 @@ export const deleteCarAdService = async (id: string): Promise<void> => {
   const imagesRepository = AppDataSource.getRepository(Images);
 
   const carAdvertisement = await advertisementsRepository.findOneBy({ id });
+  const images = carAdvertisement.images;
 
-  await imagesRepository.delete({ car: carAdvertisement });
+  for (let i = 0; i < images.length; i++) {
+    await imagesRepository.delete({ id: images[i].id });
+  }
   await advertisementsRepository.delete({ id });
 };
