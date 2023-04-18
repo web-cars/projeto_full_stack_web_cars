@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import { Navbar } from '../components/Navbar';
 import Banner from '../components/Banner';
 import { css } from '@emotion/react';
+import AdProfile from '../components/AdProfile';
 
 export const Homepage = () => {
   const { carAds, getCarAds } = useContext(CarAdsContext)
@@ -27,7 +28,8 @@ export const Homepage = () => {
   return (
     <Flex css={mobilePage} id='topo' direction="column" bg='greyScale.whiteFixed' h={"100%"} justify={"space-between"}>
       <Navbar />
-      <Banner />
+      <AdProfile/>
+      {/* <Banner />
       <Flex w='100%' direction='row' bg='greyScale.whiteFixed' justify="space-between" wrap='wrap' p='20px'>
         <Sidebar />
         <UnorderedList css={mobile} w='66%' spacing={3} display='flex' flexDirection='row' flexWrap='wrap' gap="10px" ml={"0"} alignItems={"flex-end"}>
@@ -53,7 +55,7 @@ export const Homepage = () => {
         <Text textAlign={"center"} h={"max-content"} fontSize='sm' color={"greyScale.grey2"}>{carAds?.pagination.currentPage} de {carAds?.pagination.totalPages} </Text>
         {!carAds?.pagination.hasNextPage ? (<Container w={"102.41px"}></Container>) : (<Button onClick={() => getCarAds(carAds?.pagination.currentPage + 1)} color='brand.brand2'>Seguinte</Button>)}
       </Wrap>
-      <Footer />
+      <Footer /> */}
     </Flex>
   )
 };
