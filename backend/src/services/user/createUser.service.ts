@@ -25,22 +25,16 @@ export const createUserService = async ({
   const newAddress = addressesRepository.create(address);
   await addressesRepository.save(newAddress);
 
-  const newUser = usersRepository.create({ ...dataUser, address: newAddress });
+  const {
+    address: userAddress,
+    advertisements,
+    ...newUser
+  } = usersRepository.create({ ...dataUser, address: newAddress });
   await usersRepository.save(newUser);
 
-  const returnUser = {
-    user_id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
-    cpf: newUser.cpf,
-    cellphone: newUser.cellphone,
-    isAdmin: newUser.isAdmin,
-    birthDate: newUser.birthDate,
-    description: newUser.description,
-    perfilPhoto: newUser.perfilPhoto,
-    address: newUser.address,
-    advertisements: newUser.advertisements,
+  return {
+    user: { id: newUser.id, ...newUser },
+    address: userAddress,
+    advertisements,
   };
-
-  return returnUser;
 };
