@@ -14,7 +14,11 @@ export const updateCarAdService = async (
   const carAd = await carAdRepository.findOneBy({ id });
 
   if (imagesInRequest) {
-    imagesRepository.delete({ car: carAd });
+    const images = carAd.images;
+
+    for (let i = 0; i < images.length; i++) {
+      await imagesRepository.delete({ id: images[i].id });
+    }
 
     for (let i = 0; i < imagesInRequest.length; i++) {
       carAd.images[i] = imagesInRequest[i];
