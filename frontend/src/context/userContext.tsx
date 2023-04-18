@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
     const onSubmitDelete = (data: FieldValues) => deleteProfile();
     const postLogin = (obj: FieldValues) => {
         instance
-            .post<iAxiosData>("login", obj)
+            .post<iAxiosData>("session", obj)
             .then((response) => {
                 const { token } = response.data
                 window.localStorage.setItem("TOKEN@WEBCARS", token);
