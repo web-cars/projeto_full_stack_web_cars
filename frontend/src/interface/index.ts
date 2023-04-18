@@ -28,6 +28,7 @@ export interface IUser {
   isAdmin: boolean;
   birthDate: string;
   description: string;
+  perfilPhoto: string;
   addressID: number;
   image: string;
 }
