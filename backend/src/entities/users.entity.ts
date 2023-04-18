@@ -35,7 +35,7 @@ export class Users {
   isAdmin: boolean;
 
   @Column()
-  birthDate: Date;
+  birthDate: string;
 
   @Column({ nullable: true })
   description: string;
@@ -53,7 +53,7 @@ export class Users {
   })
   advertisements: CarAds[];
 
-  @OneToOne(() => Addresses)
+  @OneToOne(() => Addresses, { eager: true })
   @JoinColumn()
   address: Addresses;
 }
