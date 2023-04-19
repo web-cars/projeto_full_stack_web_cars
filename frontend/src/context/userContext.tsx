@@ -117,6 +117,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
     window.localStorage.removeItem("TOKEN@WEBCARS")
     const toNavigate = location.state?.from?.pathname || '/'
     navigate(toNavigate, { replace: true})
+    window.location.reload()
   }
 
   return (
