@@ -22,10 +22,10 @@ interface IUserResponse {
   cellphone: string;
   isAdmin: boolean;
   birthDate: string;
-  description?: string;
-  perfilPhoto?: string;
-  advertisements: CarAds[];
+  description: string;
+  perfilPhoto: string;
   address: Addresses;
+  advertisements?: CarAds[];
 }
 
 export { IUserRequest, IUserResponse };
