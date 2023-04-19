@@ -11,6 +11,6 @@ export const retrieveEspecificUserService = async (
 
   if (!specificUser) throw new AppError("User not found.", 404);
 
-  const { password, ...userWithoutPassword } = specificUser;
-  return userWithoutPassword;
+  const { password, advertisements, ...userWithoutPassword } = specificUser;
+  return { ...userWithoutPassword, advertisements };
 };
