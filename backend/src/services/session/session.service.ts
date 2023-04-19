@@ -9,7 +9,7 @@ export const SessionService = async ({
   password,
 }: ISessionRequest): Promise<ISessionResponse> => {
   const usersRepository = AppDataSource.getRepository(Users);
-  const user = await usersRepository.findOneBy({ email });
+  const user = await usersRepository.findOneBy({ email: email });
 
   if (!user) throw new AppError("Invalid email or password.");
 
@@ -17,14 +17,11 @@ export const SessionService = async ({
 
   if (!isPasswordValid) throw new AppError("Invalid email or password.");
 
-  const token = jwt.sign(
-    { isAdm: user.isAdmin },
-    process.env.SECRETKEY as string,
-    {
-      subject: user.id,
-      expiresIn: "24h",
-    }
-  );
+  const token = jwt.sign({ isAdm: user.isAdmin }, process.env.SECRET_KEY, {
+    subject: String(user.id),
+    expiresIn: "24h",
+  });
+  console.log("oi");
 
-  return { token };
+  return { token: token };
 };
