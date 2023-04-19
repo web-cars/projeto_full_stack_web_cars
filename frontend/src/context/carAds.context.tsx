@@ -3,6 +3,7 @@ import { IAdswithPagination, ICarDataInterface, iCarAdsContextInterface, iCarAds
 import { fipeInstance, instance } from "../services/instance";
 import { FieldValues } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { obterTipoDeVeiculo } from "../components/enum/fuel.enum";
 
 
 
@@ -13,7 +14,11 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     const [specificAd, setSpecificAd] = useState<iCarAdsInterface | null>(null)
     const [fipe, setFipe] = useState<iFipeResponseInterface | null>(null)
     const onSubmitCarAd = (data: FieldValues) => {
-        console.log(data)
+        data.fipePrice = Number(fipe?.value)
+        data.fuel_type = obterTipoDeVeiculo(data.fuel_type);
+        data.price = Number(data.price)
+        data.year = Number(data.year)
+        data.kilometers = Number(data.kilometers)
         createAd(data)
     }
     const onDeleteCarAd = (id: string) => deleteSpecificCarAd(id)
@@ -106,7 +111,8 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     }, [])
 
     useEffect(() => {
-        getFipeCar(brand, model, year, fuel)
+        if (brand && model && year && fuel)
+            getFipeCar(brand, model, year, fuel)
     }, [brand, model, year, fuel])
 
 

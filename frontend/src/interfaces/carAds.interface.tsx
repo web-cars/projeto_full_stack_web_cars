@@ -69,9 +69,9 @@ export interface iCarAdsInterface {
 
 
 export interface iImageInterface {
-    id: string;
+    // id: string;
     file: string;
-    carId: string;
+    // carId: string;
 }
 
 export interface iProviderProps {
