@@ -9,15 +9,13 @@ import { UserProvider } from './context/userContext';
 function App() {
   return (
     <UserProvider>
-
       <AdsProvider>
         <ChakraProvider theme={theme}>
           <RoutesMain />
         </ChakraProvider>
       </AdsProvider>
     </UserProvider>
-  )
+  );
 }
 
-export default App
-
+export default App;

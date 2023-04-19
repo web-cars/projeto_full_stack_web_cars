@@ -19,22 +19,36 @@ export const createUserService = async ({
     .orWhere("user.cpf = :cpf", { cpf })
     .orWhere("user.cellphone = :cellphone", { cellphone })
     .getOne();
+
   if (userInDatabase)
     throw new AppError("User already exist's in our database.", 409);
 
   const newAddress = addressesRepository.create(address);
   await addressesRepository.save(newAddress);
 
-  const {
-    address: userAddress,
-    advertisements,
-    ...newUser
-  } = usersRepository.create({ ...dataUser, address: newAddress });
+  const newUser = usersRepository.create({
+    ...dataUser,
+    address: newAddress,
+  });
+
   await usersRepository.save(newUser);
 
-  return {
-    user: { id: newUser.id, ...newUser },
+  const {
+    password,
+    id,
+    description,
+    perfilPhoto,
     address: userAddress,
     advertisements,
+    ...userWithoutPassword
+  } = newUser;
+
+  return {
+    id,
+    ...userWithoutPassword,
+    description,
+    perfilPhoto,
+    address: userAddress,
+    advertisements: advertisements || [],
   };
 };
