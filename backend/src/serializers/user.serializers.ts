@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { createAddressSerializer } from "./address.serializers";
+import {
+  addressSchemaReturn,
+  createAddressSerializer,
+} from "./address.serializers";
 
 const userCreateSerializer = z.object({
   name: z.string().max(255),
@@ -20,4 +23,17 @@ const userCreateSerializer = z.object({
   address: z.lazy(() => createAddressSerializer),
 });
 
-export { userCreateSerializer };
+const userSchemaWithoutPassword = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
+  cellphone: z.string().regex(/^\(\d{2}\) \d{4,5}\-\d{4}$/),
+  isAdmin: z.boolean(),
+  birthDate: z.string().regex(/^\d{4}\-\d{2}\-\d{2}$/),
+  description: z.string(),
+  perfilPhoto: z.string(),
+  address: addressSchemaReturn,
+});
+
+export { userCreateSerializer, userSchemaWithoutPassword };

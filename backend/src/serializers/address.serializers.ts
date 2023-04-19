@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createAddressSerializer = z.object({
+const createAddressSerializer = z.object({
   cep: z.string().max(9),
   state: z.string().max(127),
   city: z.string().max(127),
@@ -8,3 +8,15 @@ export const createAddressSerializer = z.object({
   number: z.number().int().positive(),
   complement: z.string().optional().nullable(),
 });
+
+const addressSchemaReturn = z.object({
+  id: z.string(),
+  cep: z.string().regex(/^\d{5}-\d{3}$/),
+  state: z.string(),
+  city: z.string(),
+  street: z.string(),
+  number: z.number(),
+  complement: z.string().optional(),
+});
+
+export { addressSchemaReturn, createAddressSerializer };

@@ -25,16 +25,14 @@ export const createUserService = async ({
   const newAddress = addressesRepository.create(address);
   await addressesRepository.save(newAddress);
 
-  const {
-    address: userAddress,
-    advertisements,
-    ...newUser
-  } = usersRepository.create({ ...dataUser, address: newAddress });
+  const newUser = usersRepository.create({
+    ...dataUser,
+    address: newAddress,
+  });
+
   await usersRepository.save(newUser);
 
-  return {
-    user: { id: newUser.id, ...newUser },
-    address: userAddress,
-    advertisements,
-  };
+  const { password, ...userWithoutPassoword } = newUser;
+
+  return userWithoutPassoword;
 };
