@@ -29,7 +29,7 @@ const schemaImages = z.object({
 const schema = z.object({
     fipePrice: z.number(),
     price: z.number(),
-    isActive: z.boolean(),
+    isActive: z.boolean().optional(),
     description: z.string(),
     brand: z.string(),
     kilometers: z.number(),
@@ -42,7 +42,7 @@ const schema = z.object({
 
 
 export const AddCarModal = () => {
-    const { carData, setCarData, onSubmitCarAd, setBrand, setFuel, setModel, setYear, fipe } = useContext(CarAdsContext)
+    const { onSubmitCarAd, setBrand, setFuel, setModel, setYear, fipe } = useContext(CarAdsContext)
     const {
         register,
         handleSubmit,
@@ -59,31 +59,20 @@ export const AddCarModal = () => {
         background-color: var(--chakra-colors-brand-brand1);
     }
     `
-    const handleInputChange = (event: any) => {
-        const { name, value } = event.target;
-        setCarData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleImageChange = (event: any) => {
-        const images = [...event.target.files];
-        setCarData((prevData) => ({ ...prevData, images: images }));
-    };
 
     const lorem = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`
-    const inputs = Array.from({ length: inputCount }).map((_, index) => (
-        <FormControl mb="4">
-            <FormLabel fontSize={"14px"}>{index + 1}ª Imagem da Galeria</FormLabel>
-            <Input
-                key={index}
-                type="text"
-                // {...register("images"), { onChange: (e) => (handleImageChange(e)) }}
-                {...register("images")}
-                onChange={(e) => handleImageChange(e)}
-                name="images"
-                placeholder="https://image.com"
-            />
-        </FormControl>
-    ));
+    // const inputs = Array.from({ length: inputCount }).map((_, index) => (
+    //     <FormControl mb="4">
+    //         <FormLabel fontSize={"14px"}>{index + 1}ª Imagem da Galeria</FormLabel>
+    //         <Input
+    //             key={`${index}"a"`}
+    //             type="text"
+    //             {...register("images")}
+    //             name="file"
+    //             placeholder="https://image.com"
+    //         />
+    //     </FormControl>
+    // ));
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -99,6 +88,7 @@ export const AddCarModal = () => {
                     <ModalCloseButton />
                     <form onSubmit={
                         handleSubmit(onSubmitCarAd)
+
                     }>
                         <ModalBody>
                             <FormControl mb="4">
@@ -110,7 +100,6 @@ export const AddCarModal = () => {
                                 <Input  {...register("model")} onChange={(e) => setModel(e.target.value)} placeholder="Digite o modelo do veículo" name="model" />
                             </FormControl>
                             <Flex gap={"15px"}>
-
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Ano</FormLabel>
                                     <Input {...register("year")} onChange={(e) => setYear(Number(e.target.value))} placeholder="Ano" name="year" />
@@ -122,39 +111,38 @@ export const AddCarModal = () => {
                             </Flex>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Quilometragem</FormLabel>
-                                <Input {...register("kilometers")} onChange={(e) => handleInputChange(e)} placeholder="30.000" name="kilometers" />
+                                <Input {...register("kilometers")} placeholder="30.000" name="kilometers" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Cor</FormLabel>
-                                <Input {...register("color")} onChange={(e) => handleInputChange(e)} placeholder="Branco" name="color" />
+                                <Input {...register("color")} placeholder="Branco" name="color" />
                             </FormControl>
                             <Flex gap={"15px"}>
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Preço Tabela Fipe</FormLabel>
-                                    <Input {...register("fipePrice")} onChange={(e) => handleInputChange(e)} value={fipe?.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })} type="text" name="fipePrice" />
+                                    <Input {...register("fipePrice")} value={fipe?.value && fipe?.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })} type="text" name="fipePrice" />
                                 </FormControl>
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Preço</FormLabel>
-                                    <Input {...register("price")} onChange={(e) => handleInputChange(e)} placeholder="R$ 30.000" type="number" min={"0"} name="price" />
+                                    <Input {...register("price")} placeholder="R$ 30.000" type="number" min={"0"} name="price" />
                                 </FormControl>
 
                             </Flex>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Descrição</FormLabel>
-                                <Textarea {...register("description")} onChange={(e) => handleInputChange(e)} placeholder={lorem} name="description" />
+                                <Textarea {...register("description")} placeholder={lorem} name="description" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Imagem de Capa</FormLabel>
                                 <Input
                                     type="text"
                                     {...register("images")}
-                                    onChange={(e) => handleImageChange(e)}
-                                    name="images"
+                                    name="file"
                                     placeholder="https://image.com"
                                 />
                             </FormControl>
                             {
-                                inputs
+                                // inputs
                             }
 
                             {
@@ -167,7 +155,7 @@ export const AddCarModal = () => {
                             <Button bgColor={"greyScale.grey6"} mr="4" onClick={onClose}>
                                 Cancelar
                             </Button>
-                            <Button bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4">
+                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4">
                                 Criar Anuncio
                             </Button>
                         </ModalFooter>

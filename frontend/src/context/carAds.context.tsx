@@ -12,32 +12,22 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     const [carAds, setCarAds] = useState<IAdswithPagination | null>(null)
     const [specificAd, setSpecificAd] = useState<iCarAdsInterface | null>(null)
     const [fipe, setFipe] = useState<iFipeResponseInterface | null>(null)
-    const onSubmitCarAd = (data: FieldValues) => createAd(data)
+    const onSubmitCarAd = (data: FieldValues) => {
+        console.log(data)
+        createAd(data)
+    }
     const onDeleteCarAd = (id: string) => deleteSpecificCarAd(id)
     const onGetSpecificAd = (id: string) => getSpecificCarAds(id)
     const onUpdateCarAd = (id: string, data: FieldValues) => editSpecificAd(id, data)
     const onFipeRequest = (brand: string, name: string, year: number, fuel: number) => getFipeCar(brand, name, year, fuel)
-    const [carData, setCarData] = useState<ICarDataInterface>({
-        brand: "",
-        model: "",
-        year: 0,
-        fuel_type: "",
-        kilometers: 0,
-        color: "",
-        fipePrice: 0,
-        price: 0,
-        description: "",
-        images: [],
-        isActive: true,
-    });
 
     const [brand, setBrand] = useState<string>("")
     const [model, setModel] = useState<string>("")
     const [year, setYear] = useState<number>(0)
     const [fuel, setFuel] = useState<number>(0)
 
-    console.log(carData)
     const createAd = (data: FieldValues) => {
+        console.log(data)
         instance
             .post("advertisements", data)
             .then(response => {
@@ -47,6 +37,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
                 console.log(err)
             })
     }
+
     const getCarAds = (page: number) => {
         instance
             .get("advertisements", { params: { page: page } })
@@ -133,8 +124,6 @@ export const AdsProvider = ({ children }: iProviderProps) => {
                 onFipeRequest,
                 fipe,
                 getCarAds,
-                carData,
-                setCarData,
                 setBrand,
                 setYear,
                 setModel,
