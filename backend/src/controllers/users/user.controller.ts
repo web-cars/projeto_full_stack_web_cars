@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import {
-  createUserService,
-  retrieveEspecificUserService,
-} from "../../services/users/user.service";
+import { retrieveEspecificUserService } from "../../services/user/retrieveUser.service";
+import { createUserService } from "../../services/user/createUser.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData = req.body;
