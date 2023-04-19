@@ -6,26 +6,22 @@ import {
   UnorderedList,
   Stack,
   Avatar,
+  Container
 } from "@chakra-ui/react";
 import { ProductCard } from './../components/ProductCard/index';
 import { CarAdsContext } from "../context/carAds.context";
 import { useContext }from "react";
 import { iCarAdsInterface } from './../interfaces/carAds.interface';
+import { Navbar } from './../components/Navbar/index';
+import Footer from './../components/Footer/index';
 
 export const ViewUser = () => {
 
   const { carAds } = useContext(CarAdsContext)
 
-  console.log(carAds)
-
   return (
     <>
-      <Box
-        bgGradient={"linear(to-b, brand1 0px 400px, gray.100 00px 100%)"}
-        w="100%"
-        paddingBottom={10}
-        gap={5}
-      >
+      <Navbar />
         <Flex
           gap={2}
           width={"100%"}
@@ -33,6 +29,7 @@ export const ViewUser = () => {
           direction={["column", null, "row"]}
           alignItems={["center", null, "flex-start"]}
         >
+          <Container maxW={"100%"} position={"absolute"} h="55%" bgColor={"brand.brand1"} zIndex={'-1'}/>
           <Box
             marginTop={10}
             width={["90%",null ,"75%",null ,"60%" ]}
@@ -46,7 +43,7 @@ export const ViewUser = () => {
               justifyContent={"center"}
             >
               <Box
-                backgroundColor={"white"}
+                backgroundColor={"greyScale.whiteFixed"}
                 h="350"
                 width={"100%"}
                 borderRadius={5}
@@ -68,13 +65,13 @@ export const ViewUser = () => {
                   gap={5}
                 >
                   <Box display={"flex"} gap={3} alignItems={"center"}>
-                    <Text fontFamily={"Lexend"} fontWeight={600}>
+                    <Text fontFamily={"Lexend"} fontWeight={600} color={"greyScale.grey1"}> 
                       Samuel Leao
                     </Text>
                     <Button
                       h={"30px"}
-                      backgroundColor={"brand4"}
-                      color={"brand2"}
+                      backgroundColor={"brand.brand4"}
+                      color={"brand.brand2"}
                       size="sm"
                       cursor={"unset"}
                     >
@@ -82,7 +79,7 @@ export const ViewUser = () => {
                     </Button>
                   </Box>
                 </Box>
-                <Text>
+                <Text color={"greyScale.grey2"}>
                   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 </Text>
                 <Button
@@ -90,10 +87,10 @@ export const ViewUser = () => {
               w={120}
               h={10}
               border={"2px"}
-              color={"brand1"}
+              color={"brand.brand1"}
               cursor={"pointer"}
-              borderColor={"brand1"}
-              backgroundColor={"whiteFixed"}
+              borderColor={"brand.brand1"}
+              colorScheme={'purple'}
             >
               Criar anuncio
             </Button>
@@ -107,7 +104,7 @@ export const ViewUser = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                  {carAds.ads.map((card: iCarAdsInterface) => (
+                  {/* {carAds.ads.map((card: iCarAdsInterface) => (
                     <ProductCard
                       key={card.id}
                       id={card.id}
@@ -123,7 +120,7 @@ export const ViewUser = () => {
                       fuel_type={card.fuel_type}
                       iColor={card.iColor}
                     />
-                  ))}
+                  ))} */}
                 <UnorderedList
                   paddingRight={{ base: "5px", md: "0px" }}
                   display="flex"
@@ -151,9 +148,9 @@ export const ViewUser = () => {
           margin={"15px 0"}
         >
           <Flex gap={"5px"}>
-            <Text color={"brand1"}>1</Text>
-            <Text color={"gray.600"}>de</Text>
-            <Text color={"gray.600"}>2</Text>
+            <Text color={"greyScale.grey3"}>1</Text>
+            <Text color={"greyScale.grey5"}>de</Text>
+            <Text color={"greyScale.grey5"}>2</Text>
           </Flex>
           <Button
             display={"flex"}
@@ -164,7 +161,7 @@ export const ViewUser = () => {
             Seguinte &gt;
           </Button>
         </Box>
-      </Box>
+      <Footer/>
     </>
   );
 };
