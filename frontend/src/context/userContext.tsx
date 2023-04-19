@@ -114,8 +114,11 @@ export const UserProvider = ({ children }: iProviderProps) => {
 
 
   const logout = () => {
-    window.localStorage.clear()
+    window.localStorage.removeItem("TOKEN@WEBCARS")
+    const toNavigate = location.state?.from?.pathname || '/'
+    navigate(toNavigate, { replace: true})
   }
+
   return (
     <UserContext.Provider
       value={{

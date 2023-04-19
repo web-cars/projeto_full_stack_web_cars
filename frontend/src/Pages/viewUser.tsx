@@ -80,7 +80,7 @@ export const ViewUser = () => {
                   </Box>
                 </Box>
                 <Text color={"greyScale.grey2"}>
-                  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                  eis aqui uma descrição bem grande, eis aqui uma descrição bem grande, eis aqui uma descrição bem grande, eis aqui uma descrição bem grande
                 </Text>
                 <Button
               fontSize={12}
@@ -90,7 +90,7 @@ export const ViewUser = () => {
               color={"brand.brand1"}
               cursor={"pointer"}
               borderColor={"brand.brand1"}
-              colorScheme={'purple'}
+              bg={'transparent'}
             >
               Criar anuncio
             </Button>
@@ -104,6 +104,18 @@ export const ViewUser = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
+                <UnorderedList
+                  paddingRight={{ base: "5px", md: "0px" }}
+                  display="flex"
+                  flexWrap={{ base: "nowrap", md: "wrap" }}
+                  overflowX={{ base: "auto" }}
+                  gap={{ base: "25px", md: "20px" }}
+                  listStyleType="none"
+                  flex={{ base: "auto", md: 1 }}
+                  maxWidth={{ base: "auto", md: "auto" }}
+                  style={{ width: "100%", paddingRight: "5px" }}
+                  justifyContent={"center"}
+                >
                   {/* {carAds.ads.map((card: iCarAdsInterface) => (
                     <ProductCard
                       key={card.id}
@@ -121,18 +133,6 @@ export const ViewUser = () => {
                       iColor={card.iColor}
                     />
                   ))} */}
-                <UnorderedList
-                  paddingRight={{ base: "5px", md: "0px" }}
-                  display="flex"
-                  flexWrap={{ base: "nowrap", md: "wrap" }}
-                  overflowX={{ base: "auto" }}
-                  gap={{ base: "25px", md: "20px" }}
-                  listStyleType="none"
-                  flex={{ base: "auto", md: 1 }}
-                  maxWidth={{ base: "auto", md: "auto" }}
-                  style={{ width: "100%", paddingRight: "5px" }}
-                  justifyContent={"center"}
-                >
                 </UnorderedList>
               </Box>
             </Flex>
