@@ -1,7 +1,6 @@
 
 import { ICardProfile } from './../../interface/index';
 import Mock from '../../mock/mock.json'
-
 import {
   Card,
   CardBody,
@@ -11,7 +10,6 @@ import {
   Text,
   CardFooter,
   Button,
-
   Box
 } from '@chakra-ui/react'
 import { css } from '@emotion/react';
@@ -19,7 +17,7 @@ import { css } from '@emotion/react';
 export const CardProfile = ({ image, name, description }: ICardProfile) => {
   const divMobile = css`
   @media (max-width:1024px) {
-     width: 100%;
+    width: 100%;
     padding: 15px
   }
   `
