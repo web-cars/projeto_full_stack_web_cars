@@ -11,12 +11,14 @@ import { iProviderProps } from "../interfaces/carAds.interface";
 
 export const UserContext = createContext({} as IUserContext);
 
+
+
 export const UserProvider = ({ children }: iProviderProps) => {
+
     const [login, setLogin] = useState(true);
     const [user, setUser] = useState<IUser | null>(null);
     const [profile, setProfile] = useState(false);
     const [token, setToken] = useState(localStorage.getItem("TOKEN@WEBCARS") || "")
-
     const navigate = useNavigate();
 
     const onSubmitSignUp = (data: FieldValues) => postSignUp(data);
@@ -95,22 +97,22 @@ export const UserProvider = ({ children }: iProviderProps) => {
         }
     }
 
-    useEffect(() => {
-        const loadUser = async () => {
+    // useEffect(() => {
+    //     const loadUser = async () => {
 
-            if (token) {
-                try {
-                    instance.defaults.headers.authorization = `Bearer ${token}`;
-                    const { data } = await instance.get<IUser>("users");
-                    setUser(data);
-                } catch (err) {
-                    console.log(err);
-                    localStorage.clear();
-                }
-            }
-        };
-        loadUser();
-    }, [token]);
+    //         if (token) {
+    //             try {
+    //                 instance.defaults.headers.authorization = `Bearer ${token}`;
+    //                 const { data } = await instance.get<IUser>("users");
+    //                 setUser(data);
+    //             } catch (err) {
+    //                 console.log(err);
+    //                 localStorage.clear();
+    //             }
+    //         }
+    //     };
+    //     loadUser();
+    // }, [token]);
     return (
         <UserContext.Provider
             value={{

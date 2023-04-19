@@ -1,4 +1,4 @@
-import { Box, Image, Stack, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Flex, Image, Stack, Text, useMediaQuery } from "@chakra-ui/react";
 import bannerImage from "../../assets/Photo.png";
 import { css } from '@emotion/react';
 const Banner = () => {
@@ -32,11 +32,11 @@ const Banner = () => {
       <Box
         css={imageStyle}
       >
-        <Text color="white" zIndex={3} align="center" mt={isLargerThan768 ? '0' : '-20'} p={isLargerThan768 ? '0' : '1'}>
+        <Flex color="white" zIndex={3} direction={"column"} align="center" mt={isLargerThan768 ? '0' : '-20'} p={isLargerThan768 ? '0' : '1'}>
           <Text as="span" fontWeight="bold" fontSize="3xl"> Motors Shop</Text>
           <Box as="br" />
           <Text fontSize="2xl">A melhor plataforma de anúncios de carros do país</Text>
-        </Text>
+        </Flex>
       </Box>
     </Stack>
   );
