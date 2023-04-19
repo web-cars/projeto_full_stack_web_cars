@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
 import { Users } from "../../entities/users.entity";
 import { AppError } from "../../errors/errors";
-import { userSchemaWithoutPassword } from "../../serializers/user.serializer";
+import { userSchemaWithoutPassword } from "../../serializers/user.serializers";
 
 export const retrieveEspecificUserService = async (
   idUser: string
@@ -13,9 +13,7 @@ export const retrieveEspecificUserService = async (
     if (!specificUser) {
       throw new AppError("user not found", 404);
     }
-    console.log(specificUser);
     const userReturnWithoutPass = userSchemaWithoutPassword.parse(specificUser);
-    console.log("oi");
 
     return userReturnWithoutPass;
   } catch (err) {

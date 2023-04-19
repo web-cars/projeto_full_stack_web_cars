@@ -21,7 +21,6 @@ export const SessionService = async ({
     subject: String(user.id),
     expiresIn: "24h",
   });
-  console.log("oi");
 
-  return { token: token };
+  return { token };
 };
