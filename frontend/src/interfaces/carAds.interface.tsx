@@ -19,10 +19,30 @@ export interface iCarAdsContextInterface {
     onGetSpecificAd: (id: string) => void;
     onUpdateCarAd: (id: string, data: FieldValues) => void;
     onFipeRequest: (brand: string, name: string, year: number, fuel: number) => void
+    carData: ICarDataInterface | null;
+    setCarData: React.Dispatch<React.SetStateAction<ICarDataInterface>>;
+    setBrand: React.Dispatch<React.SetStateAction<string>>;
+    setYear: React.Dispatch<React.SetStateAction<number>>;
+    setModel: React.Dispatch<React.SetStateAction<string>>;
+    setFuel: React.Dispatch<React.SetStateAction<number>>;
+
 }
 export interface IAdswithPagination {
     ads: iCarAdsInterface[];
     pagination: IPagination
+}
+export interface ICarDataInterface {
+    fipePrice: number;
+    price: number;
+    isActive: boolean;
+    description: string;
+    brand: string;
+    kilometers: number;
+    images: iImageInterface[];
+    model: string;
+    year: number;
+    fuel_type: string;
+    color: string;
 }
 interface IPagination {
     currentPage: number;
@@ -46,7 +66,7 @@ export interface iCarAdsInterface {
     model: string;
     year: number;
     fuel_type: number;
-    iColor: string;
+    color: string;
 }
 
 

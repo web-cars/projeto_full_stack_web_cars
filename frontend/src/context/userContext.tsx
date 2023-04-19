@@ -126,7 +126,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
                 onSubmitDelete,
                 token,
                 setToken,
-                getProfile
+                getProfile,
+                postLogin
             }}
         >
             {children}
