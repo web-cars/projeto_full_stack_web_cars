@@ -49,6 +49,6 @@ export const createUserService = async ({
     description,
     perfilPhoto,
     address: userAddress,
-    advertisements: advertisements || null,
+    advertisements: advertisements || [],
   };
 };
