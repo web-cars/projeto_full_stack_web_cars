@@ -8,7 +8,7 @@ export interface iErrorAxios {
     message: string;
 }
 export interface iCarAdsContextInterface {
-    carAds: IAdswithPagination | null;
+    carAds: IAdswithPagination;
     setCarAds: React.Dispatch<React.SetStateAction<IAdswithPagination | null>>;
     specificAd: iCarAdsInterface | null;
     setSpecificAd: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;

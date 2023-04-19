@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { instance } from "../services/instance";
 import { FieldValues } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IUser, IUserContext } from "../interface";
 import { iErrorAxios } from "../interfaces/carAds.interface";
 import { iAxiosData } from "../interfaces/carAds.interface";
@@ -11,6 +11,7 @@ import { iProviderProps } from "../interfaces/carAds.interface";
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: iProviderProps) => {
+  const location = useLocation()
 
   const [login, setLogin] = useState(true);
   const [user, setUser] = useState<IUser | null>(null);
@@ -32,7 +33,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
         const { token } = response.data;
         localStorage.setItem("TOKEN@WEBCARS", token);
         setToken(token);
-        navigate("/dashboard");
+        const toNavigate = location.state?.from?.pathname || '/';
+        navigate(toNavigate, { replace: true})
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
@@ -109,6 +111,11 @@ export const UserProvider = ({ children }: iProviderProps) => {
     };
     loadUser();
   }, [token]);
+
+
+  const logout = () => {
+    window.localStorage.clear()
+  }
   return (
     <UserContext.Provider
       value={{
@@ -125,6 +132,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         token,
         setToken,
         getProfile,
+        logout
       }}
     >
       {children}

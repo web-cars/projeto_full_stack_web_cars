@@ -1,6 +1,5 @@
 
 import { ICardProfile } from './../../interface/index';
-import Mock from '../../mock/mock.json'
 import {
   Card,
   CardBody,

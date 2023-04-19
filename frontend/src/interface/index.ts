@@ -46,4 +46,5 @@ export interface IUserContext {
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
   getProfile: () => Promise<void>;
+  logout: Function
 }
