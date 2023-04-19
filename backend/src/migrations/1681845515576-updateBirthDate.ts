@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class AlterColumnBirthDateToString1681837619800 implements MigrationInterface {
-    name = 'AlterColumnBirthDateToString1681837619800'
+export class updateBirthDate1681845515576 implements MigrationInterface {
+    name = 'updateBirthDate1681845515576'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "users" DROP COLUMN "birthDate"`);

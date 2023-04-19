@@ -25,7 +25,7 @@ export class Users {
   @Column({ unique: true, length: 14 })
   cpf: string;
 
-  @Column({ unique: true, length: 12 })
+  @Column({ unique: true, length: 15 })
   cellphone: string;
 
   @Column({ length: 127 })
@@ -53,7 +53,7 @@ export class Users {
   })
   advertisements: CarAds[];
 
-  @OneToOne(() => Addresses)
+  @OneToOne(() => Addresses, { eager: true })
   @JoinColumn()
   address: Addresses;
 }
