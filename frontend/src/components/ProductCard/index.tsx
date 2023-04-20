@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { css } from '@emotion/react';
 
 
-export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, iColor }: iCarAdsInterface) => {
+export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color }: iCarAdsInterface) => {
   const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
   const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
 

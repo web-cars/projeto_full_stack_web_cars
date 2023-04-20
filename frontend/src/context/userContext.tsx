@@ -18,7 +18,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
   const [token, setToken] = useState(
     localStorage.getItem("TOKEN@WEBCARS") || ""
   );
-  
+
   const navigate = useNavigate();
 
   const onSubmitSignUp = (data: FieldValues) => postSignUp(data);
@@ -93,13 +93,13 @@ export const UserProvider = ({ children }: iProviderProps) => {
       }
     }
   };
-
   useEffect(() => {
     const loadUser = async () => {
+
       if (token) {
         try {
           instance.defaults.headers.authorization = `Bearer ${token}`;
-          const { data } = await instance.get<IUser>("users/infos");
+          const { data } = await instance.get<IUser>("users");
           setUser(data);
         } catch (err) {
           console.log(err);
@@ -125,6 +125,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         token,
         setToken,
         getProfile,
+        postLogin
       }}
     >
       {children}
