@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/icons";
 import logo from "../../assets/img/motors-shop.svg";
 import { UserContext } from "../../context/userContext";
+import ModalRegister from "../ModalRegister";
 
 interface MenuItemType {
   label: string
@@ -84,6 +85,7 @@ export const Navbar = () => {
                         w={"100%"}
                       >
                         {item.label}
+                        
                       </Button>
                       :
                       <Button
@@ -110,18 +112,7 @@ export const Navbar = () => {
       return (<HStack spacing="6">
         {menuItems.map(item => (
           item.label === "Cadastrar" ?
-            <Button
-              key={item.label}
-              variant="ghost"
-              fontSize="md"
-              fontWeight="normal"
-              border={"1px"}
-              borderColor={"greyScale.grey0"}
-              color={"greyScale.grey0"}
-              onClick={item.onClick}
-            >
-              {item.label}
-            </Button>
+            <ModalRegister/>
             :
             <Button
               key={item.label}
@@ -241,19 +232,20 @@ export const Navbar = () => {
               p={"10px"} h={"max-content"}>
               {menuItems.map(item => (
                 item.label === "Cadastrar" ?
-                  <Button
-                    key={item.label}
-                    variant="ghost"
-                    fontSize="md"
-                    fontWeight="normal"
-                    border={"1px"}
-                    borderColor={"greyScale.grey0"}
-                    color={"greyScale.grey0"}
-                    onClick={item.onClick}
-                    w={"100%"}
-                  >
-                    {item.label}
-                  </Button>
+                <ModalRegister/>
+                  // <Button
+                  //   key={item.label}
+                  //   variant="ghost"
+                  //   fontSize="md"
+                  //   fontWeight="normal"
+                  //   border={"1px"}
+                  //   borderColor={"greyScale.grey0"}
+                  //   color={"greyScale.grey0"}
+                  //   onClick={item.onClick}
+                  //   w={"100%"}
+                  // >
+                  //   {item.label}
+                  // </Button>
                   :
                   <Button
                     key={item.label}
