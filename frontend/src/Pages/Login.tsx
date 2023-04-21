@@ -4,9 +4,9 @@ import { Navbar } from "../components/Navbar";
 import {
   Box,
   Button,
-  Center,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Heading,
@@ -31,7 +31,7 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IUser>({
     resolver: zodResolver(schema),
   });
@@ -72,7 +72,11 @@ export const Login = () => {
         </Heading>
         <form onSubmit={handleSubmit(onSubmitLogin)}>
           <FormControl marginBottom={"22px"}>
-            <FormLabel color={"greyScale.grey1"} fontWeight={"500"}>
+            <FormLabel
+              htmlFor="usuário"
+              color={"greyScale.grey1"}
+              fontWeight={"500"}
+            >
               Usuário
             </FormLabel>
             <Input
@@ -81,7 +85,7 @@ export const Login = () => {
               border={"1px solid var(--chakra-colors-greyScale-grey6)"}
               color={"greyScale.grey1"}
             />
-            <Text
+            <FormErrorMessage
               position="absolute"
               right="5px"
               color="feedback.alert1"
@@ -90,10 +94,14 @@ export const Login = () => {
               marginBottom="20px"
             >
               {errors.email?.message}
-            </Text>
+            </FormErrorMessage>
           </FormControl>
           <FormControl id="password" mt={4}>
-            <FormLabel fontWeight={"500"} color={"greyScale.grey1"}>
+            <FormLabel
+              htmlFor="senha"
+              fontWeight={"500"}
+              color={"greyScale.grey1"}
+            >
               Senha
             </FormLabel>
             <Input
@@ -103,7 +111,7 @@ export const Login = () => {
               placeholder="Digitar senha"
               border={"1px solid var(--chakra-colors-greyScale-grey6)"}
             />
-            <Text
+            <FormErrorMessage
               position="absolute"
               right="5px"
               color="feedback.alert1"
@@ -112,7 +120,7 @@ export const Login = () => {
               marginBottom="20px"
             >
               {errors.password?.message}
-            </Text>
+            </FormErrorMessage>
 
             <FormHelperText
               textAlign={"end"}
@@ -123,10 +131,11 @@ export const Login = () => {
             </FormHelperText>
           </FormControl>
           <Button
+            // isLoading={isSubmitting}
+            type="submit"
             width={"100%"}
             backgroundColor={"brand.brand1"}
             color={"greyScale.whiteFixed"}
-            type="submit"
             mt={8}
             colorScheme="blue"
             fontWeight="600"

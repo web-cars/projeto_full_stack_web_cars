@@ -15,8 +15,7 @@ function App() {
         </ChakraProvider>
       </AdsProvider>
     </UserProvider>
-  )
+  );
 }
 
-export default App
-
+export default App;

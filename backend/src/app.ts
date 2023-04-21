@@ -24,7 +24,6 @@ app.use(
 app.use("/advertisements", advertisementRoutes);
 app.use("/users", userRoutes);
 app.use("/session", SessionRoutes);
-app.use("/user", userRoutes);
 app.use(errorHandler);
 
 export default app;
