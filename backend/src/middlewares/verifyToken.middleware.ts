@@ -10,7 +10,7 @@ export const verifyTokenMiddleware = async (
 ) => {
   let token = req.headers.authorization;
   if (!token) {
-    throw new AppError("Invalid token", 401);
+    throw new AppError("Missing token", 401);
   }
   token = token.split(" ")[1];
   jwt.verify(token, process.env.SECRET_KEY, (error, decoded: any) => {
