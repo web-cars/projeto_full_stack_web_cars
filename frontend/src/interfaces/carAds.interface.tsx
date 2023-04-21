@@ -28,7 +28,7 @@ export interface iCarAdsContextInterface {
     options: iFipeResponseInterface[] | null;
 }
 export interface IAdswithPagination {
-    ads: iCarAdsInterface[];
+    advertisements: iCarAdsInterface[];
     pagination: IPagination
 }
 export interface ICarDataInterface {

@@ -17,12 +17,12 @@ interface ICarAdResponse {
     year: Year;
     fuel_type: FuelType;
     images: Images[];
-  };
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    address: Addresses;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      address: Addresses;
+    };
   };
 }
 

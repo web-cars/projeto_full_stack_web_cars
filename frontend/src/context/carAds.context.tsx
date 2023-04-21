@@ -60,7 +60,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     instance
       .get(`advertisements/${id}`)
       .then((response) => {
-        setSpecificAd(response.data)
+        setSpecificAd(response.data.advertisement)
 
       })
       .catch((err) =>
