@@ -1,13 +1,13 @@
 import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import { Images } from "../../entities/images.entity";
-import { ICarAdResponse } from "../../interfaces/carAds.interfaces";
+import { ICarAdUpdateResponse } from "../../interfaces/carAds.interfaces";
 import { ICarAdUpdateRequest } from "../../interfaces/carAds.interfaces";
 
 export const updateCarAdService = async (
   { images: imagesInRequest, ...data }: ICarAdUpdateRequest,
   id: string
-): Promise<ICarAdResponse> => {
+): Promise<ICarAdUpdateResponse> => {
   const carAdRepository = AppDataSource.getRepository(CarAds);
   const imagesRepository = AppDataSource.getRepository(Images);
 
@@ -41,6 +41,7 @@ export const updateCarAdService = async (
 
   return {
     ...updatedCarAd,
+    price: +updatedCarAd.price,
     fipePrice: +updatedCarAd.fipePrice,
   };
 };

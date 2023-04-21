@@ -6,7 +6,7 @@ import { deleteCarAdService } from "../../services/advertisement/deleteCarAd.ser
 import createCarAdService from "../../services/advertisement/createCarAd.service";
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
-  const newAdvertisement = await createCarAdService(req.body);
+  const newAdvertisement = await createCarAdService(req.body, req.user.id);
   return res.status(201).json(newAdvertisement);
 };
 const updateCarAdController = async (request: Request, response: Response) => {
