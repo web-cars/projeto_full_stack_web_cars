@@ -37,8 +37,10 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                 <Image
                   margin={"0 auto"}
                   width={"85%"}
+                  height={"150px"}
                   src={images[0].file}
                   alt="Car"
+                  objectFit={"cover"}
                 />
               </Box>
               <Stack mt="6" spacing="3" padding={"0 25px"}>
