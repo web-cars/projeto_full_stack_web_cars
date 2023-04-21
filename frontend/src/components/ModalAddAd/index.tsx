@@ -27,7 +27,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ICarDataInterface } from "../../interfaces/carAds.interface";
 import { z } from "zod";
-import { TipoDeVeiculo, obterTipoDeVeiculo } from "../enum/fuel.enum";
+
 
 const schemaImages = z.object({
     file: z.string(),
@@ -77,7 +77,7 @@ export const AddCarModal = () => {
         <FormControl mb="4">
             <FormLabel fontSize={"14px"}>{index + 1}ª Imagem da Galeria</FormLabel>
             <Input
-                key={`${index}a33`}
+                key={`${index}im`}
                 type="text"
                 {...register(`images.${index + 1}.file`)}
                 placeholder="https://image.com"
@@ -96,7 +96,7 @@ export const AddCarModal = () => {
     }
     return (
         <>
-            <Button mt="5" bg="transparent" border="solid" borderColor="purple.600" borderWidth={2} color="purple.600" fontSize="xs">Criar anuncio</Button>
+            <Button onClick={onOpen} mt="5" bg="transparent" border="solid" borderColor="purple.600" borderWidth={2} color="purple.600" fontSize="xs">Criar anuncio</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

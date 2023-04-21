@@ -37,7 +37,7 @@ export const Homepage = () => {
       <Flex w='100%' direction='row' bg='greyScale.whiteFixed' justify="space-between" wrap='wrap' p='20px'>
         <Sidebar />
         <UnorderedList css={mobile} w='66%' spacing={3} display='flex' flexDirection='row' flexWrap='wrap' gap="10px" ml={"0"} alignItems={"flex-end"}>
-          {carAds?.ads.map((ad: iCarAdsInterface) => (
+          {carAds?.advertisements.map((ad: iCarAdsInterface) => (
             <ProductCard
               key={ad.id}
               id={ad.id}
