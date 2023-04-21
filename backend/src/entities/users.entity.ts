@@ -1,38 +1,60 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { CarAds } from "./carAds.entity";
+import { Addresses } from "./addresses.entity";
+import { hashSync } from "bcryptjs";
 
 @Entity("users")
-export class User {
+export class Users {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: "varchar", length: 255 })
+  @Column({ length: 255 })
   name: string;
 
-  @Column({ type: "varchar", length: 127 })
+  @Column({ unique: true, length: 127 })
   email: string;
 
-  @Column({ type: "varchar", length: 14 })
+  @Column({ unique: true, length: 14 })
   cpf: string;
 
-  @Column({ type: "varchar", length: 12 })
+  @Column({ unique: true, length: 15 })
   cellphone: string;
 
-  @Column({ type: "varchar", length: 127 })
+  @Column({ length: 127 })
   password: string;
 
-  @Column({ type: "boolean", default: false })
+  @Column()
   isAdmin: boolean;
 
-  @Column({ type: "varchar", length: 8 })
+  @Column()
   birthDate: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ nullable: true })
   description: string;
 
-  @Column({ type: "uuid", nullable: true })
-  addressId: string;
+  @Column({ nullable: true })
+  perfilPhoto: string;
 
-  @OneToMany(() => CarAds, (carAd) => carAd.user)
-  carsAds: CarAds[];
+  @BeforeInsert()
+  hashPassword() {
+    this.password = hashSync(this.password, 10);
+  }
+
+  @OneToMany(() => CarAds, (advertisement) => advertisement.user, {
+    eager: true,
+  })
+  advertisements: CarAds[];
+
+  @OneToOne(() => Addresses, { eager: true })
+  @JoinColumn()
+  address: Addresses;
 }
+

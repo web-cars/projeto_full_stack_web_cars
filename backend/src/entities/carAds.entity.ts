@@ -1,7 +1,16 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Images } from "./images.entity";
 import { Brand, FuelType, Year } from "../enum/carAds.enum";
-import { User } from "./users.entity";
+import { Users } from "./users.entity";
+
 
 @Entity("cars_ads")
 export class CarAds {
@@ -27,11 +36,14 @@ export class CarAds {
   year: Year;
   @Column({ type: "enum", enum: FuelType })
   fuel_type: FuelType;
+
+  @ManyToOne(() => Users, (user) => user.advertisements)
+  user: Users;
+
   @OneToMany(() => Images, (image) => image.car, {
     eager: true,
   })
   images: Images[];
 
-  @ManyToOne(() => User, (user) => user.carsAds)
-  user: User;
+
 }

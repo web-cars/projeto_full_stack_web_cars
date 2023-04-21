@@ -4,6 +4,8 @@ import express from "express";
 import advertisementRoutes from "./routes/advertisement/advertisement.routes";
 import cors from "cors";
 import { errorHandler } from "./errors/errorHandler";
+import SessionRoutes from "./routes/session/session.routes";
+import userRoutes from "./routes/user/user.routes";
 
 const app = express();
 app.use(express.json());
@@ -20,6 +22,8 @@ app.use(
   })
 );
 app.use("/advertisements", advertisementRoutes);
+app.use("/users", userRoutes);
+app.use("/session", SessionRoutes);
 app.use(errorHandler);
 
 export default app;
