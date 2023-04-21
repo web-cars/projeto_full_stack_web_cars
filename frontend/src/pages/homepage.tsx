@@ -9,6 +9,7 @@ import { Navbar } from '../components/Navbar';
 import Banner from '../components/Banner';
 import { css } from '@emotion/react';
 import { AddCarModal } from '../components/ModalAddAd';
+import ModalRegister from '../components/ModalRegister';
 
 export const Homepage = () => {
   const { carAds, getCarAds } = useContext(CarAdsContext)
@@ -63,6 +64,7 @@ export const Homepage = () => {
     // </Flex>
     <>
       <AddCarModal />
+      <ModalRegister/>
     </>
   )
 };
