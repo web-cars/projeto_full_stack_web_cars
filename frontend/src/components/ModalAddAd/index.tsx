@@ -18,6 +18,8 @@ import {
     NumberInputField,
     NumberInput,
     Select,
+    InputGroup,
+    InputLeftAddon,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { CarAdsContext } from "../../context/carAds.context";
@@ -35,8 +37,8 @@ const schemaImages = z.object({
 const schema = z.object({
     brand: z.string(),
     model: z.string(),
-    year: z.string().transform((value) => Number(value)),
-    fuel_type: z.string(),
+    year: z.string().optional().transform((value) => Number(value)),
+    fuel_type: z.string().optional(),
     kilometers: z.string().transform((value) => Number(value)),
     color: z.string(),
     fipePrice: z.string().optional(),
@@ -48,7 +50,7 @@ const schema = z.object({
 
 
 export const AddCarModal = () => {
-    const { onSubmitCarAd, setBrand, setFuel, setModel, setYear, fipe } = useContext(CarAdsContext)
+    const { onSubmitCarAd, setBrand, setFuel, setModel, setYear, fipe, options, setFipeCar, fipeCar } = useContext(CarAdsContext)
     const {
         register,
         handleSubmit,
@@ -65,7 +67,11 @@ export const AddCarModal = () => {
         background-color: var(--chakra-colors-brand-brand1);
     }
     `
-
+    const styleFocus = css`
+    &:focus-within{
+        border: 2px solid rgba(66,153,225,0.6);
+    }
+    `
     const lorem = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`
     const inputs = Array.from({ length: inputCount }).map((_, index) => (
         <FormControl mb="4">
@@ -82,11 +88,12 @@ export const AddCarModal = () => {
         "Citroën", "Fiat", "Ford", "Chevrolet", "Honda", "Hyundai", "Nissan", "Peugeot", "Renault", "Toyota", "Volkswagen"
     ]
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const onSubmit = (data: any, e: any) => {
-        data.fuel_type = obterTipoDeVeiculo(data.fuel_type);
-        data.fipePrice = fipe?.value
-        console.log(data)
-    };
+    const filterModel = (value: string) => {
+        const filteredCar = options?.find(elem => elem.name === value)
+        setFipeCar(filteredCar)
+        setYear(Number(filteredCar?.year))
+        setFuel(filteredCar?.fuel)
+    }
     return (
         <>
             <Button onClick={onOpen}>Abrir modal</Button>
@@ -105,8 +112,8 @@ export const AddCarModal = () => {
                         <ModalBody>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Marca</FormLabel>
-                                <Select {...register("brand")} onBlur={(e) => setBrand(e.target.value)} placeholder="Digite a marca do veículo" name="brand" >
-                                    {brandList.map(elem => <option value={elem}>{elem}</option>)}
+                                <Select {...register("brand")} onChange={(e) => setBrand(e.target.value.toLowerCase())} placeholder="Digite a marca do veículo" name="brand" >
+                                    {brandList.map((elem, index) => <option key={index + "b"} value={elem}>{elem}</option>)}
                                 </Select>
 
                                 <Text
@@ -122,7 +129,13 @@ export const AddCarModal = () => {
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Modelo</FormLabel>
-                                <Input  {...register("model")} onBlur={(e) => setModel(e.target.value)} placeholder="Digite o modelo do veículo" name="model" />
+                                <Select {...register("model")} onChange={(e) => {
+                                    console.log(e.target.value)
+                                    filterModel(e.target.value)
+                                    setModel(e.target.value)
+                                }} placeholder="Digite a marca do veículo" name="brand" >
+                                    {options?.map((elem, index) => <option key={index + "m"} value={elem?.name}>{elem?.name}</option>)}
+                                </Select>
                                 <Text
                                     position="absolute"
                                     right="5px"
@@ -137,13 +150,7 @@ export const AddCarModal = () => {
                             <Flex gap={"15px"}>
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Ano</FormLabel>
-                                    <Select {...register("year")} onBlur={(e) => setYear(Number(e.target.value))} placeholder="Ano" name="year" >
-                                        <option value={2022}>2022</option>
-                                        <option value={2021}>2021</option>
-                                        <option value={2020}>2020</option>
-                                        <option value={2019}>2019</option>
-                                    </Select>
-
+                                    <Input _placeholder={{ color: "greyScale.grey10" }} _disabled={{ opacity: "1" }} {...register("year")} disabled value={fipeCar?.year || "Ano"} type="text" name="year" />
                                     <Text
                                         position="absolute"
                                         right="5px"
@@ -157,10 +164,9 @@ export const AddCarModal = () => {
                                 </FormControl>
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Combustível</FormLabel>
-                                    <Select {...register("fuel_type")} onBlur={(e) => setFuel(Number(e.target.value))} placeholder="Selecione Combustivel" name="fuel_type" >
-                                        <option value={1}>Flex</option>
-                                        <option value={2}>Híbrido</option>
-                                        <option value={3}>Elétrico</option>
+                                    <Select {...register("fuel_type")} onChange={(e) => setFuel(Number(e.target.value))} placeholder="Selecione Combustivel" name="fuel_type" >
+                                        <option value={fipeCar?.fuel}>{fipeCar?.fuel === 1 ? "Flex" : fipeCar?.fuel === 2 ? "Híbrido" : "Elétrico"}</option>
+
                                     </Select>
                                     <Text
                                         position="absolute"
@@ -209,7 +215,7 @@ export const AddCarModal = () => {
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Preço Tabela Fipe</FormLabel>
 
-                                    <Input {...register("fipePrice")} disabled value={fipe?.value || 0} type="text" name="fipePrice" />
+                                    <Input {...register("fipePrice")} disabled value={fipe?.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || 0} type="text" name="fipePrice" />
 
                                     <Text
                                         position="absolute"
@@ -225,8 +231,10 @@ export const AddCarModal = () => {
                                 <FormControl mb="4">
                                     <FormLabel fontSize={"14px"}>Preço</FormLabel>
                                     <NumberInput>
-
-                                        <NumberInputField {...register("price")} min={0} placeholder="R$ 30.000" name="price" />
+                                        <InputGroup css={styleFocus} className="groupInput" border={"1px solid"} borderRadius={"0.375rem"} borderColor={"inherit"}>
+                                            <InputLeftAddon border={"none"} bgColor={"transparent"} children="R$" />
+                                            <NumberInputField _focus={{ outline: "none", boxShadow: "none" }} border={"none"} {...register("price")} min={0} placeholder="30.000" name="price" />
+                                        </InputGroup>
                                     </NumberInput>
                                     <Text
                                         position="absolute"
