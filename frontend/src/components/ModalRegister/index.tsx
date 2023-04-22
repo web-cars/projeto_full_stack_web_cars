@@ -1,8 +1,4 @@
-<style>
-  {" "}
-  @import
-  url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-</style>;
+<style>{" "} @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>;
 import {
   Button,
   Box,
@@ -19,19 +15,22 @@ import {
   Textarea,
   Flex,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { theme } from "../../style/theme";
 import z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from "react-hook-form";
+import { IRegister } from "../../interfaces/carAds.interface";
 
 const schema = z.object({
   name: z.string(),
   email: z.string().email('Deve ser um e-mail válido'),
   cpf: z.string().min(11, 'CPF deve ter no mínimo 11 caracteres'),
   cellphone: z.string().regex(/^\(\d{2}\)\s\d{5}-\d{4}$/i, 'Número de telefone inválido'),
-  birthDate: z.string().regex(/^\d{2}-\d{2}-\d{2}$/, "Data de nascimento invalida"),
+  birthDate: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, "Data de nascimento invalida"),
   description: z.string(),
   address: z.object({
     cep: z.string(),
@@ -57,7 +56,7 @@ const ModalRegister = () => {
     setBtnActive(button);
   };
   
-  const { register, handleSubmit, formState:{errors} } = useForm({ resolver: zodResolver(schema)});
+  const { register, handleSubmit, formState:{errors} } = useForm<IRegister>({ resolver: zodResolver(schema)});
   const onFormSubmit = (formData: any) => {
     if (btnActive === "comprador") {
       formData.isAdmin=false
@@ -80,18 +79,23 @@ const ModalRegister = () => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <Box>
+              <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">Nome</FormLabel>
-                <Input {...register("name")} placeholder="Ex: Samuel Leão" />
-                {/* <Text position="absolute" right="5px" color="feedback.alert1" fontSize="12px" borderRadius="4px" marginBottom="20px">{errors.name?.message}</Text> */}
+                <Input required {...register("name")} placeholder="Ex: Samuel Leão" />
+                {errors.name && (<FormErrorMessage variant="default" >{errors.name.message}</FormErrorMessage>)}
+                <FormHelperText>{errors.name?.message}</FormHelperText>
               </Box>
               <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">Email</FormLabel>
                 <Input {...register("email")} placeholder="Ex: samuel@kenzie.com.br"/>
+                {errors.email && (<FormErrorMessage variant="default" >{errors.email.message}</FormErrorMessage>)}
+                <FormHelperText>{errors.email?.message}</FormHelperText>
               </Box>
               <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">CPF</FormLabel>
                 <Input {...register("cpf")} placeholder="000.000.000-00" />
+                {errors.cpf && (<FormErrorMessage variant="default" >{errors.cpf.message}</FormErrorMessage>)}
+                <FormHelperText>{errors.cpf?.message}</FormHelperText>
               </Box>
               <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">Celular</FormLabel>
@@ -100,10 +104,14 @@ const ModalRegister = () => {
               <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">Data de nascimento</FormLabel>
                 <Input {...register("birthDate")} placeholder="00/00/00" />
+                {errors.birthDate && (<FormErrorMessage variant="default" >{errors.birthDate.message}</FormErrorMessage>)}
+                <FormHelperText>{errors.birthDate?.message}</FormHelperText>
               </Box>
               <Box mt={4}>
                 <FormLabel fontFamily={"Inter"} fontWeight="medium">Descrição</FormLabel>
                 <Textarea {...register("description")} placeholder="Digitar descrição"/>
+                {errors.description && (<FormErrorMessage variant="default" >{errors.description.message}</FormErrorMessage>)}
+                <FormHelperText>{errors.description?.message}</FormHelperText>
               </Box>
               <Text fontFamily={"Inter"} fontWeight="medium" mt="5">Infomações de endereço</Text>
               <Box mt={4}>
@@ -139,12 +147,16 @@ const ModalRegister = () => {
                 <Button
                   bg={btnActive === "comprador" ? theme.colors.brand.brand1: theme.colors.greyScale.whiteFixed}
                   color={btnActive === "comprador" ? theme.colors.greyScale.whiteFixed : theme.colors.greyScale.blackFixed}
+                  border={btnActive === "comprador" ? "none" : "solid"}
+                  borderWidth={btnActive === "comprador" ? "none" : "1px"}
                   onClick={() => handleButtonClick("comprador")}>
                     Comprador
                  </Button>
                 <Button
                   bg={btnActive === "anunciante" ? theme.colors.brand.brand1 : theme.colors.greyScale.whiteFixed}
                   color={btnActive === "anunciante" ? theme.colors.greyScale.whiteFixed : theme.colors.greyScale.blackFixed}
+                  border={btnActive === "anunciante" ? "none" : "solid"}
+                  borderWidth={btnActive === "anunciante" ? "none" : "1px"}
                   onClick={() => handleButtonClick("anunciante")}>
                     Anunciante
                   </Button>
