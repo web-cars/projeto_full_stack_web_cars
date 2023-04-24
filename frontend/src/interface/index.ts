@@ -32,6 +32,20 @@ export interface IUser {
   addressID: number;
   image: string;
 }
+
+export interface IUserReturn {
+  id: number;
+  name: string;
+  email: string;
+  cpf: string;
+  cellphone: string;
+  isAdmin: boolean;
+  birthDate: string;
+  description: string;
+  perfilPhoto: string;
+  addressID: number;
+  image: string;
+}
 export interface IUserContext {
   user: IUser | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
