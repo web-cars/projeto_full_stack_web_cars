@@ -1,4 +1,5 @@
 import { FieldValues } from "react-hook-form";
+import { IUserReturn } from "../interface";
 
 export interface iAxiosData {
     token: string;
@@ -20,13 +21,15 @@ export interface iCarAdsContextInterface {
     onUpdateCarAd: (id: string, data: FieldValues) => void;
     onFipeRequest: (brand: string, name: string, year: number, fuel: number) => void
     setBrand: React.Dispatch<React.SetStateAction<string>>;
-    setYear: React.Dispatch<React.SetStateAction<number>>;
+    setYear: React.Dispatch<React.SetStateAction<number | undefined>>;
     setModel: React.Dispatch<React.SetStateAction<string>>;
-    setFuel: React.Dispatch<React.SetStateAction<number>>;
-
+    setFuel: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setFipeCar: React.Dispatch<React.SetStateAction<iFipeResponseInterface | undefined>>;
+    fipeCar: iFipeResponseInterface | undefined
+    options: iFipeResponseInterface[] | null;
 }
 export interface IAdswithPagination {
-    ads: iCarAdsInterface[];
+    advertisements: iCarAdsInterface[];
     pagination: IPagination
 }
 export interface ICarDataInterface {
@@ -65,6 +68,7 @@ export interface iCarAdsInterface {
     year: number;
     fuel_type: number;
     color: string;
+    user: IUserReturn
 }
 
 

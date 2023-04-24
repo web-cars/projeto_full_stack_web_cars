@@ -1,20 +1,25 @@
 import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
-import { ICreateCarAdResponse } from "../../interfaces/carAds.interfaces";
+import {
+  ICarAdResponse,
+  ICreateCarAdResponse,
+} from "../../interfaces/carAds.interfaces";
 import { Images } from "../../entities/images.entity";
-import { AppError } from "../../errors/errors";
+import { Users } from "../../entities/users.entity";
 
-const createCarAdService = async ({
-  images,
-  ...data
-}: ICreateCarAdResponse) => {
-  if (!images) throw new AppError("Images are a required field.", 400);
-
+const createCarAdService = async (
+  { images, ...data }: ICreateCarAdResponse,
+  userId: string
+): Promise<ICarAdResponse> => {
   const advertisementRepository = AppDataSource.getRepository(CarAds);
+  const usersRepository = AppDataSource.getRepository(Users);
   const imagesRepository = AppDataSource.getRepository(Images);
+
+  const user = await usersRepository.findOneBy({ id: userId });
 
   const newAdvertisement = advertisementRepository.create({
     ...data,
+    user,
   });
 
   const completeAdvertisement = await advertisementRepository.save(
@@ -30,10 +35,26 @@ const createCarAdService = async ({
     outputImages.push({ ...images[i], id: newImage.id });
   }
 
+  const {
+    user: userInAd,
+    images: imagesInAd,
+    ...returnedAdvertisement
+  } = completeAdvertisement;
+
   return {
-    id: completeAdvertisement.id,
-    ...completeAdvertisement,
-    images: outputImages,
+    advertisement: {
+      id: returnedAdvertisement.id,
+      ...returnedAdvertisement,
+      images: outputImages,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        address: {
+          ...user.address,
+        },
+      },
+    },
   };
 };
 

@@ -9,6 +9,7 @@ import {
   Box,
   Flex,
   useMediaQuery,
+  Avatar,
 } from "@chakra-ui/react";
 import { iCarAdsInterface } from "../../interfaces/carAds.interface";
 import { CarAdsContext } from "../../context/carAds.context";
@@ -17,7 +18,7 @@ import { Link } from "react-router-dom";
 import { css } from '@emotion/react';
 
 
-export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color }: iCarAdsInterface) => {
+export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color, user }: iCarAdsInterface) => {
   const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
   const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
 
@@ -37,8 +38,10 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                 <Image
                   margin={"0 auto"}
                   width={"85%"}
+                  height={"150px"}
                   src={images[0].file}
                   alt="Car"
+                  objectFit={"cover"}
                 />
               </Box>
               <Stack mt="6" spacing="3" padding={"0 25px"}>
@@ -64,19 +67,27 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                 </Text>
 
                 <Flex flexDirection={"row"} gap={"8px"} alignItems={"center"}>
-                  <Image
-                    src="src/components/ProductCard/carMock.png"
-                    borderRadius={"50%"}
-                    width={"30px"}
-                    height={"30px"}
-                  ></Image>
+                  {user.image ?
+                    <Image
+                      src={user.image}
+                      borderRadius={"50%"}
+                      width={"20px"}
+                      height={"20px"}
+                    ></Image> :
+                    <Avatar
+                      width={"30px"}
+                      height={"30px"}
+                      size={"sm"}
+                      name={user.name} src='' />
+                  }
+
                   <Text
                     color={"greyScale.grey2"}
                     fontSize={"14px"}
                     fontFamily={"Inter, sans-serif"}
                     fontWeight={"500"}
                   >
-                    Anunciante
+                    {user.name}
                   </Text>
                 </Flex>
 
