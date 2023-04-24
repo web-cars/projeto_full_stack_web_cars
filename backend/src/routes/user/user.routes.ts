@@ -3,10 +3,14 @@ import { validSerializerMiddleware } from "../../middlewares/validSerializer.mid
 import {
   createUserController,
   retrieveEspecificUserController,
+  updateUserController,
 } from "../../controllers/user/user.controller";
 import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
 import { verifyUser } from "../../middlewares/verifyUser.middleware";
-import { userCreateSerializer } from "../../serializers/user.serializers";
+import {
+  userCreateSerializer,
+  userUpdateSchema,
+} from "../../serializers/user.serializers";
 const userRoutes = Router();
 
 userRoutes.post(
@@ -19,6 +23,13 @@ userRoutes.get(
   verifyTokenMiddleware,
   verifyUser,
   retrieveEspecificUserController
+);
+userRoutes.patch(
+  "/:id",
+  validSerializerMiddleware(userUpdateSchema),
+  verifyTokenMiddleware,
+  verifyUser,
+  updateUserController
 );
 
 export default userRoutes;
