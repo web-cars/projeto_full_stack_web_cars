@@ -77,9 +77,7 @@ const listAllCarAdsService = async (
         price: +price,
         fipePrice: +fipePrice,
         ...data,
-        advertisements: {
-          user: userWithoutPassword,
-        },
+        user: userWithoutPassword,
       };
     }
   );

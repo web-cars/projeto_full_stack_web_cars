@@ -46,13 +46,13 @@ const createCarAdService = async (
       id: returnedAdvertisement.id,
       ...returnedAdvertisement,
       images: outputImages,
-    },
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      address: {
-        ...user.address,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        address: {
+          ...user.address,
+        },
       },
     },
   };
