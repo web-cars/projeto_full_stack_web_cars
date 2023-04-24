@@ -51,6 +51,7 @@ export const Homepage = () => {
               model={ad.model}
               year={ad.year}
               fuel_type={ad.fuel_type}
+              user={ad.user}
               color={ad.color}></ProductCard>))}
         </UnorderedList>
       </Flex>
