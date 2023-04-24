@@ -2,7 +2,9 @@ import { Router } from "express";
 import { validSerializerMiddleware } from "../../middlewares/validSerializer.middleware";
 import {
   createUserController,
+  sendEmailController,
   retrieveEspecificUserController,
+  resetPasswordController,
 } from "../../controllers/user/user.controller";
 import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
 import { verifyUser } from "../../middlewares/verifyUser.middleware";
@@ -20,5 +22,8 @@ userRoutes.get(
   verifyUser,
   retrieveEspecificUserController
 );
+
+userRoutes.post("/resetPassword", sendEmailController);
+userRoutes.patch("/resetPassword/:token", resetPasswordController);
 
 export default userRoutes;
