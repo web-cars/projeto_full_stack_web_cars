@@ -11,7 +11,6 @@ const listCarAdByIdService = async (adId: string): Promise<ICarAdResponse> => {
       user: true,
     },
   });
-  console.log(advertisement);
 
   const { user, images, id, ...returnedAdvertisement } = advertisement;
 
