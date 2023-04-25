@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import { Navbar } from '../components/Navbar';
 import Banner from '../components/Banner';
 import { css } from '@emotion/react';
-import { AddCarModal } from '../components/ModalAddAd';
+
 
 export const Homepage = () => {
   const { carAds, getCarAds } = useContext(CarAdsContext)
@@ -30,6 +30,7 @@ export const Homepage = () => {
     height: 100vh;
    }
   `
+
   return (
     <Flex css={mobilePage} id='topo' direction="column" bg='greyScale.whiteFixed' h={"100%"} justify={"space-between"}>
       <Navbar />
