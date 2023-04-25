@@ -33,5 +33,21 @@ const userSchemaWithoutPassword = z.object({
   perfilPhoto: z.string(),
   address: addressSchemaReturn,
 });
-
-export { userCreateSerializer, userSchemaWithoutPassword };
+const userUpdateSchema = z.object({
+  name: z.string().optional(),
+  email: z.string().email().optional(),
+  cpf: z
+    .string()
+    .regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)
+    .optional(),
+  cellphone: z
+    .string()
+    .regex(/^\(\d{2}\) \d{4,5}\-\d{4}$/)
+    .optional(),
+  irthDate: z
+    .string()
+    .regex(/^\d{4}\-\d{2}\-\d{2}$/)
+    .optional(),
+  description: z.string().optional(),
+});
+export { userCreateSerializer, userSchemaWithoutPassword, userUpdateSchema };

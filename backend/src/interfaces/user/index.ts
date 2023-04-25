@@ -28,4 +28,13 @@ interface IUserResponse {
   advertisements?: CarAds[];
 }
 
-export { IUserRequest, IUserResponse };
+interface IUserUpdate {
+  name?: string;
+  email?: string;
+  cpf?: string;
+  cellphone?: string;
+  birthDate?: string;
+  description?: string;
+}
+
+export { IUserRequest, IUserResponse, IUserUpdate };
