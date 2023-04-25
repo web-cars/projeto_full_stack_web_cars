@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { createUserService } from "../../services/user/createUser.service";
 import { retrieveEspecificUserService } from "../../services/user/retrieveUser.service";
-import { sendEmailService } from "../../services/user/sendEmail.service";
+import deleteUserService from "../../services/user/deleteUser.service";
 import { resetPasswordService } from "../../services/user/resetPassword.service";
+import { sendEmailService } from "../../services/user/sendEmail.service";
 
 const retrieveEspecificUserController = async (req: Request, res: Response) => {
   const userId = req.user?.id;
@@ -11,10 +12,17 @@ const retrieveEspecificUserController = async (req: Request, res: Response) => {
 };
 
 const createUserController = async (request: Request, response: Response) => {
+  console.log(request.body);
   const data = await createUserService(request.body);
   return response.status(201).json(data);
 };
 
+const deleteUserController = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const idToken = req.user.id;
+  const deletedUser = await deleteUserService(userId, idToken);
+  return res.status(200).json(deletedUser);
+};
 const sendEmailController = async (request: Request, response: Response) => {
   const host = request.get("host");
   const token = await sendEmailService(
@@ -45,4 +53,5 @@ export {
   retrieveEspecificUserController,
   sendEmailController,
   resetPasswordController,
+  deleteUserController,
 };
