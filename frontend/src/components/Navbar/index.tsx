@@ -155,7 +155,7 @@ export const Navbar = () => {
           bg="white"
           h={"300px"}
           width={"100%"}
-          position="absolute"
+          position="fixed"
           top="0"
           left="0"
           right="0"

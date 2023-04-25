@@ -1,4 +1,5 @@
 import { FieldValues } from "react-hook-form";
+import { IUserReturn } from "../interface";
 
 export interface iAxiosData {
     token: string;
@@ -67,6 +68,7 @@ export interface iCarAdsInterface {
     year: number;
     fuel_type: number;
     color: string;
+    user: IUserReturn
 }
 
 
@@ -87,4 +89,24 @@ export interface iFipeResponseInterface {
     year: string;
     fuel: number;
     value: number;
+}
+
+export interface IRegister {
+  name: string,
+  email: string,
+  cpf: string,
+  cellphone: string,
+  birthDate: string,
+  description: string,
+  address: {
+    cep: string,
+    state: string,
+    city: string
+    street: string,
+    number: string,
+    complement: string,
+  },
+  isAdm: boolean,
+  password: string,
+  confirmationPassword: string
 }
