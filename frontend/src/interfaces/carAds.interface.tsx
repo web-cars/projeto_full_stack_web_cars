@@ -90,3 +90,23 @@ export interface iFipeResponseInterface {
     fuel: number;
     value: number;
 }
+
+export interface IRegister {
+  name: string,
+  email: string,
+  cpf: string,
+  cellphone: string,
+  birthDate: string,
+  description: string,
+  address: {
+    cep: string,
+    state: string,
+    city: string
+    street: string,
+    number: string,
+    complement: string,
+  },
+  isAdm: boolean,
+  password: string,
+  confirmationPassword: string
+}

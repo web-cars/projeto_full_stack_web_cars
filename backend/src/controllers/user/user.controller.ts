@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { createUserService } from "../../services/user/createUser.service";
 import { retrieveEspecificUserService } from "../../services/user/retrieveUser.service";
 import deleteUserService from "../../services/user/deleteUser.service";
+import { resetPasswordService } from "../../services/user/resetPassword.service";
+import { sendEmailService } from "../../services/user/sendEmail.service";
 
 const retrieveEspecificUserController = async (req: Request, res: Response) => {
   const userId = req.user?.id;
@@ -21,9 +23,35 @@ const deleteUserController = async (req: Request, res: Response) => {
   const deletedUser = await deleteUserService(userId, idToken);
   return res.status(200).json(deletedUser);
 };
+const sendEmailController = async (request: Request, response: Response) => {
+  const host = request.get("host");
+  const token = await sendEmailService(
+    request.body.email,
+    request.protocol,
+    host
+  );
+
+  return response
+    .status(200)
+    .json({ message: "Token sended, check e-mail.", resetToken: token });
+};
+
+const resetPasswordController = async (
+  request: Request,
+  response: Response
+) => {
+  const token = request.params.token;
+  const password = request.body.password;
+
+  await resetPasswordService(password, token);
+
+  return response.status(200).json({ message: "Password changed." });
+};
 
 export {
   createUserController,
   retrieveEspecificUserController,
+  sendEmailController,
+  resetPasswordController,
   deleteUserController,
 };

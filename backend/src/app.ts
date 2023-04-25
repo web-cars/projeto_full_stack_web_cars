@@ -9,18 +9,7 @@ import userRoutes from "./routes/user/user.routes";
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    allowedHeaders: [
-      "sessionId",
-      "Content-Type",
-      "Authorization",
-      "authorization",
-    ],
-    origin: ["http://localhost:5173"],
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  })
-);
+app.use(cors());
 app.use("/advertisements", advertisementRoutes);
 app.use("/users", userRoutes);
 app.use("/session", SessionRoutes);
