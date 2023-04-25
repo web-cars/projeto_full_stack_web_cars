@@ -10,16 +10,20 @@ const retrieveEspecificUserController = async (req: Request, res: Response) => {
 };
 
 const createUserController = async (request: Request, response: Response) => {
-  console.log(request.body)
+  console.log(request.body);
   const data = await createUserService(request.body);
   return response.status(201).json(data);
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const deletedUser = await deleteUserService(userId);
+  const idToken = req.user.id;
+  const deletedUser = await deleteUserService(userId, idToken);
   return res.status(200).json(deletedUser);
 };
 
-
-export { createUserController, retrieveEspecificUserController, deleteUserController };
+export {
+  createUserController,
+  retrieveEspecificUserController,
+  deleteUserController,
+};
