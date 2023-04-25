@@ -50,7 +50,9 @@ export const EditPersonModal = () => {
         background-color: var(--chakra-colors-brand-brand1);
     }
     `
-
+    const testObject = (data: any) => {
+        console.log(data)
+    }
 
     return (
         <>
@@ -58,31 +60,31 @@ export const EditPersonModal = () => {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Adicionar pessoa</ModalHeader>
+                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Editar perfil</ModalHeader>
                     <ModalCloseButton />
-                    <form>
+                    <form onSubmit={handleSubmit(testObject)}>
                         <ModalBody>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Nome</FormLabel>
-                                <Input type="text" {...register("name")} placeholder="Digite o nome da pessoa" />
+                                <Input type="text" {...register("name")} placeholder="Digite o nome" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>E-mail</FormLabel>
-                                <Input type="text" {...register("email")} placeholder="Digite o e-mail da pessoa" />
+                                <Input type="text" {...register("email")} placeholder="Digite o e-mai" />
                                 <Text position="absolute" right="5px" color="feedback.alert1" fontSize="12px" borderRadius="4px" marginBottom="20px">
                                 </Text>
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>CPF</FormLabel>
-                                <Input type="text" {...register("cpf")} placeholder="Digite o CPF da pessoa" />
+                                <Input type="text" {...register("cpf")} placeholder="Digite o CPF" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Telefone celular</FormLabel>
-                                <Input type="text" {...register("cellphone")} placeholder="Digite o telefone celular da pessoa" />
+                                <Input type="text" {...register("cellphone")} placeholder="Digite o telefone celular" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Data de nascimento</FormLabel>
-                                <Input type="date" {...register("birthDate")} placeholder="Digite a data de nascimento da pessoa" />
+                                <Input type="text" {...register("birthDate")} placeholder="Digite a data de nascimento" />
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Descrição</FormLabel>
