@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { createUserService } from "../../services/user/createUser.service";
 import { retrieveEspecificUserService } from "../../services/user/retrieveUser.service";
+import deleteUserService from "../../services/user/deleteUser.service";
 
 const retrieveEspecificUserController = async (req: Request, res: Response) => {
   const userId = req.user?.id;
@@ -9,8 +10,16 @@ const retrieveEspecificUserController = async (req: Request, res: Response) => {
 };
 
 const createUserController = async (request: Request, response: Response) => {
+  console.log(request.body)
   const data = await createUserService(request.body);
   return response.status(201).json(data);
 };
 
-export { createUserController, retrieveEspecificUserController };
+const deleteUserController = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const deletedUser = await deleteUserService(userId);
+  return res.status(200).json(deletedUser);
+};
+
+
+export { createUserController, retrieveEspecificUserController, deleteUserController };
