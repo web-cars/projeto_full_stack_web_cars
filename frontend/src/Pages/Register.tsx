@@ -63,7 +63,7 @@ const Register = () => {
     <Navbar/>
        <Box as="main" w="100%" bg={theme.colors.greyScale.grey8}>
          <Flex justifyContent="center" alignItems="center">
-           <FormControl w="25%" mb={5} mt={5} bg={theme.colors.greyScale.whiteFixed} p="10" borderRadius={5}>
+           <FormControl w="35%" mb={5} mt={5} bg={theme.colors.greyScale.whiteFixed} p="10" borderRadius={5}>
                <Text fontFamily={"Inter"} fontWeight="medium" mt={4}>Cadastro</Text>
                   <Box mt={4}>
                     <FormLabel fontFamily={"Inter"} fontWeight="medium">Nome</FormLabel>
