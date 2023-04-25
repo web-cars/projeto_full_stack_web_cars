@@ -10,6 +10,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { theme } from "../style/theme";
@@ -43,6 +44,7 @@ const schema = z.object({
 })
 
 const Register = () => {
+   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
    const [btnActive, setBtnActive] = useState("comprador");
   const handleButtonClick = (button: React.SetStateAction<string>) => {
     setBtnActive(button);
@@ -63,7 +65,7 @@ const Register = () => {
     <Navbar/>
        <Box as="main" w="100%" bg={theme.colors.greyScale.grey8}>
          <Flex justifyContent="center" alignItems="center">
-           <FormControl w="35%" mb={5} mt={5} bg={theme.colors.greyScale.whiteFixed} p="10" borderRadius={5}>
+           <FormControl w={isLargerThan768 ? "45%" : "95%"} mb={5} mt={5} bg={theme.colors.greyScale.whiteFixed} p="10" borderRadius={5}>
                <Text fontFamily={"Inter"} fontWeight="medium" mt={4}>Cadastro</Text>
                   <Box mt={4}>
                     <FormLabel fontFamily={"Inter"} fontWeight="medium">Nome</FormLabel>
