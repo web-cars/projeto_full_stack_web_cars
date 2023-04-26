@@ -110,3 +110,12 @@ export interface IRegister {
   password: string,
   confirmationPassword: string
 }
+
+export interface IAdress {
+    cep: string,
+    state: string,
+    city: string
+    street: string,
+    number: string,
+    complement: string,
+}
