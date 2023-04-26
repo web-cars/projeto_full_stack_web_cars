@@ -131,7 +131,7 @@ export const Login = () => {
             </FormHelperText>
           </FormControl>
           <Button
-            // isLoading={isSubmitting}
+            isLoading={isSubmitting}
             type="submit"
             width={"100%"}
             backgroundColor={"brand.brand1"}
