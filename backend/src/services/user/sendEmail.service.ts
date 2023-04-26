@@ -18,8 +18,8 @@ export const sendEmailService = async (
   const resetToken = randomUUID();
 
   await usersRepository.save({
-    resetToken: resetToken,
     ...user,
+    resetToken,
   });
 
   const resetTemplate = resetPasswordTemplate(
