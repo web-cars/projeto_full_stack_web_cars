@@ -134,6 +134,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
           const { data } = await instance.get<IUser>("users/infos");
           setUser(data);
         } catch (err) {
+          localStorage.clear();
           console.log(err);
         }
       }
