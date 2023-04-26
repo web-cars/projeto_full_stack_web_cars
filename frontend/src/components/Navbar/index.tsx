@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/icons";
 import logo from "../../assets/img/motors-shop.svg";
 import { UserContext } from "../../context/userContext";
+import ModalEditAdress from "../ModalEditAdress";
 
 interface MenuItemType {
   label: string
@@ -280,6 +281,7 @@ export const Navbar = () => {
           <Link to="/" style={{ display: "flex" }}>
             <img src={logo} alt="Motors Shop" />
           </Link>
+          <ModalEditAdress/>
         </Box>
         <Spacer />
         {isLargerThanLaptop ? renderDesktopMenu() : renderMobileMenu()}

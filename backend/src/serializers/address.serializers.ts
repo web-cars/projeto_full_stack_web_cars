@@ -9,6 +9,7 @@ const createAddressSerializer = z.object({
   complement: z.string().optional(),
 });
 
+
 const addressSchemaReturn = z.object({
   id: z.string(),
   cep: z.string().regex(/^\d{5}-\d{3}$/),
@@ -18,5 +19,6 @@ const addressSchemaReturn = z.object({
   number: z.number(),
   complement: z.string().optional(),
 });
+const returnAdressUpdateSchema = addressSchemaReturn.partial()
 
-export { addressSchemaReturn, createAddressSerializer };
+export { addressSchemaReturn, createAddressSerializer, returnAdressUpdateSchema };
