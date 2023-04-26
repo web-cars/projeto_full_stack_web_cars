@@ -61,4 +61,6 @@ export interface IUserContext {
   setToken: React.Dispatch<React.SetStateAction<string>>;
   getProfile: () => Promise<void>;
   postLogin: (data: FieldValues) => void;
+  onSubmitSendEmail: (data: FieldValues) => void;
+  onSubmitResetPassword: (data: FieldValues) => void;
 }
