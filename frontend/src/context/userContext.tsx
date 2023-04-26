@@ -11,8 +11,8 @@ import { iProviderProps } from "../interfaces/carAds.interface";
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: iProviderProps) => {
-
   const [login, setLogin] = useState(true);
+  const [resetToken, setResetToken] = useState("");
   const [user, setUser] = useState<IUser | null>(null);
   const [profile, setProfile] = useState(false);
   const [token, setToken] = useState(
@@ -25,6 +25,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
   const onSubmitLogin = (data: FieldValues) => postLogin(data);
   const onSubmitUpdate = (data: FieldValues) => editProfile(data);
   const onSubmitDelete = (data: FieldValues) => deleteProfile();
+  const onSubmitResetPassword = (data: FieldValues) => resetPassword(data);
+  const onSubmitSendEmail = (data: FieldValues) => sendEmail(data);
   const postLogin = async (obj: FieldValues) => {
     instance
       .post<iAxiosData>("session", obj)
@@ -93,22 +95,52 @@ export const UserProvider = ({ children }: iProviderProps) => {
       }
     }
   };
+
+  const sendEmail = async (email: FieldValues) => {
+    try {
+      const { data: resetToken } = await instance.post(
+        "users/resetPassword",
+        email
+      );
+      setResetToken(resetToken);
+      toast.success("E-mail enviado");
+    } catch (err) {
+      console.log(err);
+
+      toast.error("E-mail não encontrado");
+    }
+  };
+
+  const resetPassword = async (obj: FieldValues) => {
+    if (token) {
+      try {
+        instance
+          .patch(`users/resetPassword/${token}:`, obj)
+          .then((response) => {
+            setUser(response.data);
+            toast.success("Senha trocada com sucesso");
+          });
+      } catch (err) {
+        toast.error("Algo deu errado");
+      }
+    }
+  };
+
   useEffect(() => {
     const loadUser = async () => {
-
       if (token) {
         try {
           instance.defaults.headers.authorization = `Bearer ${token}`;
-          const { data } = await instance.get<IUser>("users");
+          const { data } = await instance.get<IUser>("users/infos");
           setUser(data);
         } catch (err) {
           console.log(err);
-          localStorage.clear();
         }
       }
     };
     loadUser();
   }, [token]);
+
   return (
     <UserContext.Provider
       value={{
@@ -125,7 +157,9 @@ export const UserProvider = ({ children }: iProviderProps) => {
         token,
         setToken,
         getProfile,
-        postLogin
+        postLogin,
+        onSubmitSendEmail,
+        onSubmitResetPassword,
       }}
     >
       {children}
