@@ -123,7 +123,7 @@ export const ResetPassword = () => {
             color={"greyScale.grey2"}
             mr={2}
           >
-            <Link to={"/"}>Voltar para os anúncios</Link>
+            <Link to={"/"}>Ir para os anúncios como visitante</Link>
           </Text>
         </Flex>
       </Box>

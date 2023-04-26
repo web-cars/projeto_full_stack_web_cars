@@ -48,6 +48,9 @@ export const Login = () => {
     input::placeholder {
       color: #868e96;
     }
+    a:hover {
+      color: var(--chakra-colors-brand-brand2);
+    }
   `;
 
   return (
@@ -126,8 +129,9 @@ export const Login = () => {
               textAlign={"end"}
               color={"greyScale.grey2"}
               fontWeight={"500"}
+              cursor={"pointer"}
             >
-              Esqueci minha senha
+              <Link to={"/resetPassword"}>Esqueci minha senha</Link>
             </FormHelperText>
           </FormControl>
           <Button
