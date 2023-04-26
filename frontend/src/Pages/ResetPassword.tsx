@@ -7,34 +7,37 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   Heading,
   Input,
-  Text,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import { useForm } from "react-hook-form";
-import { IUser } from "../interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { Link } from "react-router-dom";
 import { css } from "@emotion/react";
 
-const schema = z.object({
-  email: z.string().nonempty("Email é obrigatório").email("Email inválido"),
-});
+const schema = z
+  .object({
+    password: z.string().nonempty("Senha é obrigatória"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Senhas devem ser iguais",
+    path: ["confirmPassword"],
+  });
 
-interface ISendEmail {
-  email: string;
+interface IResetPassword {
+  password: string;
+  confirmPassword: string;
 }
 export const ResetPassword = () => {
-  const { onSubmitSendEmail } = useContext(UserContext);
+  const { onSubmitResetPassword } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<ISendEmail>({
+  } = useForm<IResetPassword>({
     resolver: zodResolver(schema),
   });
 
@@ -74,22 +77,23 @@ export const ResetPassword = () => {
           color={"greyScale.blackFixed"}
           fontSize={"24px"}
         >
-          Recuperação de senha
+          Escolha sua senha
         </Heading>
-        <form onSubmit={handleSubmit(onSubmitSendEmail)}>
+        <form onSubmit={handleSubmit(onSubmitResetPassword)}>
           <FormControl marginBottom={"22px"}>
             <FormLabel
               htmlFor="usuário"
               color={"greyScale.grey1"}
               fontWeight={"500"}
             >
-              Coloque seu endereço de e-mail cadastrado
+              Senha
             </FormLabel>
             <Input
-              {...register("email")}
-              placeholder="Digite seu e-mail"
+              {...register("password")}
+              placeholder="Digite sua senha"
               border={"1px solid var(--chakra-colors-greyScale-grey6)"}
               color={"greyScale.grey1"}
+              type="password"
             />
             <FormErrorMessage
               position="absolute"
@@ -99,7 +103,34 @@ export const ResetPassword = () => {
               borderRadius="4px"
               marginBottom="20px"
             >
-              {errors.email?.message}
+              {errors.password?.message}
+            </FormErrorMessage>
+          </FormControl>
+
+          <FormControl marginBottom={"22px"}>
+            <FormLabel
+              htmlFor="usuário"
+              color={"greyScale.grey1"}
+              fontWeight={"500"}
+            >
+              Confirme a senha
+            </FormLabel>
+            <Input
+              {...register("confirmPassword")}
+              placeholder="Confirme sua senha"
+              border={"1px solid var(--chakra-colors-greyScale-grey6)"}
+              color={"greyScale.grey1"}
+              type="password"
+            />
+            <FormErrorMessage
+              position="absolute"
+              right="5px"
+              color="feedback.alert1"
+              fontSize="12px"
+              borderRadius="4px"
+              marginBottom="20px"
+            >
+              {errors.confirmPassword?.message}
             </FormErrorMessage>
           </FormControl>
 
@@ -113,19 +144,9 @@ export const ResetPassword = () => {
             colorScheme="blue"
             fontWeight="600"
           >
-            Enviar
+            Confirmar
           </Button>
         </form>
-        <Flex direction={"column"} mt={8}>
-          <Text
-            marginBottom={"24px"}
-            textAlign={"center"}
-            color={"greyScale.grey2"}
-            mr={2}
-          >
-            <Link to={"/"}>Ir para os anúncios como visitante</Link>
-          </Text>
-        </Flex>
       </Box>
       <Footer />
     </Flex>

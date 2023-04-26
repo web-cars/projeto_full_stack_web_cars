@@ -63,4 +63,5 @@ export interface IUserContext {
   postLogin: (data: FieldValues) => void;
   onSubmitSendEmail: (data: FieldValues) => void;
   onSubmitResetPassword: (data: FieldValues) => void;
+  resetToken: string;
 }

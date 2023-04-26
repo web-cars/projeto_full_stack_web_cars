@@ -80,7 +80,7 @@ export const Login = () => {
               color={"greyScale.grey1"}
               fontWeight={"500"}
             >
-              Usuário
+              Email
             </FormLabel>
             <Input
               {...register("email")}
