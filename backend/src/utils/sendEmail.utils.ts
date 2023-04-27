@@ -47,7 +47,7 @@ const resetPasswordTemplate = (
     theme: "default",
     product: {
       name: "Web Cars",
-      link: `${protocol}://${host}`,
+      link: `${protocol}://localhost:5173/resetPassword/${resetToken}`,
     },
   });
 
@@ -61,7 +61,7 @@ const resetPasswordTemplate = (
         button: {
           color: "#4529E6",
           text: "Reset your password",
-          link: `${protocol}://${host}/users/resetPassword/${resetToken}`, //precisa ser o link da página de reset de password do frontend com um formulário, recebe o token e envia pro backend
+          link: `${protocol}://localhost:5173/resetPassword/${resetToken}`, //precisa ser o link da página de reset de password do frontend com um formulário, recebe o token e envia pro backend
         },
       },
       outro:

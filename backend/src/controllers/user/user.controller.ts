@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { createUserService } from "../../services/user/createUser.service";
 import { retrieveEspecificUserService } from "../../services/user/retrieveUser.service";
+import { IUserUpdate } from "../../interfaces/user";
+import { updateUserService } from "../../services/user/editUser.service";
 import deleteUserService from "../../services/user/deleteUser.service";
 import { resetPasswordService } from "../../services/user/resetPassword.service";
 import { sendEmailService } from "../../services/user/sendEmail.service";
@@ -12,9 +14,15 @@ const retrieveEspecificUserController = async (req: Request, res: Response) => {
 };
 
 const createUserController = async (request: Request, response: Response) => {
-  console.log(request.body);
   const data = await createUserService(request.body);
   return response.status(201).json(data);
+};
+
+const updateUserController = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const userData: IUserUpdate = req.body;
+  const updatedUser = await updateUserService(userData, userId);
+  return res.status(200).json(updatedUser);
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
@@ -25,11 +33,10 @@ const deleteUserController = async (req: Request, res: Response) => {
   return res.status(200).json(deletedUser);
 };
 const sendEmailController = async (request: Request, response: Response) => {
-  const host = request.get("host");
   const token = await sendEmailService(
     request.body.email,
     request.protocol,
-    host
+    "localhost:5173"
   );
 
   return response
@@ -42,9 +49,8 @@ const resetPasswordController = async (
   response: Response
 ) => {
   const token = request.params.token;
-  const password = request.body.password;
 
-  await resetPasswordService(password, token);
+  await resetPasswordService(request.body, token);
 
   return response.status(200).json({ message: "Password changed." });
 };
@@ -55,4 +61,5 @@ export {
   sendEmailController,
   resetPasswordController,
   deleteUserController,
+  updateUserController,
 };

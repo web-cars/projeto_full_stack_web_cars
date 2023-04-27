@@ -62,4 +62,7 @@ export interface IUserContext {
   getProfile: () => Promise<void>;
   postLogin: (data: FieldValues) => void;
   deleteProfile: () => void;
+  onSubmitSendEmail: (data: FieldValues) => void;
+  onSubmitResetPassword: (data: FieldValues) => void;
+  resetToken: string;
 }
