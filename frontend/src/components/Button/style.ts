@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { device } from "../../Global/media";
 
 interface ButtonProps {
   sizebutton?: string;
@@ -243,7 +242,7 @@ export const ContainerButtonVehicle = styled.button`
   &:hover {
     opacity: 0.9;
   }
-  @media ${device.mobile} {
+  @media ${"768px"} {
     width: 100%;
   }
 `;
@@ -254,7 +253,7 @@ export const DivButton = styled.div`
   justify-content: center;
   margin-top: 50px;
 
-  @media ${device.mobile} {
+  @media ${"768px"} {
     align-items: center;
     flex-direction: column;
   }

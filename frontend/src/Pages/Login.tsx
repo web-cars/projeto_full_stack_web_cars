@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { Link } from "react-router-dom";
 import { css } from "@emotion/react";
+import { DeleteProfileModal } from "../components/ModalDeleteProfile";
 
 const schema = z.object({
   email: z.string().nonempty("Email é obrigatório").email("Email inválido"),
@@ -47,6 +48,9 @@ export const Login = () => {
 
     input::placeholder {
       color: #868e96;
+    }
+    a:hover {
+      color: var(--chakra-colors-brand-brand2);
     }
   `;
 
@@ -77,7 +81,7 @@ export const Login = () => {
               color={"greyScale.grey1"}
               fontWeight={"500"}
             >
-              Usuário
+              Email
             </FormLabel>
             <Input
               {...register("email")}
@@ -126,12 +130,13 @@ export const Login = () => {
               textAlign={"end"}
               color={"greyScale.grey2"}
               fontWeight={"500"}
+              cursor={"pointer"}
             >
-              Esqueci minha senha
+              <Link to={"/resetPassword"}>Esqueci minha senha</Link>
             </FormHelperText>
           </FormControl>
           <Button
-            // isLoading={isSubmitting}
+            isLoading={isSubmitting}
             type="submit"
             width={"100%"}
             backgroundColor={"brand.brand1"}

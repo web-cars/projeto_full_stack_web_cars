@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   Entity,
   JoinColumn,
@@ -43,6 +44,10 @@ export class Users {
   @Column({ nullable: true })
   perfilPhoto: string;
 
+  @Column({ nullable: true })
+  resetToken: string;
+
+  @BeforeUpdate()
   @BeforeInsert()
   hashPassword() {
     this.password = hashSync(this.password, 10);

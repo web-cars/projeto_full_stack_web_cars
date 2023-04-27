@@ -1,13 +1,16 @@
 import AppDataSource from "../../data-source";
 import { CarAds } from "../../entities/carAds.entity";
 import {
-  ICarAdResponse,
+  IListAllCarAdsResponse,
   IPagination,
 } from "../../interfaces/carAds.interfaces";
 
 const listAllCarAdsService = async (
   currentPage: number
-): Promise<{ ads: ICarAdResponse[]; pagination: IPagination }> => {
+): Promise<{
+  advertisements: IListAllCarAdsResponse[];
+  pagination: IPagination;
+}> => {
   const PAGE_SIZE = 12;
   const skip = (currentPage - 1) * PAGE_SIZE;
 
@@ -61,15 +64,25 @@ const listAllCarAdsService = async (
   const advertisements = await advertisementsRepository.find({
     skip: skip,
     take: PAGE_SIZE,
+    relations: {
+      user: true,
+    },
   });
 
   const formattedAds = advertisements.map(
-    ({ id, price, fipePrice, ...data }) => {
-      return { id, price: +price, fipePrice: +price, ...data };
+    ({ id, price, fipePrice, user, ...data }) => {
+      const { password, advertisements, ...userWithoutPassword } = user;
+      return {
+        id,
+        price: +price,
+        fipePrice: +fipePrice,
+        ...data,
+        user: userWithoutPassword,
+      };
     }
   );
 
-  return { pagination, ads: formattedAds };
+  return { pagination, advertisements: formattedAds };
 };
 
 export default listAllCarAdsService;

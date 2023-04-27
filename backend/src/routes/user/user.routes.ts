@@ -1,12 +1,23 @@
 import { Router } from "express";
 import { validSerializerMiddleware } from "../../middlewares/validSerializer.middleware";
+
 import {
   createUserController,
+  sendEmailController,
   retrieveEspecificUserController,
+  updateUserController,
+  resetPasswordController,
+  deleteUserController,
 } from "../../controllers/user/user.controller";
-import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
+
 import { verifyUser } from "../../middlewares/verifyUser.middleware";
-import { userCreateSerializer } from "../../serializers/user.serializers";
+import {
+  userCreateSerializer,
+  userUpdateSchema,
+} from "../../serializers/user.serializers";
+
+import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
+
 const userRoutes = Router();
 
 userRoutes.post(
@@ -20,5 +31,18 @@ userRoutes.get(
   verifyUser,
   retrieveEspecificUserController
 );
+
+userRoutes.patch(
+  "/:id",
+  validSerializerMiddleware(userUpdateSchema),
+  verifyTokenMiddleware,
+  verifyUser,
+  updateUserController
+);
+
+userRoutes.delete("/:id", verifyTokenMiddleware, deleteUserController);
+
+userRoutes.post("/resetPassword", sendEmailController);
+userRoutes.patch("/resetPassword/:token", resetPasswordController);
 
 export default userRoutes;

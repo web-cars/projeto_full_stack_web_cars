@@ -14,18 +14,27 @@ export const UserProvider = ({ children }: iProviderProps) => {
   const location = useLocation()
 
   const [login, setLogin] = useState(true);
+  const [resetToken, setResetToken] = useState(
+    localStorage.getItem("RESETTOKEN@WEBCARS") || ""
+  );
   const [user, setUser] = useState<IUser | null>(null);
   const [profile, setProfile] = useState(false);
   const [token, setToken] = useState(
     localStorage.getItem("TOKEN@WEBCARS") || ""
   );
-  
+
   const navigate = useNavigate();
 
   const onSubmitSignUp = (data: FieldValues) => postSignUp(data);
   const onSubmitLogin = (data: FieldValues) => postLogin(data);
   const onSubmitUpdate = (data: FieldValues) => editProfile(data);
   const onSubmitDelete = (data: FieldValues) => deleteProfile();
+  const onSubmitResetPassword = (data: FieldValues) => {
+    resetPassword(data);
+    navigate("/login");
+  };
+
+  const onSubmitSendEmail = (data: FieldValues) => sendEmail(data);
   const postLogin = async (obj: FieldValues) => {
     instance
       .post<iAxiosData>("session", obj)
@@ -34,7 +43,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         localStorage.setItem("TOKEN@WEBCARS", token);
         setToken(token);
         const toNavigate = location.state?.from?.pathname || '/';
-        navigate(toNavigate, { replace: true})
+        navigate(toNavigate, { replace: true })
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
@@ -76,6 +85,9 @@ export const UserProvider = ({ children }: iProviderProps) => {
         .then((response) => {
           toast.success("User deleted successfully");
           setProfile(false);
+          setLogin(false);
+          setToken("");
+          localStorage.setItem("TOKEN@WEBCARS", "");
         })
         .catch((err: iErrorAxios) => {
           console.log(err);
@@ -96,6 +108,31 @@ export const UserProvider = ({ children }: iProviderProps) => {
     }
   };
 
+  const sendEmail = async (email: FieldValues) => {
+    try {
+      const { data } = await instance.post("users/resetPassword", email);
+      console.log(data);
+      localStorage.setItem("RESETTOKEN@WEBCARS", data.resetToken);
+      setResetToken(data.resetToken);
+      toast.success("E-mail enviado");
+    } catch (err) {
+      console.log(err);
+      toast.error("E-mail não encontrado");
+    }
+  };
+
+  const resetPassword = async (obj: FieldValues) => {
+    if (resetToken) {
+      try {
+        await instance.patch(`users/resetPassword/${resetToken}`, obj);
+        localStorage.removeItem("RESETTOKEN@WEBCARS");
+        toast.success("Senha trocada com sucesso");
+      } catch (err) {
+        toast.error("Algo deu errado");
+      }
+    }
+  };
+
   useEffect(() => {
     const loadUser = async () => {
       if (token) {
@@ -104,8 +141,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
           const { data } = await instance.get<IUser>("users/infos");
           setUser(data);
         } catch (err) {
-          console.log(err);
           localStorage.clear();
+          console.log(err);
         }
       }
     };
@@ -116,7 +153,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
   const logout = () => {
     window.localStorage.removeItem("TOKEN@WEBCARS")
     const toNavigate = location.state?.from?.pathname || '/'
-    navigate(toNavigate, { replace: true})
+    navigate(toNavigate, { replace: true })
     window.location.reload()
   }
 
@@ -137,6 +174,11 @@ export const UserProvider = ({ children }: iProviderProps) => {
         setToken,
         getProfile,
         logout
+        postLogin,
+        deleteProfile,
+        onSubmitSendEmail,
+        onSubmitResetPassword,
+        resetToken,
       }}
     >
       {children}
