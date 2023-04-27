@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { FieldValues } from "react-hook-form";
+import { iCarAdsInterface } from "../interfaces/carAds.interface";
 
 export interface IChildren {
   children: ReactNode;
@@ -45,10 +46,11 @@ export interface IUserReturn {
   perfilPhoto: string;
   addressID: number;
   image: string;
+  advertisements: [iCarAdsInterface];
 }
 export interface IUserContext {
-  user: IUser | null;
-  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+  user: IUserReturn | null;
+  setUser: React.Dispatch<React.SetStateAction<IUserReturn | null>>;
   onSubmitSignUp: (data: FieldValues) => void;
   onSubmitLogin: (data: FieldValues) => void;
   login: boolean;
@@ -60,6 +62,7 @@ export interface IUserContext {
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
   getProfile: () => Promise<void>;
+  logout: Function;
   postLogin: (data: FieldValues) => void;
   deleteProfile: () => void;
   onSubmitSendEmail: (data: FieldValues) => void;

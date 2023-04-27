@@ -27,7 +27,7 @@ interface MenuItemType {
 }
 
 export const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext)
   const navigate = useNavigate();
   const [isLargerThanLaptop] = useMediaQuery("(min-width: 768px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,8 +40,8 @@ export const Navbar = () => {
     { label: "Editar Perfil", onClick: () => navigate("/dashboard") },
     { label: "Editar Endereço", onClick: () => navigate("/dashboard") },
     { label: "Meus Anúncios", onClick: () => navigate("/dashboard") },
-    { label: "Sair", onClick: () => localStorage.clear() },
-  ];
+    { label: "Sair", onClick: () => logout() },
+  ]
   const renderDesktopMenu = () => {
     if (user) {
       return (
