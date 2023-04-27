@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { instance } from "../services/instance";
 import { FieldValues } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IUser, IUserContext } from "../interface";
+import { IUser, IUserContext, IUserReturn } from "../interface";
 import { iErrorAxios } from "../interfaces/carAds.interface";
 import { iAxiosData } from "../interfaces/carAds.interface";
 import { iProviderProps } from "../interfaces/carAds.interface";
@@ -17,7 +17,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
   const [resetToken, setResetToken] = useState(
     localStorage.getItem("RESETTOKEN@WEBCARS") || ""
   );
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUserReturn | null>(null);
   const [profile, setProfile] = useState(false);
   const [token, setToken] = useState(
     localStorage.getItem("TOKEN@WEBCARS") || ""
@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         localStorage.setItem("TOKEN@WEBCARS", token);
         setToken(token);
         const toNavigate = location.state?.from?.pathname || '/';
-        navigate(toNavigate, { replace: true })
+        navigate("/userInfo", { replace: true })
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
@@ -64,7 +64,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
     if (token) {
       instance.defaults.headers.authorization = `Bearer ${token}`;
       instance
-        .patch<IUser>(`users/${user?.id}`, obj)
+        .patch<IUserReturn>(`users/${user?.id}`, obj)
         .then((response) => {
           console.log(response);
           toast.success("User updated successfully");
@@ -99,7 +99,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
     if (token) {
       try {
         instance.defaults.headers.authorization = `Bearer ${token}`;
-        const { data } = await instance.get<IUser>("users/infos");
+        const { data } = await instance.get<IUserReturn>("users/infos");
         setUser(data);
       } catch (err) {
         console.log(err);
@@ -138,7 +138,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
       if (token) {
         try {
           instance.defaults.headers.authorization = `Bearer ${token}`;
-          const { data } = await instance.get<IUser>("users/infos");
+          const { data } = await instance.get<IUserReturn>("users/infos");
           setUser(data);
         } catch (err) {
           localStorage.clear();
@@ -173,7 +173,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         token,
         setToken,
         getProfile,
-        logout
+        logout,
         postLogin,
         deleteProfile,
         onSubmitSendEmail,
