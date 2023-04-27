@@ -16,20 +16,17 @@ import {
   Stack,
   Heading,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import logo from "../../assets/img/motors-shop.svg";
 import { UserContext } from "../../context/userContext";
 
 interface MenuItemType {
-  label: string
-  onClick: () => void
+  label: string;
+  onClick: () => void;
 }
 
 export const Navbar = () => {
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isLargerThanLaptop] = useMediaQuery("(min-width: 768px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,17 +39,21 @@ export const Navbar = () => {
     { label: "Editar Perfil", onClick: () => navigate("/dashboard") },
     { label: "Editar Endereço", onClick: () => navigate("/dashboard") },
     { label: "Meus Anúncios", onClick: () => navigate("/dashboard") },
-    { label: "Sair", onClick: () => navigate("/dashboard") },
-  ]
+    { label: "Sair", onClick: () => localStorage.clear() },
+  ];
   const renderDesktopMenu = () => {
     if (user) {
-
       return (
         <Menu>
-
-          <Flex color={"greyScale.grey0"} cursor={"pointer"} align={"center"} gap={"15px"} onClick={() => setMenuIconVisible(!isMenuIconVisible)}>
+          <Flex
+            color={"greyScale.grey0"}
+            cursor={"pointer"}
+            align={"center"}
+            gap={"15px"}
+            onClick={() => setMenuIconVisible(!isMenuIconVisible)}
+          >
             <Avatar w={"40px"} h={"40px"} name={user?.name} src={user?.name} />
-            <Heading size='md'>{user?.name}</Heading>
+            <Heading size="md">{user?.name}</Heading>
           </Flex>
           {user && isMenuIconVisible && (
             <Box
@@ -67,11 +68,17 @@ export const Navbar = () => {
               zIndex="10"
             >
               <Flex direction="column" h="full">
-                <Flex flex="1" overflowY="auto"
-                  flexDirection={"column"} align={"flex-start"} gap={"10px"}
-                  p={"10px"} h={"max-content"}>
-                  {menuLogged.map(item => (
-                    item.label === "Cadastrar" ?
+                <Flex
+                  flex="1"
+                  overflowY="auto"
+                  flexDirection={"column"}
+                  align={"flex-start"}
+                  gap={"10px"}
+                  p={"10px"}
+                  h={"max-content"}
+                >
+                  {menuLogged.map((item) =>
+                    item.label === "Cadastrar" ? (
                       <Button
                         key={item.label}
                         variant="ghost"
@@ -85,7 +92,7 @@ export const Navbar = () => {
                       >
                         {item.label}
                       </Button>
-                      :
+                    ) : (
                       <Button
                         key={item.label}
                         variant="ghost"
@@ -96,50 +103,50 @@ export const Navbar = () => {
                       >
                         {item.label}
                       </Button>
-                  ))}
+                    )
+                  )}
                 </Flex>
               </Flex>
             </Box>
           )}
         </Menu>
-      )
-
+      );
     } else {
-
-
-      return (<HStack spacing="6">
-        {menuItems.map(item => (
-          item.label === "Cadastrar" ?
-            <Button
-              key={item.label}
-              variant="ghost"
-              fontSize="md"
-              fontWeight="normal"
-              border={"1px"}
-              borderColor={"greyScale.grey0"}
-              color={"greyScale.grey0"}
-              onClick={item.onClick}
-            >
-              {item.label}
-            </Button>
-            :
-            <Button
-              key={item.label}
-              variant="ghost"
-              fontSize="md"
-              fontWeight="normal"
-              color={"greyScale.grey0"}
-              onClick={item.onClick}
-            >
-              {item.label}
-            </Button>
-        ))}
-      </HStack>)
+      return (
+        <HStack spacing="6">
+          {menuItems.map((item) =>
+            item.label === "Cadastrar" ? (
+              <Button
+                key={item.label}
+                variant="ghost"
+                fontSize="md"
+                fontWeight="normal"
+                border={"1px"}
+                borderColor={"greyScale.grey0"}
+                color={"greyScale.grey0"}
+                onClick={item.onClick}
+              >
+                {item.label}
+              </Button>
+            ) : (
+              <Button
+                key={item.label}
+                variant="ghost"
+                fontSize="md"
+                fontWeight="normal"
+                color={"greyScale.grey0"}
+                onClick={item.onClick}
+              >
+                {item.label}
+              </Button>
+            )
+          )}
+        </HStack>
+      );
     }
   };
 
-  const renderMobileMenu = () =>
-  (
+  const renderMobileMenu = () => (
     <Menu isOpen={isOpen} onClose={onClose}>
       <MenuButton
         as={IconButton}
@@ -163,7 +170,12 @@ export const Navbar = () => {
           zIndex="10"
         >
           <Flex direction="column" h="full">
-            <Box p="4" display="flex" justifyContent={"space-between"} w={"100%"}>
+            <Box
+              p="4"
+              display="flex"
+              justifyContent={"space-between"}
+              w={"100%"}
+            >
               <Link to="/" style={{ display: "flex" }}>
                 <img src={logo} alt="Motors Shop" />
               </Link>
@@ -176,11 +188,17 @@ export const Navbar = () => {
                 color={"greyScale.grey0"}
               />
             </Box>
-            <Flex flex="1" overflowY="auto"
-              flexDirection={"column"} align={"flex-start"} gap={"10px"}
-              p={"10px"} h={"max-content"}>
-              {menuLogged.map(item => (
-                item.label === "Cadastrar" ?
+            <Flex
+              flex="1"
+              overflowY="auto"
+              flexDirection={"column"}
+              align={"flex-start"}
+              gap={"10px"}
+              p={"10px"}
+              h={"max-content"}
+            >
+              {menuLogged.map((item) =>
+                item.label === "Cadastrar" ? (
                   <Button
                     key={item.label}
                     variant="ghost"
@@ -194,7 +212,7 @@ export const Navbar = () => {
                   >
                     {item.label}
                   </Button>
-                  :
+                ) : (
                   <Button
                     key={item.label}
                     variant="ghost"
@@ -205,7 +223,8 @@ export const Navbar = () => {
                   >
                     {item.label}
                   </Button>
-              ))}
+                )
+              )}
             </Flex>
           </Flex>
         </Box>
@@ -223,7 +242,12 @@ export const Navbar = () => {
           zIndex="10"
         >
           <Flex direction="column" h="full">
-            <Box p="4" display="flex" justifyContent={"space-between"} w={"100%"}>
+            <Box
+              p="4"
+              display="flex"
+              justifyContent={"space-between"}
+              w={"100%"}
+            >
               <Link to="/" style={{ display: "flex" }}>
                 <img src={logo} alt="Motors Shop" />
               </Link>
@@ -236,11 +260,17 @@ export const Navbar = () => {
                 color={"greyScale.grey0"}
               />
             </Box>
-            <Flex flex="1" overflowY="auto"
-              flexDirection={"column"} align={"flex-start"} gap={"10px"}
-              p={"10px"} h={"max-content"}>
-              {menuItems.map(item => (
-                item.label === "Cadastrar" ?
+            <Flex
+              flex="1"
+              overflowY="auto"
+              flexDirection={"column"}
+              align={"flex-start"}
+              gap={"10px"}
+              p={"10px"}
+              h={"max-content"}
+            >
+              {menuItems.map((item) =>
+                item.label === "Cadastrar" ? (
                   <Button
                     key={item.label}
                     variant="ghost"
@@ -254,7 +284,7 @@ export const Navbar = () => {
                   >
                     {item.label}
                   </Button>
-                  :
+                ) : (
                   <Button
                     key={item.label}
                     variant="ghost"
@@ -265,13 +295,14 @@ export const Navbar = () => {
                   >
                     {item.label}
                   </Button>
-              ))}
+                )
+              )}
             </Flex>
           </Flex>
         </Box>
       )}
-    </Menu>)
-
+    </Menu>
+  );
 
   return (
     <Box borderBottom="2px" borderColor="gray.200" bg="white">

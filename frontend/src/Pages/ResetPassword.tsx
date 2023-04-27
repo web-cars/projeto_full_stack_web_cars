@@ -7,32 +7,37 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   Heading,
   Input,
-  Text,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import { useForm } from "react-hook-form";
-import { IUser } from "../interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { Link } from "react-router-dom";
 import { css } from "@emotion/react";
 
-const schema = z.object({
-  email: z.string().nonempty("Email é obrigatório").email("Email inválido"),
-  password: z.string().nonempty("Senha é obrigatória"),
-});
+const schema = z
+  .object({
+    password: z.string().nonempty("Senha é obrigatória"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Senhas devem ser iguais",
+    path: ["confirmPassword"],
+  });
 
-export const Login = () => {
-  const { onSubmitLogin } = useContext(UserContext);
+interface IResetPassword {
+  password: string;
+  confirmPassword: string;
+}
+export const ResetPassword = () => {
+  const { onSubmitResetPassword } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<IUser>({
+  } = useForm<IResetPassword>({
     resolver: zodResolver(schema),
   });
 
@@ -48,6 +53,7 @@ export const Login = () => {
     input::placeholder {
       color: #868e96;
     }
+
     a:hover {
       color: var(--chakra-colors-brand-brand2);
     }
@@ -71,48 +77,23 @@ export const Login = () => {
           color={"greyScale.blackFixed"}
           fontSize={"24px"}
         >
-          Login
+          Escolha sua senha
         </Heading>
-        <form onSubmit={handleSubmit(onSubmitLogin)}>
+        <form onSubmit={handleSubmit(onSubmitResetPassword)}>
           <FormControl marginBottom={"22px"}>
             <FormLabel
               htmlFor="usuário"
               color={"greyScale.grey1"}
               fontWeight={"500"}
             >
-              Email
-            </FormLabel>
-            <Input
-              {...register("email")}
-              placeholder="Digitar usuário"
-              border={"1px solid var(--chakra-colors-greyScale-grey6)"}
-              color={"greyScale.grey1"}
-            />
-            <FormErrorMessage
-              position="absolute"
-              right="5px"
-              color="feedback.alert1"
-              fontSize="12px"
-              borderRadius="4px"
-              marginBottom="20px"
-            >
-              {errors.email?.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="password" mt={4}>
-            <FormLabel
-              htmlFor="senha"
-              fontWeight={"500"}
-              color={"greyScale.grey1"}
-            >
               Senha
             </FormLabel>
             <Input
               {...register("password")}
-              type="password"
-              color={"greyScale.grey1"}
-              placeholder="Digitar senha"
+              placeholder="Digite sua senha"
               border={"1px solid var(--chakra-colors-greyScale-grey6)"}
+              color={"greyScale.grey1"}
+              type="password"
             />
             <FormErrorMessage
               position="absolute"
@@ -124,16 +105,35 @@ export const Login = () => {
             >
               {errors.password?.message}
             </FormErrorMessage>
-
-            <FormHelperText
-              textAlign={"end"}
-              color={"greyScale.grey2"}
-              fontWeight={"500"}
-              cursor={"pointer"}
-            >
-              <Link to={"/resetPassword"}>Esqueci minha senha</Link>
-            </FormHelperText>
           </FormControl>
+
+          <FormControl marginBottom={"22px"}>
+            <FormLabel
+              htmlFor="usuário"
+              color={"greyScale.grey1"}
+              fontWeight={"500"}
+            >
+              Confirme a senha
+            </FormLabel>
+            <Input
+              {...register("confirmPassword")}
+              placeholder="Confirme sua senha"
+              border={"1px solid var(--chakra-colors-greyScale-grey6)"}
+              color={"greyScale.grey1"}
+              type="password"
+            />
+            <FormErrorMessage
+              position="absolute"
+              right="5px"
+              color="feedback.alert1"
+              fontSize="12px"
+              borderRadius="4px"
+              marginBottom="20px"
+            >
+              {errors.confirmPassword?.message}
+            </FormErrorMessage>
+          </FormControl>
+
           <Button
             isLoading={isSubmitting}
             type="submit"
@@ -144,33 +144,9 @@ export const Login = () => {
             colorScheme="blue"
             fontWeight="600"
           >
-            Entrar
+            Confirmar
           </Button>
         </form>
-        <Flex direction={"column"} mt={8}>
-          <Text
-            marginBottom={"24px"}
-            textAlign={"center"}
-            color={"greyScale.grey2"}
-            mr={2}
-          >
-            Ainda não possui conta?
-          </Text>
-          <Link
-            style={{
-              width: "100%",
-              border: "1px solid #ADB5BD",
-              borderRadius: "4px",
-              color: "#0B0D0D",
-              textAlign: "center",
-              padding: "7px 0",
-              fontWeight: "600",
-            }}
-            to="/register"
-          >
-            Cadastrar
-          </Link>
-        </Flex>
       </Box>
       <Footer />
     </Flex>
