@@ -19,6 +19,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import logo from "../../assets/img/motors-shop.svg";
 import { UserContext } from "../../context/userContext";
+import ModalEditAdress from "../ModalEditAdress";
 
 interface MenuItemType {
   label: string;
