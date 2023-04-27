@@ -7,10 +7,9 @@ import {
   retrieveEspecificUserController,
   updateUserController,
   resetPasswordController,
-  deleteUserController
+  deleteUserController,
 } from "../../controllers/user/user.controller";
 
-import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
 import { verifyUser } from "../../middlewares/verifyUser.middleware";
 import {
   userCreateSerializer,
@@ -18,8 +17,6 @@ import {
 } from "../../serializers/user.serializers";
 
 import { verifyTokenMiddleware } from "../../middlewares/verifyToken.middleware";
-import { verifyUser } from "../../middlewares/verifyUser.middleware";
-
 
 const userRoutes = Router();
 
@@ -47,6 +44,5 @@ userRoutes.delete("/:id", verifyTokenMiddleware, deleteUserController);
 
 userRoutes.post("/resetPassword", sendEmailController);
 userRoutes.patch("/resetPassword/:token", resetPasswordController);
-
 
 export default userRoutes;
