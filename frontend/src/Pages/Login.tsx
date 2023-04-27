@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { Link } from "react-router-dom";
 import { css } from "@emotion/react";
+import { DeleteProfileModal } from "../components/ModalDeleteProfile";
 
 const schema = z.object({
   email: z.string().nonempty("Email é obrigatório").email("Email inválido"),

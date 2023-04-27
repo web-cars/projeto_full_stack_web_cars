@@ -82,6 +82,9 @@ export const UserProvider = ({ children }: iProviderProps) => {
         .then((response) => {
           toast.success("User deleted successfully");
           setProfile(false);
+          setLogin(false);
+          setToken("");
+          localStorage.setItem("TOKEN@WEBCARS", "");
         })
         .catch((err: iErrorAxios) => {
           console.log(err);
@@ -160,6 +163,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         setToken,
         getProfile,
         postLogin,
+        deleteProfile,
         onSubmitSendEmail,
         onSubmitResetPassword,
         resetToken,
