@@ -281,7 +281,6 @@ export const Navbar = () => {
           <Link to="/" style={{ display: "flex" }}>
             <img src={logo} alt="Motors Shop" />
           </Link>
-          <ModalEditAdress/>
         </Box>
         <Spacer />
         {isLargerThanLaptop ? renderDesktopMenu() : renderMobileMenu()}
