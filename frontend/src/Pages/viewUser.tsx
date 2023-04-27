@@ -15,6 +15,7 @@ import { iCarAdsInterface } from './../interfaces/carAds.interface';
 import { Navbar } from './../components/Navbar/index';
 import Footer from './../components/Footer/index';
 import { UserContext } from "../context/userContext";
+import { ProfileAds } from "../components/profileAds";
 
 export const ViewUser = () => {
 
@@ -136,8 +137,10 @@ export const ViewUser = () => {
 
             {user && user?.advertisements?.length > 0 ? user?.advertisements?.map((card: iCarAdsInterface) => {
 
-              return (
-                < ProductCard
+              return (<>
+
+
+                < ProfileAds
                   key={card.id}
                   id={card.id}
                   kilometers={card.kilometers}
@@ -153,6 +156,7 @@ export const ViewUser = () => {
                   color={card.color}
                   user={user}
                 />
+              </>
               )
             })
               : (<Text> Você ainda não possui anuncios!</Text>)}
