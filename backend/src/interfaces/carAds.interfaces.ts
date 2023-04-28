@@ -92,6 +92,19 @@ interface IListAllCarAdsResponse {
   fuel_type: FuelType;
   images: Images[];
 }
+
+interface ISelect{
+  color:string,
+  model:string,
+  brand:Brand,
+  year:Year,
+  fuel_type:FuelType,
+  kilometers_min:number,
+  kilometers_max:number,
+  price_min:number,
+  price_max:number,
+}
+
 export {
   IListAllCarAdsResponse,
   ICarAdResponse,
@@ -99,4 +112,5 @@ export {
   ICreateCarAdResponse,
   IPagination,
   ICarAdUpdateResponse,
+  ISelect
 };
