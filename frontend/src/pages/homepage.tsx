@@ -88,7 +88,7 @@ export const Homepage = () => {
               fuel_type={ad.fuel_type}
               user={ad.user}
               color={ad.color}
-            ></ProductCard>
+            />
           ))}
         </UnorderedList>
       </Flex>

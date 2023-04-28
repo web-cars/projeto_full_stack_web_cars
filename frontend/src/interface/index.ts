@@ -35,6 +35,7 @@ export interface IUser {
 }
 
 export interface IUserReturn {
+  user: any;
   id: number;
   name: string;
   email: string;
@@ -48,6 +49,8 @@ export interface IUserReturn {
   image: string;
   advertisements: [iCarAdsInterface];
 }
+
+
 export interface IUserContext {
   user: IUserReturn | null;
   setUser: React.Dispatch<React.SetStateAction<IUserReturn | null>>;

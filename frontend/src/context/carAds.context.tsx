@@ -57,8 +57,8 @@ export const AdsProvider = ({ children }: iProviderProps) => {
 
   const getCarAds = (page: number) => {
     instance
-      .get("advertisements", { params: { page: page } })
-      // .get("advertisements")
+      // .get("advertisements", { params: { page: page } })
+      .get("advertisements")
       .then((response) => {
         setCarAds(response.data);
       })
