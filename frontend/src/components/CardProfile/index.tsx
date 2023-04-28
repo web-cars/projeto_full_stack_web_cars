@@ -12,8 +12,10 @@ import {
   Box
 } from '@chakra-ui/react'
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
 export const CardProfile = ({ image, name, description }: ICardProfile) => {
+  const navigate = useNavigate()
   const divMobile = css`
   @media (max-width:1024px) {
     width: 100%;
@@ -40,7 +42,7 @@ export const CardProfile = ({ image, name, description }: ICardProfile) => {
           </Stack>
         </CardBody>
         <CardFooter>
-          <Button variant='solid' bgColor={"greyScale.grey0"} color={"greyScale.grey10"}>
+          <Button variant='solid' bgColor={"greyScale.grey0"} color={"greyScale.grey10"} onClick={()=> navigate("/userAdInfo")} >
             Ver todos os anuncios
           </Button>
         </CardFooter>

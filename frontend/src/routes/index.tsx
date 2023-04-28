@@ -6,6 +6,7 @@ import { ViewUser } from './../Pages/viewUser';
 import Register from "../Pages/Register";
 import { SendEmail } from "../Pages/SendEmail";
 import { ResetPassword } from "../Pages/ResetPassword";
+import ViewUserAd from "../Pages/viewUserAd";
 
 export const RoutesMain = () => {
   return (
@@ -18,6 +19,7 @@ export const RoutesMain = () => {
       <Route path="/resetPassword/:token" element={<ResetPassword />} />
       <Route path="*" element={<Navigate to="/" />} />
       <Route path="/userInfo" element={<ViewUser />} />
+      <Route path="/userAdInfo" element={<ViewUserAd />} />
     </Routes>
   );
 };
