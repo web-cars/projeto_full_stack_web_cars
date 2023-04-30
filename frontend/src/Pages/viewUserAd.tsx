@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 const ViewUserAd = () => {
     const {id}: any = useParams()
     const {carAds} = useContext(CarAdsContext)
-    const userAdespecific = carAds?.advertisements.filter(elem=> elem.user.id === id)
+    const userAdespecific: any = carAds?.advertisements.filter(elem=> elem.user.id === id)
 
     return ( 
         <>
