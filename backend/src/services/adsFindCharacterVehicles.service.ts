@@ -1,5 +1,5 @@
 import AppDataSource from "../data-source";
-import { Advertisements } from "../entities/adversitements.entity";
+import { Advertisements } from "../entities/advertisements.entity";
 import { IAdsCharactersResponse } from "../interfaces/advertisement";
 
 

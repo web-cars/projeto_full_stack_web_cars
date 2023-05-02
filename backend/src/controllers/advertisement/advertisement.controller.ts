@@ -3,7 +3,9 @@ import { updateCarAdService } from "../../services/advertisement/updateCarAd.ser
 import listCarAdByIdService from "../../services/advertisement/listCarAdById.service";
 import listAllCarAdsService from "../../services/advertisement/listAllCarAds.service";
 import { deleteCarAdService } from "../../services/advertisement/deleteCarAd.service";
-import createCarAdService from "../../services/advertisement/createCarAd.service";
+import createCarAdService from "../../services/advertisement/createCarAd.service";0
+import selectAllCarAdsService from "../../services/advertisement/selectCarAds.service.";
+
 
 const advertisementsCreateController = async (req: Request, res: Response) => {
   const newAdvertisement = await createCarAdService(req.body, req.user.id);
@@ -28,10 +30,16 @@ const deleteCarAdController = async (req: Request, res: Response) => {
   return res.status(204).json();
 };
 
+const selectCarAdsController = async (req: Request, res: Response) => {
+  const data = await selectAllCarAdsService(+req.query.page || 1,req.body);
+  return res.status(200).json(data);
+};
+
 export {
   advertisementsCreateController,
   listAllCarAdsController,
   getSpecificCarController,
   updateCarAdController,
   deleteCarAdController,
+  selectCarAdsController
 };

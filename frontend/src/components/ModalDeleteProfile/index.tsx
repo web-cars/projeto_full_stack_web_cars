@@ -30,9 +30,7 @@ export const DeleteProfileModal = () => {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Excluir perfil
-                        
-                    </ModalHeader>
+                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Excluir perfil</ModalHeader>
                     <ModalCloseButton />
                         <ModalBody pb={6}>
                             <Flex marginBottom={"25px"} fontSize={"16px"} color={ "#000000"} fontWeight={500}>

@@ -9,6 +9,7 @@ import {
   advertisementsCreateController,
   deleteCarAdController,
   getSpecificCarController,
+  selectCarAdsController,
   updateCarAdController,
 } from "../../controllers/advertisement/advertisement.controller";
 import { listAllCarAdsController } from "../../controllers/advertisement/advertisement.controller";
@@ -47,5 +48,6 @@ advertisementRoutes.delete(
   verifyIfCarAdExistsMiddleware,
   deleteCarAdController
 );
+advertisementRoutes.post("/select",selectCarAdsController)
 
 export default advertisementRoutes;
