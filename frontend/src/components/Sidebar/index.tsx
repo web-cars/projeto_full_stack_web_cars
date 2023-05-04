@@ -20,7 +20,7 @@ const Sidebar = () => {
     
         
     return (
-        <Box bg="white" color="black" w="25%" left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
+        <Box bg="white" color="black"  left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
             {/* <Flex justifyContent="space-around" align="center" >
                 <Text >Filtros</Text>
                 <Text color="gray.300">x</Text>
