@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import {
   IAdswithPagination,
+  ISelect,
   iCarAdsContextInterface,
   iCarAdsInterface,
   iErrorAxios,
@@ -17,7 +18,6 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   const [specificAd, setSpecificAd] = useState<iCarAdsInterface | null>(null);
   const [fipe, setFipe] = useState<iFipeResponseInterface | null>(null);
   const onSubmitCarAd = (data: FieldValues) => {
-    console.log(data);
     data.fipePrice = Number(fipe?.value);
     data.fuel_type = Number(fipeCar?.fuel);
     data.price = Number(data.price);
@@ -43,8 +43,9 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   const [year, setYear] = useState<number | undefined>(0);
   const [fuel, setFuel] = useState<number | undefined>(0);
   const [options, setOptions] = useState<iFipeResponseInterface[] | null>(null);
+  const [filter,setFilter] = useState<ISelect | null>(selectDefaultValues)
+  
   const createAd = (data: FieldValues) => {
-    console.log(data);
     instance
       .post("advertisements", data)
       .then((response) => {
@@ -120,6 +121,18 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         console.log(err);
       });
   };
+
+  const filterCardAds = (data:ISelect) => { 
+    instance
+    .post("advertisements/select", data)
+    .then((response) => {
+      setCarAds(response.data)
+    })
+    .catch((err: iErrorAxios) => {
+      console.log(err);
+    });
+  }
+
   useEffect(() => {
     if (brand) getCarInfos(brand);
   }, [brand]);
@@ -149,9 +162,24 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         options,
         setFipeCar,
         fipeCar,
+        filter,
+        setFilter,
+        filterCardAds
       }}
     >
       {children}
     </CarAdsContext.Provider>
   );
 };
+const selectDefaultValues = {
+  color: '',
+  model: '',
+  brand: '',
+  year: '',
+  fuel_type: '',
+  kilometers_min: 0,
+  kilometers_max: 0,
+  price_min: 0,
+  price_max: 0,
+};
+
