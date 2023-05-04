@@ -20,7 +20,7 @@ const Sidebar = () => {
     
         
     return (
-        <Box bg="white" color="black" w="25%" h="100vh" left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
+        <Box bg="white" color="black" w="25%" left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
             {/* <Flex justifyContent="space-around" align="center" >
                 <Text >Filtros</Text>
                 <Text color="gray.300">x</Text>
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 </ListItem>
                 <Box display={isLargerThan768 ? "none" : "block"}>
                     <Flex justifyContent="center" align="center">
-                        <Button bg="#5126EA" color="white" top="0" left="-9" p="4" w="73%" borderRadius="3">Limpar Filtros</Button>
+                        <Button bg="#5126EA" color="white" top="0" left="-14" p="4" w="72%" borderRadius="3">Limpar Filtros</Button>
                     </Flex>
                 </Box>
             </List>
