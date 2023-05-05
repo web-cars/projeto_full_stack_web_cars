@@ -23,7 +23,7 @@ export const Homepage = () => {
       <Box as='div'><Banner/></Box>
       <Flex direction='row' mt='5' mb='5'>
       <Box as='div'><Sidebar/></Box>
-        <Box as='div' display='flex' flexWrap='wrap' gap='3' w='70%'>
+        <Box as='div' display='flex' flexWrap='wrap' gap='3' w='70%' justifyContent='space-between'>
         {carAds?.advertisements.map((ad: iCarAdsInterface) => (
               <ProductCard
                 key={ad.id}
@@ -40,7 +40,7 @@ export const Homepage = () => {
                 fuel_type={ad.fuel_type}
                 user={ad.user}
                 color={ad.color}
-              ></ProductCard>
+              />
             ))}
         </Box>
       </Flex>

@@ -19,6 +19,7 @@ export const PrimaryImage = () => {
       borderRadius={"4px"}
       boxSize={"sm"}
       w={"55%"}
+      position={'relative'}
       zIndex={1}
     >
       <Image

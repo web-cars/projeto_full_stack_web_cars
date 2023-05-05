@@ -21,10 +21,10 @@ const Sidebar = () => {
         
     return (
         <Box bg="white" color="black"  left="0" p="4" display={isLargerThan768 ? "none" : "block"}>
-            {/* <Flex justifyContent="space-around" align="center" >
+            <Flex justifyContent="space-around"  align="center" display={isLargerThan768 ? "block" : "none"}>
                 <Text >Filtros</Text>
                 <Text color="gray.300">x</Text>
-            </Flex> */}
+            </Flex>
             <List mt="5px" ml="3" fontSize="small">
                 <ListItem mb="4" fontWeight="bold" fontSize="small">Marca
                     <List ml="4" mt="4" color="gray.500" cursor={"pointer"}>{brands.map((marca, index) => (<ListItem key={index}>{marca}</ListItem>))}</List>
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 </ListItem>
                 <Box display={isLargerThan768 ? "none" : "block"}>
                     <Flex justifyContent="center" align="center">
-                        <Button bg="#5126EA" color="white" top="0" left="-14" p="4" w="72%" borderRadius="3">Limpar Filtros</Button>
+                        <Button bg="#5126EA" color="white" position="relative" top="0" right='10' p="4" w="77%" borderRadius="3">Limpar Filtros</Button>
                     </Flex>
                 </Box>
             </List>
