@@ -7,14 +7,16 @@ import Footer from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import Banner from "../components/Banner";
 import { ProductCard } from "../components/ProductCard";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CarAdsContext } from "../context/carAds.context";
-import { iCarAdsInterface } from "../interfaces/carAds.interface";
+import { ISelect, iCarAdsInterface } from "../interfaces/carAds.interface";
 
 export const Homepage = () => {
-  const { carAds, getCarAds } = useContext(CarAdsContext);
+  const [select,setSelect] = useState<ISelect>(selectDefaultValues) 
+  const { carAds, getCarAds,filterCardAds } = useContext(CarAdsContext);
   useEffect(() => {
     getCarAds(1);
+    // filterCardAds(select)
   }, []);
 
   return (
@@ -47,4 +49,15 @@ export const Homepage = () => {
       <Box as='div' ><Footer/></Box>
     </Flex>
   );
+};
+const selectDefaultValues = {
+  color: '',
+  model: '',
+  brand: '',
+  year: '',
+  fuel_type: '',
+  kilometers_min: 0,
+  kilometers_max: 0,
+  price_min: 0,
+  price_max: 0,
 };

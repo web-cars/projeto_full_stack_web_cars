@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import {
   IAdswithPagination,
+  ISelect,
   iCarAdsContextInterface,
   iCarAdsInterface,
   iErrorAxios,
@@ -121,6 +122,20 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         console.log(err);
       });
   };
+
+  const filterCardAds = (data:ISelect) => { 
+    instance
+    .post("advertisements/select", data)
+    .then((response) => {
+      setCarAds(response.data)
+    })
+    .catch((err: iErrorAxios) => {
+      console.log(err);
+    });
+  }
+
+
+
   useEffect(() => {
     if (brand) getCarInfos(brand);
   }, [brand]);
@@ -150,6 +165,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         options,
         setFipeCar,
         fipeCar,
+        filterCardAds
       }}
     >
       {children}

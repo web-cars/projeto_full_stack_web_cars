@@ -34,6 +34,10 @@ export interface iCarAdsContextInterface {
   >;
   fipeCar: iFipeResponseInterface | undefined;
   options: iFipeResponseInterface[] | null;
+  setFilter: React.Dispatch<
+    React.SetStateAction<ISelect | null>
+  >;
+  filterCardAds:(data:ISelect) => void;
 }
 export interface IAdswithPagination {
   advertisements: iCarAdsInterface[];
@@ -124,4 +128,16 @@ export interface IAdress {
   street: string,
   number: string,
   complement: string,
+}
+
+export interface ISelect{
+  color:string,
+  model:string,
+  brand:string,
+  year:string,
+  fuel_type:string,
+  kilometers_min:number,
+  kilometers_max:number,
+  price_min:number,
+  price_max:number,
 }
