@@ -34,6 +34,13 @@ export const UserProvider = ({ children }: iProviderProps) => {
     navigate("/login");
   };
 
+  const createUser = (formData: any) =>{
+    instance
+      .post("users", formData)
+      .then( response =>console.log(response.data))
+      .catch(err => console.log(err))
+  }
+
   const onSubmitSendEmail = (data: FieldValues) => sendEmail(data);
   const postLogin = async (obj: FieldValues) => {
     instance
@@ -179,6 +186,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         onSubmitSendEmail,
         onSubmitResetPassword,
         resetToken,
+        createUser
       }}
     >
       {children}

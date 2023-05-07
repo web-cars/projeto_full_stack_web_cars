@@ -44,6 +44,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   const [year, setYear] = useState<number | undefined>(0);
   const [fuel, setFuel] = useState<number | undefined>(0);
   const [options, setOptions] = useState<iFipeResponseInterface[] | null>(null);
+  const [filter,setFilter] = useState<ISelect | null>(selectDefaultValues)
   const createAd = (data: FieldValues) => {
     console.log(data);
     instance
@@ -134,8 +135,6 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     });
   }
 
-
-
   useEffect(() => {
     if (brand) getCarInfos(brand);
   }, [brand]);
@@ -171,4 +170,15 @@ export const AdsProvider = ({ children }: iProviderProps) => {
       {children}
     </CarAdsContext.Provider>
   );
+};
+const selectDefaultValues = {
+  color: '',
+  model: '',
+  brand: '',
+  year: '',
+  fuel_type: '',
+  kilometers_min: 0,
+  kilometers_max: 0,
+  price_min: 0,
+  price_max: 0,
 };

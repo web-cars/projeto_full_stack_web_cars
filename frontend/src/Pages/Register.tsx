@@ -49,7 +49,6 @@ const Register = () => {
   const handleButtonClick = (button: React.SetStateAction<string>) => {
     setBtnActive(button);
   };
-
   const { register, handleSubmit, formState: { errors } } = useForm<IRegister>({ resolver: zodResolver(schema) });
   const onFormSubmit = (formData: any) => {
     if (btnActive === "comprador") {
@@ -151,11 +150,11 @@ const Register = () => {
             </Flex>
             <Box mt={4}>
               <FormLabel fontFamily={"Inter"} fontWeight="medium">Senha</FormLabel>
-              <Input border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("password")} placeholder="Digitar senha" />
+              <Input type='password' border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("password")} placeholder="Digitar senha" />
             </Box>
             <Box mt={4}>
               <FormLabel fontFamily={"Inter"} fontWeight="medium">Confirmar Senha</FormLabel>
-              <Input border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("confirmationPassword")} placeholder="Digitar senha" />
+              <Input type='password' border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("confirmationPassword")} placeholder="Digitar senha" />
             </Box>
             <Button mt="5" onClick={handleSubmit(onFormSubmit)} bg={theme.colors.brand.brand1} color={theme.colors.greyScale.whiteFixed} w="100%">
               Finalizar cadastro
