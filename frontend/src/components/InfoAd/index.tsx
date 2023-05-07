@@ -22,7 +22,7 @@ export const InfoAd = ({ car, year, km, price }: IInfoAd) => {
   }
   `
   return (
-    <Card css={divMobile} width={{ base: '90%', md: '55%' }} zIndex={1} alignSelf='center' margin={'auto'} backgroundColor={"greyScale.grey10"} color={"greyScale.grey0"}>
+    <Card css={divMobile} width={{ base: '90%', md: '60%' }} zIndex={1} alignSelf='center' margin={'auto'} backgroundColor={"greyScale.grey10"} color={"greyScale.grey0"}>
       <CardHeader display={'flex'} justifyContent={'center'} alignItems={'center'}>
         <Heading size='md'> {car}</Heading>
       </CardHeader>

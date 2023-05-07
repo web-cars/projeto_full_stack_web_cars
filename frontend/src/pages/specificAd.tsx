@@ -9,38 +9,36 @@ import { CardProfile } from "../components/CardProfile";
 import Footer from "../components/Footer";
 import { InfoAd } from "../components/InfoAd";
 import { Navbar } from "../components/Navbar";
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
+import { theme } from "../style/theme";
 
 export const SpecificAd = () => {
   const { id } = useParams<{ id: string }>();
-  
-  const mobile = css`
-  @media (max-width:1024px) {
-    flex-wrap: nowrap;
-    width: 100%;
-    height: max-content;
-    gap: 20px;
-  }
-  `
 
-  const { specificAd } = useContext(CarAdsContext)
-  const car = `${specificAd?.brand} ${specificAd?.model}`
+  const mobile = css`
+    @media (max-width: 1024px) {
+      flex-wrap: nowrap;
+      width: 100%;
+      height: max-content;
+      gap: 20px;
+    }
+  `;
+
+  const { specificAd } = useContext(CarAdsContext);
+  const car = `${specificAd?.brand} ${specificAd?.model}`;
   return (
     <>
       <Navbar />
-      <Flex w={"100%"} bgColor=' greyScale.grey8' justify={"center"}>
-        <Flex css={mobile} h={"90vh"} direction={"column"} w={"80%"} justify={"flex-start"} p="20px" align={"center"} gap='2'>
-          <Box as='div' h='100%' w='100%'>
-            <PrimaryImage/>
-            <SecondaryImages />
-          </Box>
-            <InfoAd car={car} year={specificAd?.year} price={specificAd?.price} km={specificAd?.kilometers} />
-            <Description />
-          <Box as='div' w='100%'>
-            <CardProfile />
-          </Box>
+      <Flex bgGradient="linear(to-b, #4529E6 60%, #FFFFFF 40%)" p="5" justifyContent='end'>
+        <Flex flexDir='column' alignItems='center' w='90%' gap='4'>
+          <PrimaryImage />
+          <InfoAd/>
+          <Description/>
         </Flex>
-        <Container maxW={"100%"} position={"absolute"} h="55%" bgColor={"brand.brand1"}></Container>
+        <Flex flexDirection="column" gap="5" position='relative' right='13%'>
+          <SecondaryImages />
+          <CardProfile />
+        </Flex>
       </Flex>
       <Footer />
     </>

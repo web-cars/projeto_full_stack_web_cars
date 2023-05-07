@@ -18,15 +18,16 @@ export const PrimaryImage = () => {
       backgroundColor={"greyScale.grey10"}
       borderRadius={"4px"}
       boxSize={"sm"}
-      w={"55%"}
+      w={"60%"}
       position={'relative'}
-      zIndex={1}
+      as="figure" 
+      h='22em'
+      p="5"
     >
       <Image
         src={specificAd?.images[0].file}
         alt={`Foto de capa: ${specificAd?.brand} ${specificAd?.model}`}
         objectFit="cover"
-        boxSize="100%"
         h={"100%"}
         margin={"0 auto"}
 

@@ -13,14 +13,13 @@ export const SecondaryImages = () => {
   `
   return (
     <Box
-      css={divMobile}
+      // css={divMobile}
       backgroundColor={"greyScale.grey10"}
-      padding={"36px 44px"}
+      padding={"5"}
       borderRadius={"4px"}
-      width={"30%"}
-      h={"48%"}
-      mb={"12px"}
-      zIndex={1}
+      // w={"30%"}
+      h={"50%"}
+      as="figure" 
     >
       <Heading
         marginBottom={"32px"}
@@ -37,7 +36,7 @@ export const SecondaryImages = () => {
               alignItems={"center"}
               backgroundColor={"greyScale.grey7"}
               borderRadius={"4px"}
-              boxSize={"108px"}
+              boxSize={"100px"}
             >
               <Image
                 src={image.file}

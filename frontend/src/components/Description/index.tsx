@@ -17,7 +17,7 @@ export const Description = () => {
       borderRadius={"4px"}
       justifyContent={"center"}
       border={"none"}
-      w={"55%"}
+      w={"60%"}
       // zIndex={1}
     >
       <Box as='div' p='5'>
