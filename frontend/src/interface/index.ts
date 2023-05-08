@@ -68,6 +68,7 @@ export interface IUserContext {
   onSubmitSendEmail: (data: FieldValues) => void;
   onSubmitResetPassword: (data: FieldValues) => void;
   createUser: (data: FieldValues) => void;
+  editProfile: (data: FieldValues) => void;
   resetToken: string;
 }
 

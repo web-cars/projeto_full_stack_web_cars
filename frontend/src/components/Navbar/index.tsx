@@ -20,6 +20,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import logo from "../../assets/img/motors-shop.svg";
 import { UserContext } from "../../context/userContext";
 import ModalEditAdress from "../ModalEditAdress";
+import { EditPersonModal } from "../ModalEditUser";
 
 interface MenuItemType {
   label: string;
@@ -37,9 +38,9 @@ export const Navbar = () => {
     { label: "Cadastrar", onClick: () => navigate("/register") },
   ];
   const menuLogged = [
-    { label: "Editar Perfil", onClick: () => navigate("/dashboard") },
-    { label: "Editar Endereço", onClick: () => navigate("/dashboard") },
-    { label: "Meus Anúncios", onClick: () => navigate("/dashboard") },
+    // { label: "Editar Perfil", onClick: () => navigate("/dashboard") },
+    // { label: "Editar Endereço", onClick: () => navigate("/dashboard") },
+    { label: "Meus Anúncios", onClick: () => navigate("/userInfo") },
     { label: "Sair", onClick: () => logout() },
   ]
   const renderDesktopMenu = () => {
@@ -78,6 +79,8 @@ export const Navbar = () => {
                   p={"10px"}
                   h={"max-content"}
                 >
+                  <EditPersonModal/>
+                  <ModalEditAdress/>
                   {menuLogged.map((item) =>
                     item.label === "Cadastrar" ? (
                       <Button

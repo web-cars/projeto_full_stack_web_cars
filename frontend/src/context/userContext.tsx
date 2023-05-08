@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
     navigate("/login");
   };
 
-  const createUser = (formData: IUserContext) =>{
+  const createUser = (formData: FieldValues) =>{
     console.log(formData)
     instance
       .post("users", formData)
@@ -192,7 +192,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
         onSubmitSendEmail,
         onSubmitResetPassword,
         resetToken,
-        createUser
+        createUser,
+        editProfile,
       }}
     >
       {children}

@@ -34,9 +34,9 @@ export interface iCarAdsContextInterface {
   >;
   fipeCar: iFipeResponseInterface | undefined;
   options: iFipeResponseInterface[] | null;
-  setFilter: React.Dispatch<
-    React.SetStateAction<ISelect | null>
-  >;
+  // setFilter: React.Dispatch<
+  //   React.SetStateAction<ISelect | null>
+  // >;
   filterCardAds:(data:ISelect) => void;
 }
 export interface IAdswithPagination {

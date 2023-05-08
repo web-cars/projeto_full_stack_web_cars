@@ -18,10 +18,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { css } from "@emotion/react";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
 
 const schema = z.object({
     name: z.string().optional(),
-    email: z.string().email().optional(),
+    email: z.string().optional(),
     cpf: z.string().optional(),
     cellphone: z.string().optional(),
     birthDate: z.string().optional(),
@@ -29,6 +31,7 @@ const schema = z.object({
 });
 
 export const EditPersonModal = () => {
+    const {editProfile} = useContext(UserContext)
     const {
         isOpen,
         onOpen,
@@ -51,12 +54,20 @@ export const EditPersonModal = () => {
     }
     `
     const testObject = (data: any) => {
-        console.log(data)
+
+        const newData: any = {}
+        for (const chave in data) {
+            if (data[chave] !== "") {
+                newData[chave] = data[chave];
+            }
+          }
+
+        editProfile(newData)
     }
 
     return (
         <>
-            <Button onClick={onOpen} mt="5" bg="transparent" border="solid" borderColor="purple.600" borderWidth={2} color="purple.600" fontSize="xs">Editar perfil</Button>
+            <Button onClick={onOpen} mt="5" bg="transparent" color="black" fontWeight="0" fontSize="ls">Editar perfil</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -70,7 +81,7 @@ export const EditPersonModal = () => {
                             </FormControl>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>E-mail</FormLabel>
-                                <Input type="text" {...register("email")} placeholder="Digite o e-mai" />
+                                <Input type="text" {...register("email")} placeholder="Digite o e-mail" />
                                 <Text position="absolute" right="5px" color="feedback.alert1" fontSize="12px" borderRadius="4px" marginBottom="20px">
                                 </Text>
                             </FormControl>
@@ -104,7 +115,7 @@ export const EditPersonModal = () => {
                             <Button bgColor={"greyScale.grey6"} mr="4" onClick={onClose}>
                                 Cancelar
                             </Button>
-                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4">
+                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4" onClick={testObject}>
                                 Editar Perfil
                             </Button>
                         </ModalFooter>
