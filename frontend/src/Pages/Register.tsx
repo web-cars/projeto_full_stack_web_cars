@@ -12,7 +12,7 @@ import {
   FormHelperText,
   useMediaQuery,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { theme } from "../style/theme";
 import z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,6 +20,8 @@ import { useForm } from "react-hook-form";
 import { IRegister } from "../interfaces/carAds.interface";
 import { Navbar } from "../components/Navbar";
 import Footer from "../components/Footer";
+import { UserContext } from "../context/userContext";
+import { ToastContainer } from "react-toastify";
 
 const schema = z.object({
   name: z.string(),
@@ -49,14 +51,21 @@ const Register = () => {
   const handleButtonClick = (button: React.SetStateAction<string>) => {
     setBtnActive(button);
   };
+  const {createUser}= useContext(UserContext)
   const { register, handleSubmit, formState: { errors } } = useForm<IRegister>({ resolver: zodResolver(schema) });
   const onFormSubmit = (formData: any) => {
+    formData.address.number =  Number(formData.address.number)
+    const parts = formData.birthDate.split('/')
+    const day = parts[0]
+    const month = parts[1]
+    const year = parts[2]
+    formData.birthDate = year+'-'+month+'-'+day
     if (btnActive === "comprador") {
       formData.isAdmin = false
     } else {
       formData.isAdmin = true
     }
-    console.log(formData)
+    createUser(formData)
   };
 
   return (
@@ -86,7 +95,7 @@ const Register = () => {
             </Box>
             <Box mt={4}>
               <FormLabel fontFamily={"Inter"} fontWeight="medium">Celular</FormLabel>
-              <Input border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("cellphone")} placeholder="(DDD) 90000-0000" />
+              <Input border={"2px solid"} borderColor={"greyScale.grey6"} _hover={{ borderColor: "greyScale.grey5" }} _placeholder={{ color: "greyScale.grey3" }} {...register("cellphone")} placeholder="(00) 90000-0000" />
             </Box>
             <Box mt={4}>
               <FormLabel fontFamily={"Inter"} fontWeight="medium">Data de nascimento</FormLabel>
@@ -159,6 +168,7 @@ const Register = () => {
             <Button mt="5" onClick={handleSubmit(onFormSubmit)} bg={theme.colors.brand.brand1} color={theme.colors.greyScale.whiteFixed} w="100%">
               Finalizar cadastro
             </Button>
+            <ToastContainer theme="colored"/>
           </FormControl>
         </Flex>
       </Box>

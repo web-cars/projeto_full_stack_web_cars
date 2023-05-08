@@ -34,10 +34,16 @@ export const UserProvider = ({ children }: iProviderProps) => {
     navigate("/login");
   };
 
-  const createUser = (formData: any) =>{
+  const createUser = (formData: IUserContext) =>{
+    console.log(formData)
     instance
       .post("users", formData)
-      .then( response =>console.log(response.data))
+      .then( (response) =>{
+        console.log(response.data)
+        toast.success("User created successfully");
+        navigate("/login")
+      })
+      
       .catch(err => console.log(err))
   }
 
