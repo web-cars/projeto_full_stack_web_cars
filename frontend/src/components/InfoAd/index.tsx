@@ -8,12 +8,15 @@ import {
   Button,
   Box,
   Text,
-  LightMode
+  LightMode,
+  Link
 } from '@chakra-ui/react'
 import { IInfoAd } from '../../interface'
 import { css } from '@emotion/react'
+import { useContext } from 'react'
+import { UserContext } from '../../context/userContext'
 
-export const InfoAd = ({ car, year, km, price }: IInfoAd) => {
+export const InfoAd = ({ car, year, km, price, cellPhone }: IInfoAd) => {
   // Adicione o CAR no Heading, YEAR no primeiro badge, KM no segundo badge e PRICE no text.
   const divMobile = css`
   @media (max-width:1024px) {
@@ -21,6 +24,8 @@ export const InfoAd = ({ car, year, km, price }: IInfoAd) => {
     
   }
   `
+  const {user} = useContext(UserContext)
+  console.log(user)
   return (
     <Card css={divMobile} width={{ base: '90%', md: '60%' }} zIndex={1} alignSelf='center' margin={'auto'} backgroundColor={"greyScale.grey10"} color={"greyScale.grey0"}>
       <CardHeader display={'flex'} justifyContent={'center'} alignItems={'center'}>
@@ -37,7 +42,7 @@ export const InfoAd = ({ car, year, km, price }: IInfoAd) => {
       </CardBody>
       <CardFooter>
         <LightMode>
-          <Button colorScheme={'purple'}>Comprar</Button>
+          <Link href={`https://wa.me/+${cellPhone}?text=Óla, gostaria de conversar sobre o seu veículo`} colorScheme={'purple'}  target="_blank" > Comprar</Link>
         </LightMode>
       </CardFooter>
     </Card>

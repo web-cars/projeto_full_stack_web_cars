@@ -22,7 +22,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
   const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
   const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
 
-
   return (
     <>
       {isActive ? (

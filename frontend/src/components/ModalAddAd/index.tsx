@@ -96,7 +96,14 @@ export const AddCarModal = () => {
     }
     return (
         <>
-            <Button onClick={onOpen} mt="5" bg="transparent" border="solid" borderColor="purple.600" borderWidth={2} color="purple.600" fontSize="xs">Criar anuncio</Button>
+            <Button onClick={onOpen} fontSize={12}
+                w={120}
+                h={10}
+                border={"2px"}
+                color={"brand.brand1"}
+                cursor={"pointer"}
+                borderColor={"brand.brand1"}
+                bg={'transparent'}>Criar anuncio</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

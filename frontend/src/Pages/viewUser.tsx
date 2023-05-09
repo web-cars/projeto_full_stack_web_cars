@@ -16,11 +16,12 @@ import { Navbar } from './../components/Navbar/index';
 import Footer from './../components/Footer/index';
 import { UserContext } from "../context/userContext";
 import { ProfileAds } from "../components/profileAds";
+import { AddCarModal } from "../components/ModalAddAd";
 
 export const ViewUser = () => {
 
   const { carAds } = useContext(CarAdsContext)
-  const { user } = useContext(UserContext)
+  const { user }:any = useContext(UserContext)
   console.log(user)
   return (
     <>
@@ -59,7 +60,7 @@ export const ViewUser = () => {
               marginTop={75}
             >
               <Stack direction="row" alignItems="center">
-                <Avatar size="xl" name="Samuel Leao" />
+                <Avatar size="xl" name={user.name} />
               </Stack>
               <Box
                 display={"flex"}
@@ -70,7 +71,7 @@ export const ViewUser = () => {
               >
                 <Box display={"flex"} gap={3} alignItems={"center"}>
                   <Text fontFamily={"Lexend"} fontWeight={600} color={"greyScale.grey1"}>
-                    Samuel Leao
+                    {user.name}
                   </Text>
                   <Button
                     h={"30px"}
@@ -84,20 +85,9 @@ export const ViewUser = () => {
                 </Box>
               </Box>
               <Text color={"greyScale.grey2"}>
-                eis aqui uma descrição bem grande, eis aqui uma descrição bem grande, eis aqui uma descrição bem grande, eis aqui uma descrição bem grande
+                {user.description}
               </Text>
-              <Button
-                fontSize={12}
-                w={120}
-                h={10}
-                border={"2px"}
-                color={"brand.brand1"}
-                cursor={"pointer"}
-                borderColor={"brand.brand1"}
-                bg={'transparent'}
-              >
-                Criar anuncio
-              </Button>
+              <AddCarModal/>
             </Box>
           </Flex>
         </Box>

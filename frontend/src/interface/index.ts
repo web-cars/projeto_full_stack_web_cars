@@ -11,6 +11,7 @@ export interface IInfoAd {
   year?: number;
   km?: number;
   price?: number;
+  cellPhone?:string;
 }
 
 export interface ICardProfile {
@@ -45,6 +46,9 @@ export interface IUserReturn {
   description: string;
   perfilPhoto: string;
   addressID: number;
+  address: {
+    id: string;
+  };
   image: string;
   advertisements: [iCarAdsInterface];
 }
@@ -69,6 +73,6 @@ export interface IUserContext {
   onSubmitResetPassword: (data: FieldValues) => void;
   createUser: (data: FieldValues) => void;
   editProfile: (data: FieldValues) => void;
+  editAdress: (obj: FieldValues) => void;
   resetToken: string;
 }
-

@@ -20,6 +20,8 @@ import { z } from "zod";
 import { css } from "@emotion/react";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = z.object({
     name: z.string().optional(),
@@ -118,6 +120,7 @@ export const EditPersonModal = () => {
                             <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4" onClick={testObject}>
                                 Editar Perfil
                             </Button>
+                            <ToastContainer />
                         </ModalFooter>
                     </form>
                 </ModalContent>

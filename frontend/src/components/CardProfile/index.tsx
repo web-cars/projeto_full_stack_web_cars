@@ -39,7 +39,7 @@ export const CardProfile = ({ image, name, description }: any) => {
     >
       <Card maxW='sm' bgColor={"transparent"} color={"greyScale.grey0"} boxShadow={"none"}>
         <CardBody display={'flex'} alignItems={'center'} flexDirection={'column'}>
-          <Avatar name={'test name'} src='' />
+          <Avatar name={userAdespecific.user.name} src='' />
           <Stack mt='6' spacing='3' >
             <Heading size='md'>{userAdespecific.user.name}</Heading>
             <Text>{userAdespecific.description}</Text>

@@ -11,12 +11,15 @@ import { Box, Button,
         ModalOverlay, 
         Text, 
         useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import z from "zod"
 import { theme } from "../../style/theme";
 import { useForm } from "react-hook-form";
 import { IAdress } from "../../interfaces/carAds.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserContext } from "../../context/userContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = z.object({
     cep: z.string(),
@@ -28,16 +31,23 @@ const schema = z.object({
 })
 
 const ModalEditAdress = () => {
+    const {editAdress} =useContext(UserContext)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
     const {register, handleSubmit, formState: {errors}} = useForm<IAdress>({resolver: zodResolver(schema)})
-    const onFormSubmit = (formData: IAdress) => {
-        console.log(formData)
+    const onFormSubmit = (formData: any) => {
+      const newformdata: any = {}
+      for (const chave in formData) {
+          if (formData[chave] !== "") {
+              newformdata[chave] = formData[chave];
+          }
+        }
+        editAdress(newformdata)
     }
     return ( 
         <>
-        <Button onClick={onOpen}>Editar endereço</Button>  
+        <Button onClick={onOpen}  bg="transparent" color="black" fontWeight="0" fontSize="ls">Editar endereço</Button>  
         <Modal initialFocusRef={initialRef} finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent w="95%">
@@ -81,6 +91,7 @@ const ModalEditAdress = () => {
               <Button colorScheme='blue' 
               onClick={handleSubmit(onFormSubmit)}
               bg={theme.colors.brand.brand1} color={theme.colors.greyScale.whiteFixed} w="50%">Salvar alterações</Button>
+              <ToastContainer />
             </ModalFooter>
           </ModalContent>
         </Modal>

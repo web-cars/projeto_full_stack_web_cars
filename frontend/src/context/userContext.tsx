@@ -56,7 +56,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         localStorage.setItem("TOKEN@WEBCARS", token);
         setToken(token);
         const toNavigate = location.state?.from?.pathname || '/';
-        navigate("/userInfo", { replace: true })
+        navigate("/", { replace: true })
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
@@ -73,6 +73,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         console.log(err);
       });
   };
+
   const editProfile = (obj: FieldValues) => {
     if (token) {
       instance.defaults.headers.authorization = `Bearer ${token}`;
@@ -80,16 +81,36 @@ export const UserProvider = ({ children }: iProviderProps) => {
         .patch<IUserReturn>(`users/${user?.id}`, obj)
         .then((response) => {
           console.log(response);
-          toast.success("User updated successfully");
+          toast.success("Usuario atualizado com sucesso");
           setUser(response.data);
           setProfile(false);
         })
         .catch((err: iErrorAxios) => {
           console.log(err);
-          toast.error("Fail to update user");
+          // toast.error("Fail to update user");
         });
     }
   };
+
+  const editAdress = (obj: FieldValues) => {
+    if (token) {
+      instance.defaults.headers.authorization = `Bearer ${token}`;
+      instance
+        .patch<IUserReturn>(`adress/${user?.address.id}`, obj)
+        .then((response) => {
+          console.log(response);
+          toast.success("Enderesso atualizado com sucesso");
+          // setUser(response.data);
+          // setProfile(false);
+        })
+        .catch((err: iErrorAxios) => {
+          console.log(err);
+          toast.error("Fail to update adress");
+        });
+    }
+  };
+
+
   const deleteProfile = () => {
     if (token) {
       instance.defaults.headers.authorization = `Bearer ${token}`;
@@ -194,6 +215,7 @@ export const UserProvider = ({ children }: iProviderProps) => {
         resetToken,
         createUser,
         editProfile,
+        editAdress
       }}
     >
       {children}
