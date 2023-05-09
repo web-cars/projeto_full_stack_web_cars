@@ -1,12 +1,21 @@
-# Documentação da API
+# Nome do projeto e objetivos
 
-## Tabela de Conteúdos
+- O projeto E-Commerce Webcars é um site de anúncios para compra e venda de veículos, que foi desenvolvido para formação no curso de desenvolvimento Fullstack da Kenzie Academy Brasil.
 
-- [Visão Geral](#1-visão-geral)
+# Principais features da aplicação
 
-- [Diagrama ER](#2-diagrama-er)
+- Registro, edição e exclusão de usuários.
+- Login
+- Registro, listagem, edição e exclusão de anúncios.
+- Filtro para busca de anúncios. 
+- Redirecionamento para contato do anunciante
 
-- [Rodando localmente](#3-rodando-localmente)
+# API ultilizada na aplicação
+
+- **[API](https://kenzie-kars.herokuapp.com/)**
+
+
+# Back-end
 
 ## 1. Tecnologias
 
@@ -18,19 +27,13 @@ Principais tecnologias utilizadas.
 
 - **[Postgres](https://www.postgresql.org/)**
 
-- **[Chakra UI](https://chakra-ui.com/)**
-
 ## 2. Diagrama ER
-
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
 Diagrama ER da API definindo as relações entre as entidades do banco de dados.
 
-<img src="https://github.com/web-cars/projeto_full_stack_web_cars/blob/develop/backend/DER.png?raw=true" alt="Diagrama ER" width="550px"/>
+- **[Diagrama](https://github.com/web-cars/projeto_full_stack_web_cars/blob/develop/backend/DER.png?raw=true)**
 
 ## 3. Rodando localmente
-
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
 ### 3.1 Clone o projeto em sua máquina e instale as depêndencias da aplicação
 
@@ -59,3 +62,36 @@ Execute o comando em seu terminal:
 ```bash
 yarn dev
 ```
+
+# Front-end
+
+## 1. Tecnologias
+
+Principais tecnologias utilizadas.
+
+- **[React (JavaScript)](https://pt-br.legacy.reactjs.org/docs/getting-started.html)**
+  (Principais bibliotecas: React-Hook-Form, React-Router-Dom, Zod, Axios)
+  
+- **[TypeScript](https://www.typescriptlang.org/)**
+  
+- **[Chakra UI](https://chakra-ui.com/)**
+
+## 2. Figma da aplicação
+
+**[Figma](https://www.figma.com/file/KX3C3fIi8zmCRpNipxIYYF/M6---E-Commerce-Filter?type=design&node-id=45-2&t=Ys3VsYb1TGGubQnr-0)**
+
+## 3. Rodando localmente
+
+### 3.1 Clone o projeto em sua máquina e instale as depêndencias da aplicação
+
+- Instale as dependências de acordo com seu gerenciador de pacotes, exemplo (yarn):
+
+```bash
+yarn install
+```
+- Para rodar a aplicação de acordo com seu gerenciador de pacotes, exemplo:
+  
+```bash
+yarn dev
+```
+

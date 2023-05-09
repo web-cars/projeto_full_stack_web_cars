@@ -132,8 +132,8 @@ export interface IAdress {
 }
 
 export interface ISelect{
-  color:string,
   model:string,
+  color:string,
   brand:string,
   year:string,
   fuel_type:string,
