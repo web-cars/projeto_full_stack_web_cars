@@ -45,7 +45,7 @@ async function getListCarsAds(filter:ISelect,currentPage:number,repository:Repos
   const PAGE_SIZE = 12;
   const skip = (currentPage - 1) * PAGE_SIZE;
 
-  let query = await repository.createQueryBuilder('cars_ads').leftJoinAndSelect('cars_ads.user','users')
+  let query = await repository.createQueryBuilder('cars_ads').leftJoinAndSelect('cars_ads.user','users').leftJoinAndSelect('cars_ads.images', 'images')
 
   if(brand){
     query = query.andWhere('brand = :brand',{brand:brand})
@@ -59,7 +59,6 @@ async function getListCarsAds(filter:ISelect,currentPage:number,repository:Repos
   }
 
   if(color){
-    console.log(color)
     query = query.andWhere('color = :color',{color:color})
   }
 

@@ -127,6 +127,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     .post("advertisements/select", data)
     .then((response) => {
       setCarAds(response.data)
+      console.log(response.data)
     })
     .catch((err: iErrorAxios) => {
       console.log(err);
@@ -176,7 +177,7 @@ const selectDefaultValues = {
   model: '',
   brand: '',
   year: '',
-  fuel_type: '',
+  fuel_type: 0,
   kilometers_min: 0,
   kilometers_max: 0,
   price_min: 0,

@@ -136,7 +136,7 @@ export interface ISelect{
   model:string,
   brand:string,
   year:string,
-  fuel_type:string,
+  fuel_type:number,
   kilometers_min:number,
   kilometers_max:number,
   price_min:number,

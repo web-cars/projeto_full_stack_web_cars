@@ -17,10 +17,12 @@ export enum Year {
   YEAR_2021 = 2021,
   YEAR_2020 = 2020,
   YEAR_2019 = 2019,
+  YEAR_2018 = 2018,
 }
 
 export enum FuelType {
   FLEX = 1,
-  HYBRID = 2,
-  ELECTRIC = 3,
+  DIESEL = 2,
+  ETANOL = 3,
+  GASOLINA = 4
 }

@@ -39,7 +39,7 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                   margin={"0 auto"}
                   width={"85%"}
                   height={"150px"}
-                  src={images[0].file}
+                  src={images.length > 0 ? images[0].file : ''}
                   alt="Car"
                   objectFit={"cover"}
                 />
@@ -133,7 +133,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
           </Card>
         </Link>
       ) : (<></>)}
-
-    </>
+          </>
   );
 };
