@@ -18,7 +18,7 @@ import { css } from "@emotion/react";
 
 export const Homepage = () => {
   const [select,setSelect] = useState<ISelect>(selectDefaultValues) 
-  const { carAds, getCarAds,filterCardAds } = useContext(CarAdsContext);
+  const { carAds, getCarAds, filterCardAds } = useContext(CarAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModal = () => {
@@ -41,6 +41,7 @@ export const Homepage = () => {
   useEffect(() => {
     getCarAds(1);
     filterCardAds(select)
+    console.log(select)
   }, []);
 
   return (
@@ -135,8 +136,8 @@ export const Homepage = () => {
   );
 };
 const selectDefaultValues = {
-  color: '',
   model: '',
+  color: '',
   brand: '',
   year: '',
   fuel_type: '',

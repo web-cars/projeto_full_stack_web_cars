@@ -16,13 +16,9 @@ import { CarAdsContext } from "../../context/carAds.context";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { css } from '@emotion/react';
-
-
 export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color, user }: iCarAdsInterface) => {
   const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
   const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
-
-
   return (
     <>
       {isActive ? (
@@ -39,7 +35,7 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                   margin={"0 auto"}
                   width={"85%"}
                   height={"150px"}
-                  src={images[0].file}
+                  src={"images"}
                   alt="Car"
                   objectFit={"cover"}
                 />
@@ -65,7 +61,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                 >
                   {description || 'Não possui descrição'}
                 </Text>
-
                 <Flex flexDirection={"row"} gap={"8px"} alignItems={"center"}>
                   {user.image ?
                     <Image
@@ -80,7 +75,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                       size={"sm"}
                       name={user.name} src='' />
                   }
-
                   <Text
                     color={"greyScale.grey2"}
                     fontSize={"14px"}
@@ -90,7 +84,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                     {user.name}
                   </Text>
                 </Flex>
-
                 <Flex justifyContent={"space-between"} alignItems={"center"}>
                   <Flex gap="10px">
                     <Text
@@ -118,7 +111,6 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
                       {year}
                     </Text>
                   </Flex>
-
                   <Text
                     fontSize={"md"}
                     color={"greyScale.grey1"}
@@ -133,7 +125,15 @@ export const ProductCard = ({ id, kilometers, fipePrice, price, isActive, descri
           </Card>
         </Link>
       ) : (<></>)}
-
     </>
   );
 };
+
+
+
+
+
+
+
+
+
