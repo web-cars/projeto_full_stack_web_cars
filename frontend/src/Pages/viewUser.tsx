@@ -6,19 +6,24 @@ import {
   UnorderedList,
   Stack,
   Avatar,
-  Container
+  Container,
+  useMediaQuery,
+  css
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { iCarAdsInterface } from './../interfaces/carAds.interface';
 import { Navbar } from './../components/Navbar/index';
 import Footer from './../components/Footer/index';
 import { UserContext } from "../context/userContext";
 import { ProfileAds } from "../components/profileAds";
 import { AddCarModal } from "../components/ModalAddAd";
+import { CarAdsContext } from "../context/carAds.context";
 
 export const ViewUser = () => {
+   const { user }:any = useContext(UserContext)
+  const [userData, setUserData] = useState(user);
+  const [isLargerThan1025] = useMediaQuery("(min-width: 1025px)");
 
-  const { user }:any = useContext(UserContext)
   return (
     <>
       <Navbar />
@@ -80,7 +85,7 @@ export const ViewUser = () => {
                   </Button>
                 </Box>
               </Box>
-              <Text color={"greyScale.grey2"}>
+              <Text color={"greyScale.grey2"} overflow='hidden' whiteSpace={isLargerThan1025 ? 'normal' : 'nowrap' } textOverflow='ellipsis'>
                 {user.description}
               </Text>
               <AddCarModal/>
@@ -104,15 +109,17 @@ export const ViewUser = () => {
           display={"flex"}
           flexDirection={{ base: "column", md: "row-reverse" }}
           width={{ base: "auto", md: "100%" }}
-          maxWidth={"1600px"}
+          maxWidth={"100%"}
           justifyContent={"center"}
           alignItems={"center"}
         >
           <UnorderedList
             paddingRight={{ base: "5px", md: "0px" }}
             display="flex"
-            flexWrap={{ base: "nowrap", md: "wrap" }}
-            overflowX={{ base: "auto" }}
+            flexWrap={isLargerThan1025 ? "wrap" : "nowrap"} 
+            overflow={isLargerThan1025 ? "": 'scroll'}
+            // flexWrap={{ base: "nowrap", md: "wrap" }}
+            // overflowX={{ base: "auto" }}
             gap={{ base: "25px", md: "20px" }}
             listStyleType="none"
             flex={{ base: "auto", md: 1 }}
@@ -124,8 +131,6 @@ export const ViewUser = () => {
             {user && user?.advertisements?.length > 0 ? user?.advertisements?.map((card: iCarAdsInterface) => {
 
               return (<>
-
-
                 < ProfileAds
                   key={card.id}
                   id={card.id}
@@ -140,12 +145,12 @@ export const ViewUser = () => {
                   year={card.year}
                   fuel_type={card.fuel_type}
                   color={card.color}
-                  user={user}
+                  user={userData}
                 />
               </>
               )
             })
-              : (<Text> Você ainda não possui anuncios!</Text>)}
+              : (<Text color={'black'}> Você ainda não possui anuncios!</Text>)}
 
           </UnorderedList>
         </Box>

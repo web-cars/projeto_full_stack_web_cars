@@ -24,7 +24,6 @@ export const UserProvider = ({ children }: iProviderProps) => {
   );
 
   const navigate = useNavigate();
-
   const onSubmitSignUp = (data: FieldValues) => postSignUp(data);
   const onSubmitLogin = (data: FieldValues) => postLogin(data);
   const onSubmitUpdate = (data: FieldValues) => editProfile(data);
@@ -43,8 +42,8 @@ export const UserProvider = ({ children }: iProviderProps) => {
         toast.success("User created successfully");
         navigate("/login")
       })
-      
       .catch(err => console.log(err))
+      toast.error("Dados invalidos")
   }
 
   const onSubmitSendEmail = (data: FieldValues) => sendEmail(data);
@@ -56,10 +55,12 @@ export const UserProvider = ({ children }: iProviderProps) => {
         localStorage.setItem("TOKEN@WEBCARS", token);
         setToken(token);
         const toNavigate = location.state?.from?.pathname || '/';
+        toast.success("Usuário logado");
         navigate("/", { replace: true })
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
+        toast.error("Email ou senha incorreta")
       });
   };
 

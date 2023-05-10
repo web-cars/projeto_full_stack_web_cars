@@ -21,7 +21,8 @@ import { IRegister } from "../interfaces/carAds.interface";
 import { Navbar } from "../components/Navbar";
 import Footer from "../components/Footer";
 import { UserContext } from "../context/userContext";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = z.object({
   name: z.string(),

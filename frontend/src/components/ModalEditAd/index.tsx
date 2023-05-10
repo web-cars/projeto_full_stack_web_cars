@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     Modal,
     ModalOverlay,
@@ -53,7 +53,7 @@ const schema = z.object({
 
 
 export const EditAds = ({id}: any) => {
-    const { onSubmitEditCarAd, setBrand, setFuel, setModel, setYear, fipe, options, setFipeCar, fipeCar } = useContext(CarAdsContext)
+    const { onSubmitEditCarAd, setBrand, setFuel, setModel, setYear, fipe, options, setFipeCar, fipeCar, seIdCard } = useContext(CarAdsContext)
     const {
         register,
         handleSubmit,
@@ -103,6 +103,10 @@ export const EditAds = ({id}: any) => {
       setBtnActive(button);
     };
 
+    const handleClick = (id: any) => {
+        seIdCard(id)
+      };
+
     return (
         <>
             <Button onClick={onOpen} fontSize={12}
@@ -118,7 +122,7 @@ export const EditAds = ({id}: any) => {
                 <ModalContent>
                     <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Editar Anúncio
 
-                        <Text fontSize={"14px"} mt='4'>Informações do veículo {id}</Text>
+                        <Text fontSize={"14px"} mt='4'>Informações do veículo</Text>
                     </ModalHeader>
                     <ModalCloseButton />
                     <form onSubmit={
@@ -148,7 +152,7 @@ export const EditAds = ({id}: any) => {
                                 <Select {...register("model")} onChange={(e) => {
                                     filterModel(e.target.value)
                                     setModel(e.target.value)
-                                }} placeholder="Digite a marca do veículo" name="brand" >
+                                }} placeholder="Digite a marca do veículo" name="model" >
                                     {options?.map((elem, index) => <option key={index + "m"} value={elem?.name}>{elem?.name}</option>)}
                                 </Select>
                                 <Text
@@ -331,7 +335,7 @@ export const EditAds = ({id}: any) => {
                             <Button bgColor={"greyScale.grey6"} mr="4" onClick={onClose}>
                                 Cancelar
                             </Button>
-                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4" id={id}>
+                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4" id={id} onClick={() => handleClick(id)}>
                                 Editar Anuncio 
                             </Button>
                             <ToastContainer />

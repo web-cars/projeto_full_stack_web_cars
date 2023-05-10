@@ -69,7 +69,7 @@ export const EditPersonModal = () => {
 
     return (
         <>
-            <Button onClick={onOpen} mt="5" bg="transparent" color="black" fontWeight="0" fontSize="ls">Editar perfil</Button>
+            <Button onClick={onOpen}  bg="transparent" color="black" fontWeight="0" fontSize="ls">Editar perfil</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { iCarAdsInterface } from "../../interfaces/carAds.interface";
 import { CarAdsContext } from "../../context/carAds.context";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { css } from '@emotion/react';
 import { EditAds } from "../ModalEditAd";
 
@@ -23,7 +23,12 @@ import { EditAds } from "../ModalEditAd";
 export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color, user }: iCarAdsInterface) => {
     const { onGetSpecificAd, getCarAds } = useContext(CarAdsContext)
     const [isLargerThan1024] = useMediaQuery("(max-width: 1024px)");
-
+    const navigate = useNavigate()
+    const {carAds} = useContext(CarAdsContext)
+    const userAdespecific: any = carAds?.advertisements?.find(elem=> elem.id == id)
+    useEffect(() => {
+        return getCarAds(1);
+    }, [id]);
 
     return (
         <>
@@ -121,6 +126,7 @@ export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, descrip
                             cursor={"pointer"}
                             borderColor={"greyScale.grey2"}
                             bg={'transparent'}
+                            onClick={()=> navigate(`/adCar/${id}`)} 
                         >
                             Ver Detalhes
                         </Button>

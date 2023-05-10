@@ -1,4 +1,4 @@
-import { Box, Container, Text } from "@chakra-ui/react";
+import { Box, Container, Text, useMediaQuery } from "@chakra-ui/react";
 import { Navbar } from "../components/Navbar";
 import AdPforfile from "../components/adProfile";
 import Footer from "../components/Footer";
@@ -13,6 +13,7 @@ const ViewUserAd = () => {
     const {id}: any = useParams()
     const {carAds} = useContext(CarAdsContext)
     const userAdespecific: any = carAds?.advertisements.filter(elem=> elem.user.id === id)
+    const [isLargerThan1025] = useMediaQuery("(min-width: 1025px)");
 
     return ( 
         <>
@@ -22,9 +23,9 @@ const ViewUserAd = () => {
                 <AdPforfile nameAd={userAdespecific[0].user.name} descriptionUserAd={userAdespecific[0].user.description}/>
             </Box>
             <Container maxW="80%">
-                <Text fontWeight={'bold'}>Anúncios</Text>
-                <Box display={'flex'} alignItems={'center'} justifyContent={"center"} p={5} gap={4} flexWrap="wrap">
-               
+                <Text fontWeight={'bold'} color={'black'}>Anúncios</Text>
+                <Box display={'flex'} alignItems={'center'} justifyContent={"center"} p={5} gap={4}
+                 flexWrap={isLargerThan1025 ? "wrap" : "nowrap"} overflow={isLargerThan1025 ? "": 'scroll'} >
                 {userAdespecific.map((ad: iCarAdsInterface) => (
                    <ProductCard
                             key={ad.id}

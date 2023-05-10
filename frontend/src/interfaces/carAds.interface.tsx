@@ -13,6 +13,7 @@ export interface iCarAdsContextInterface {
   setCarAds: React.Dispatch<React.SetStateAction<IAdswithPagination | null>>;
   specificAd: iCarAdsInterface | null;
   setSpecificAd: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
+  seIdCard: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
   fipe: iFipeResponseInterface | null;
   getCarAds: (page: number) => void;
   onSubmitCarAd: (data: FieldValues) => void;

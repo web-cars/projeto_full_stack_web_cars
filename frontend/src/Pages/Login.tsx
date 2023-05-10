@@ -21,6 +21,8 @@ import z from "zod";
 import { Link } from "react-router-dom";
 import { css } from "@emotion/react";
 import { DeleteProfileModal } from "../components/ModalDeleteProfile";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = z.object({
   email: z.string().nonempty("Email é obrigatório").email("Email inválido"),
@@ -147,6 +149,7 @@ export const Login = () => {
           >
             Entrar
           </Button>
+          <ToastContainer />
         </form>
         <Flex direction={"column"} mt={8}>
           <Text

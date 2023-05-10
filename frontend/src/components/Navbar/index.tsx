@@ -30,7 +30,7 @@ interface MenuItemType {
 export const Navbar = () => {
   const { user, logout } = useContext(UserContext)
   const navigate = useNavigate();
-  const [isLargerThanLaptop] = useMediaQuery("(min-width: 768px)");
+  const [isLargerThanLaptop] = useMediaQuery("(min-width: 1025px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMenuIconVisible, setMenuIconVisible] = useState(false);
   const menuItems = [
@@ -201,6 +201,8 @@ export const Navbar = () => {
               p={"10px"}
               h={"max-content"}
             >
+              <ModalEditAdress/>
+              <EditPersonModal/>
               {menuLogged.map((item) =>
                 item.label === "Cadastrar" ? (
                   <Button

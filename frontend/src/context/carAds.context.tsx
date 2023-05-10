@@ -10,6 +10,7 @@ import {
 } from "../interfaces/carAds.interface";
 import { fipeInstance, instance } from "../services/instance";
 import { FieldValues } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export const CarAdsContext = createContext({} as iCarAdsContextInterface);
 
@@ -27,16 +28,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     createAd(data);
   };
   
-  const carAdsContextValue = {id: String}
-  const onSubmitEditCarAd = (data: FieldValues) => {
-    const newAd: any = {}
-    for (const key in data){
-      if(data[key]){
-        newAd[key] = data[key]
-      }
-    }
-    editSpecificAd(newAd)
-  };
+  
   const onDeleteCarAd = (id: string) => deleteSpecificCarAd(id);
   const onGetSpecificAd = (id: string) => getSpecificCarAds(id);
 
@@ -60,14 +52,32 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   const [options, setOptions] = useState<iFipeResponseInterface[] | null>(null);
   const [filter,setFilter] = useState<ISelect | null>(selectDefaultValues)
 
+  const [idCard, seIdCard] = useState<iCarAdsInterface | null>(null);
+  const onSubmitEditCarAd = (data: FieldValues) => {
+   console.log({"marca":brand, "modelo":model, "form": data})
+    const newAd: any = {}
+    for (const key in data) {
+      if (data[key] !== "" && data[key] !== undefined && data[key] !== 0 && !Number.isNaN(data[key])) {
+        if (key === "images" && data[key][0].file === "") {
+          continue;
+        }
+        newAd[key] = data[key];
+      }
+    }
+    editSpecificAd(newAd)
+  };
+
+
   const createAd = (data: FieldValues) => {
     instance
       .post("advertisements", data)
       .then((response) => {
         getCarAds(1);
+        toast.success("Anuncio resgistrado com sucesso");
       })
       .catch((err: iErrorAxios) => {
         console.log(err);
+        toast.error("Dados invalidos")
       });
   };
 
@@ -91,15 +101,17 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   // const editSpecificAd = (id: string, data: FieldValues) => {
   const editSpecificAd = ( data: FieldValues) => {
     console.log(data)
-    // instance
-    //   .patch(`advertisements/${id}`, data)
-    //   .then((response) => {
-    //     getCarAds(1);
-    //     setSpecificAd(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    instance
+      .patch(`advertisements/${idCard}`, data)
+      .then((response) => {
+        getCarAds(1);
+        toast.success("Anuncio atualizado com sucesso");
+        // setUserData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Dados inválidos")
+      });
   };
   const deleteSpecificCarAd = (id: string) => {
     instance
@@ -182,6 +194,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         setFipeCar,
         fipeCar,
         filterCardAds,
+        seIdCard
       }}
     >
       {children}
@@ -199,3 +212,7 @@ const selectDefaultValues = {
   price_min: 0,
   price_max: 0,
 };
+function setUserData(advertisement: any) {
+  throw new Error("Function not implemented.");
+}
+
