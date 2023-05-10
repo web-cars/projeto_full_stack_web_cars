@@ -17,6 +17,7 @@ import { CarAdsContext } from "../../context/carAds.context";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { css } from '@emotion/react';
+import { EditAds } from "../ModalEditAd";
 
 
 export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, description, brand, images, model, year, fuel_type, color, user }: iCarAdsInterface) => {
@@ -27,7 +28,7 @@ export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, descrip
     return (
         <>
             {isActive ? (
-                <Link to={`/adCar/${id}`} style={{ width: isLargerThan1024 ? "100%" : "24%" }}>
+                <Box as="div" style={{ width: isLargerThan1024 ? "100%" : "24%" }}>
                     <Card mb={"10px"} backgroundColor={"transparent"} marginTop={"0"} maxW="sm" onClick={() => onGetSpecificAd(id)}>
                         <CardBody
 
@@ -109,18 +110,8 @@ export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, descrip
                         <Divider />
                     </Card>
                     <Flex gap={"10px"}>
-                        <Button
-                            fontSize={12}
-                            w={"80px"}
-                            h={10}
-                            border={"2px"}
-                            color={"greyScale.grey2"}
-                            cursor={"pointer"}
-                            borderColor={"greyScale.grey2"}
-                            bg={'transparent'}
-                        >
-                            Editar
-                        </Button>
+                        <EditAds id={id}/>
+                        <Link to={`/adCar/${id}`} style={{ width: isLargerThan1024 ? "100%" : "24%" }}></Link>
                         <Button
                             fontSize={12}
                             w={120}
@@ -134,7 +125,7 @@ export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, descrip
                             Ver Detalhes
                         </Button>
                     </Flex>
-                </Link>
+                </Box>
             ) : (<></>)}
 
         </>

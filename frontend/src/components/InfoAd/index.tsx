@@ -25,7 +25,6 @@ export const InfoAd = ({ car, year, km, price, cellPhone }: IInfoAd) => {
   }
   `
   const {user} = useContext(UserContext)
-  console.log(user)
   return (
     <Card css={divMobile} width={{ base: '90%', md: '60%' }} zIndex={1} alignSelf='center' margin={'auto'} backgroundColor={"greyScale.grey10"} color={"greyScale.grey0"}>
       <CardHeader display={'flex'} justifyContent={'center'} alignItems={'center'}>

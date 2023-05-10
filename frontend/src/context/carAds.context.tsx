@@ -26,10 +26,24 @@ export const AdsProvider = ({ children }: iProviderProps) => {
     data.kilometers = Number(data.kilometers);
     createAd(data);
   };
+  
+  const carAdsContextValue = {id: String}
+  const onSubmitEditCarAd = (data: FieldValues) => {
+    const newAd: any = {}
+    for (const key in data){
+      if(data[key]){
+        newAd[key] = data[key]
+      }
+    }
+    editSpecificAd(newAd)
+  };
   const onDeleteCarAd = (id: string) => deleteSpecificCarAd(id);
   const onGetSpecificAd = (id: string) => getSpecificCarAds(id);
-  const onUpdateCarAd = (id: string, data: FieldValues) =>
-    editSpecificAd(id, data);
+
+  // const onUpdateCarAd = (id: string, data: FieldValues) =>
+  //   editSpecificAd(id, data);
+
+    
   const onFipeRequest = (
     brand: string,
     name: string,
@@ -45,8 +59,8 @@ export const AdsProvider = ({ children }: iProviderProps) => {
   const [fuel, setFuel] = useState<number | undefined>(0);
   const [options, setOptions] = useState<iFipeResponseInterface[] | null>(null);
   const [filter,setFilter] = useState<ISelect | null>(selectDefaultValues)
+
   const createAd = (data: FieldValues) => {
-    console.log(data);
     instance
       .post("advertisements", data)
       .then((response) => {
@@ -74,16 +88,18 @@ export const AdsProvider = ({ children }: iProviderProps) => {
       })
       .catch((err) => console.log(err));
   };
-  const editSpecificAd = (id: string, data: FieldValues) => {
-    instance
-      .patch(`advertisements/${id}`, data)
-      .then((response) => {
-        getCarAds(1);
-        setSpecificAd(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // const editSpecificAd = (id: string, data: FieldValues) => {
+  const editSpecificAd = ( data: FieldValues) => {
+    console.log(data)
+    // instance
+    //   .patch(`advertisements/${id}`, data)
+    //   .then((response) => {
+    //     getCarAds(1);
+    //     setSpecificAd(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   const deleteSpecificCarAd = (id: string) => {
     instance
@@ -151,9 +167,10 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         setCarAds,
         setSpecificAd,
         onSubmitCarAd,
+        onSubmitEditCarAd,
         onDeleteCarAd,
         onGetSpecificAd,
-        onUpdateCarAd,
+        // onUpdateCarAd,
         onFipeRequest,
         fipe,
         getCarAds,
@@ -164,7 +181,7 @@ export const AdsProvider = ({ children }: iProviderProps) => {
         options,
         setFipeCar,
         fipeCar,
-        filterCardAds
+        filterCardAds,
       }}
     >
       {children}

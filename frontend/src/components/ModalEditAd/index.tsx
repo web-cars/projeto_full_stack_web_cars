@@ -22,6 +22,7 @@ import {
     InputLeftAddon,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
+import { theme } from "../../style/theme";
 import { CarAdsContext } from "../../context/carAds.context";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,8 +52,8 @@ const schema = z.object({
 })
 
 
-export const AddCarModal = () => {
-    const { onSubmitCarAd, setBrand, setFuel, setModel, setYear, fipe, options, setFipeCar, fipeCar } = useContext(CarAdsContext)
+export const EditAds = ({id}: any) => {
+    const { onSubmitEditCarAd, setBrand, setFuel, setModel, setYear, fipe, options, setFipeCar, fipeCar } = useContext(CarAdsContext)
     const {
         register,
         handleSubmit,
@@ -96,6 +97,12 @@ export const AddCarModal = () => {
         setYear(Number(filteredCar?.year))
         setFuel(filteredCar?.fuel)
     }
+
+    const [btnActive, setBtnActive] = useState("sim");
+    const handleButtonClick = (button: React.SetStateAction<string>) => {
+      setBtnActive(button);
+    };
+
     return (
         <>
             <Button onClick={onOpen} fontSize={12}
@@ -105,17 +112,17 @@ export const AddCarModal = () => {
                 color={"brand.brand1"}
                 cursor={"pointer"}
                 borderColor={"brand.brand1"}
-                bg={'transparent'}>Criar anuncio</Button>
+                bg={'transparent'}>Editar</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Criar Anúncio
+                    <ModalHeader fontSize={"16px"} color={"greyScale.grey-1"}>Editar Anúncio
 
-                        <Text fontSize={"14px"}>Informações do veículo</Text>
+                        <Text fontSize={"14px"} mt='4'>Informações do veículo {id}</Text>
                     </ModalHeader>
                     <ModalCloseButton />
                     <form onSubmit={
-                        handleSubmit(onSubmitCarAd)
+                        handleSubmit(onSubmitEditCarAd)
 
                     }>
                         <ModalBody>
@@ -139,7 +146,6 @@ export const AddCarModal = () => {
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Modelo</FormLabel>
                                 <Select {...register("model")} onChange={(e) => {
-                                    console.log(e.target.value)
                                     filterModel(e.target.value)
                                     setModel(e.target.value)
                                 }} placeholder="Digite a marca do veículo" name="brand" >
@@ -272,6 +278,27 @@ export const AddCarModal = () => {
                                     {errors.description?.message}
                                 </Text>
                             </FormControl>
+                            <Text>Publicado</Text>
+                            <Flex justifyContent="space-around" alignItems="center" mt={4} mb={4}>
+                                <Button
+                                w='40%'
+                                bg={btnActive === "Sim" ? theme.colors.brand.brand1 : theme.colors.greyScale.whiteFixed}
+                                color={btnActive === "Sim" ? theme.colors.greyScale.whiteFixed : theme.colors.greyScale.blackFixed}
+                                border={btnActive === "Sim" ? "none" : "solid"}
+                                borderWidth={btnActive === "Sim" ? "none" : "1px"}
+                                onClick={() => handleButtonClick("Sim")}>
+                                Sim
+                                </Button>
+                                <Button
+                                 w='40%'
+                                bg={btnActive === "Não" ? theme.colors.brand.brand1 : theme.colors.greyScale.whiteFixed}
+                                color={btnActive === "Não" ? theme.colors.greyScale.whiteFixed : theme.colors.greyScale.blackFixed}
+                                border={btnActive === "Não" ? "none" : "solid"}
+                                borderWidth={btnActive === "Não" ? "none" : "1px"}
+                                onClick={() => handleButtonClick("Não")}>
+                                Não
+                                </Button>
+                            </Flex>
                             <FormControl mb="4">
                                 <FormLabel fontSize={"14px"}>Imagem de Capa</FormLabel>
                                 <Input
@@ -304,8 +331,8 @@ export const AddCarModal = () => {
                             <Button bgColor={"greyScale.grey6"} mr="4" onClick={onClose}>
                                 Cancelar
                             </Button>
-                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4">
-                                Criar Anuncio
+                            <Button type="submit" bgColor={"brand.brand3"} css={styleHover} color={"greyScale.grey10"} mr="4" id={id}>
+                                Editar Anuncio 
                             </Button>
                             <ToastContainer />
                         </ModalFooter>

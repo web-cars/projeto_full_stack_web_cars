@@ -272,7 +272,7 @@ export const Navbar = () => {
               gap={"10px"}
               p={"10px"}
               h={"max-content"}
-            >
+              >
               {menuItems.map((item) =>
                 item.label === "Cadastrar" ? (
                   <Button

@@ -16,9 +16,10 @@ export interface iCarAdsContextInterface {
   fipe: iFipeResponseInterface | null;
   getCarAds: (page: number) => void;
   onSubmitCarAd: (data: FieldValues) => void;
+  onSubmitEditCarAd: (data: FieldValues) => void;
   onDeleteCarAd: (id: string) => void;
   onGetSpecificAd: (id: string) => void;
-  onUpdateCarAd: (id: string, data: FieldValues) => void;
+  // onUpdateCarAd: (id: string, data: FieldValues) => void;
   onFipeRequest: (
     brand: string,
     name: string,
@@ -55,6 +56,7 @@ export interface ICarDataInterface {
   year: number;
   fuel_type: string;
   color: string;
+  onUpdateCarAd: (id: string, data: FieldValues) => void;
 }
 interface IPagination {
   currentPage: number;

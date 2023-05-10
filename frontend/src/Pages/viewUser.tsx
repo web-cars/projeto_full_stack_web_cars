@@ -8,8 +8,6 @@ import {
   Avatar,
   Container
 } from "@chakra-ui/react";
-import { ProductCard } from './../components/ProductCard/index';
-import { CarAdsContext } from "../context/carAds.context";
 import { useContext } from "react";
 import { iCarAdsInterface } from './../interfaces/carAds.interface';
 import { Navbar } from './../components/Navbar/index';
@@ -20,9 +18,7 @@ import { AddCarModal } from "../components/ModalAddAd";
 
 export const ViewUser = () => {
 
-  const { carAds } = useContext(CarAdsContext)
   const { user }:any = useContext(UserContext)
-  console.log(user)
   return (
     <>
       <Navbar />
@@ -153,7 +149,7 @@ export const ViewUser = () => {
 
           </UnorderedList>
         </Box>
-        <Flex gap={"5px"}>
+        {/* <Flex gap={"5px"}>
           <Text color={"greyScale.grey3"}>1</Text>
           <Text color={"greyScale.grey5"}>de</Text>
           <Text color={"greyScale.grey5"}>2</Text>
@@ -165,7 +161,7 @@ export const ViewUser = () => {
           color={"brand1"}
         >
           Seguinte &gt;
-        </Button>
+        </Button> */}
       </Box>
       <Footer />
     </>
