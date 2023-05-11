@@ -14,6 +14,7 @@
 
 - **[API](https://kenzie-kars.herokuapp.com/)**
 
+-------------------------------------------------------
 
 # Back-end
 
@@ -63,11 +64,11 @@ Execute o comando em seu terminal:
 yarn dev
 ```
 
-### 4. Acessar documentação swagger
+### 4. Acessar documentação Swagger
 
 http://localhost:3000/api-docs/
 
-
+-------------------------------------------------
 
 # Front-end
 
