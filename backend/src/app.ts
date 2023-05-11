@@ -7,6 +7,9 @@ import { errorHandler } from "./errors/errorHandler";
 import SessionRoutes from "./routes/session/session.routes";
 import userRoutes from "./routes/user/user.routes";
 import adressRoutes from "./routes/adress/adress.route";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger_documentation.json"
+
 
 const app = express();
 app.use(express.json());
@@ -16,5 +19,7 @@ app.use("/users", userRoutes);
 app.use("/session", SessionRoutes);
 app.use("/adress", adressRoutes);
 app.use(errorHandler);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 export default app;
