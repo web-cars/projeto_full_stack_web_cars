@@ -1,0 +1,404 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "E-Commerce Webcars",
+    "description": "Documentação da API Webcars"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags":[{
+    "name":"Advertisements",
+    "description":"Sobre anúncios"
+  },
+  {
+    "name":"Users",
+    "description":"Sobre usuários"
+  }, 
+  {
+    "name":"Session",
+    "description":"Sobre sessão"
+  },
+  {
+    "name":"Address",
+    "description":"Sobre endereço"
+  }],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "JWT": {
+      "description": "JWT token",
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/advertisements": {
+      "post": {
+        "tags" : ["Advertisements"],
+        "description": "",
+        "parameters": [
+          {
+            "in":"body",
+                "name":"body",
+                "description":"Created user object",
+                "required":true,
+                "schema":{
+                  "$ref":"#/definitions/Advertisement"
+                }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/advertisements/{id}": {
+      "patch": {
+        "tags" : ["Advertisements"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags" : ["Advertisements"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags" : ["Advertisements"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/advertisements/select": {
+      "post": {
+        "tags" : ["Advertisements"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [{
+            "in":"body",
+            "name":"body",
+            "description":"Created user object",
+            "required":true,
+            "schema":{
+              "$ref":"#/definitions/User"
+          }
+       }],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/infos": {
+      "get": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "patch": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/resetPassword": {
+      "post": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/resetPassword/{token}": {
+      "patch": {
+        "tags" : ["Users"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/session": {
+      "post": {
+        "tags" : ["Session"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/adress/{id}": {
+      "patch": {
+        "tags" : ["Address"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type":"object",
+        "properties":{
+           "name":{
+              "type":"string"
+           },
+           "email":{
+              "type":"string"
+           },
+           "cpf":{
+              "type":"string"
+           },
+           "cellphone":{
+              "type":"string"
+           },
+           "birthDate":{
+              "type":"string"
+           },
+           "description":{
+              "type":"string"
+           },
+           "isAdmin":{
+            "type":"string"
+           },  
+            "password":{
+              "type":"string"
+           }, 
+           "address":{
+              "type": "object"
+           }
+      },
+      "xml" : {
+        "name" : "Users"
+      }
+    },
+    "Advertisement": {
+      "type":"object",
+        "properties":{
+            "brand":{
+              "type":"string"
+            },
+            "model":{
+              "type":"string"
+            },
+            "fuel_type":{
+              "type":"number"
+            },
+            "color":{
+              "type":"string"
+            },
+            "fipePrice":{
+              "type":"string"
+            },
+            "price":{
+              "type":"string"
+            },
+            "kilometers":{
+              "type":"string"
+            },  
+            "description":{
+              "type":"string"
+            }, 
+            "year":{
+              "type": "number"
+            },
+            "images":{
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+      },
+      "xml" : {
+        "name" : "Advertisements"
+      }
+    }
+  }
+}
