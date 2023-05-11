@@ -20,8 +20,8 @@ import { AddCarModal } from "../components/ModalAddAd";
 import { CarAdsContext } from "../context/carAds.context";
 
 export const ViewUser = () => {
-   const { user }:any = useContext(UserContext)
-  const [userData, setUserData] = useState(user);
+  const { user }:any = useContext(UserContext)
+  const { userAd }:any = useContext(CarAdsContext)
   const [isLargerThan1025] = useMediaQuery("(min-width: 1025px)");
 
   return (
@@ -128,7 +128,7 @@ export const ViewUser = () => {
             justifyContent={"center"}
           >
 
-            {user && user?.advertisements?.length > 0 ? user?.advertisements?.map((card: iCarAdsInterface) => {
+            {userAd && userAd.length > 0 ? userAd.map((card: iCarAdsInterface) => {
 
               return (<>
                 < ProfileAds
@@ -145,7 +145,7 @@ export const ViewUser = () => {
                   year={card.year}
                   fuel_type={card.fuel_type}
                   color={card.color}
-                  user={userData}
+                  user={user}
                 />
               </>
               )

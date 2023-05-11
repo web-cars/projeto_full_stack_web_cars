@@ -14,6 +14,7 @@ export interface iCarAdsContextInterface {
   specificAd: iCarAdsInterface | null;
   setSpecificAd: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
   seIdCard: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
+  setUserAd: React.Dispatch<React.SetStateAction<iCarAdsInterface | null>>;
   fipe: iFipeResponseInterface | null;
   getCarAds: (page: number) => void;
   onSubmitCarAd: (data: FieldValues) => void;
@@ -40,6 +41,7 @@ export interface iCarAdsContextInterface {
   //   React.SetStateAction<ISelect | null>
   // >;
   filterCardAds:(data:ISelect) => void;
+  userAd: any;
 }
 export interface IAdswithPagination {
   advertisements: iCarAdsInterface[];

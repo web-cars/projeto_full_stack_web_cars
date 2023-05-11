@@ -24,7 +24,7 @@ export const InfoAd = ({ car, year, km, price, cellPhone }: IInfoAd) => {
     
   }
   `
-  const {user} = useContext(UserContext)
+  const {user}:any = useContext(UserContext)
   return (
     <Card css={divMobile} width={{ base: '90%', md: '60%' }} zIndex={1} alignSelf='center' margin={'auto'} backgroundColor={"greyScale.grey10"} color={"greyScale.grey0"}>
       <CardHeader display={'flex'} justifyContent={'center'} alignItems={'center'}>
@@ -42,6 +42,7 @@ export const InfoAd = ({ car, year, km, price, cellPhone }: IInfoAd) => {
       <CardFooter>
         <LightMode>
           <Link href={`https://wa.me/+${cellPhone}?text=Óla, gostaria de conversar sobre o seu veículo`} colorScheme={'purple'}  target="_blank" > Comprar</Link>
+          {/* <Link href={`https://wa.me/+${cellPhone}?text=Óla ${user.name}, gostaria de conversar sobre o seu veículo`} colorScheme={'purple'}  target="_blank" > Comprar</Link> */}
         </LightMode>
       </CardFooter>
     </Card>

@@ -50,7 +50,8 @@ export interface IUserReturn {
     id: string;
   };
   image: string;
-  advertisements: [iCarAdsInterface];
+  advertisements: [iCarAdsInterface] | undefined;
+  
 }
 export interface IUserContext {
   user: IUserReturn | null;

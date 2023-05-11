@@ -118,6 +118,7 @@ export const ProfileAds = ({ id, kilometers, fipePrice, price, isActive, descrip
                         <EditAds id={id}/>
                         <Link to={`/adCar/${id}`} style={{ width: isLargerThan1024 ? "100%" : "24%" }}></Link>
                         <Button
+                            key={id}
                             fontSize={12}
                             w={120}
                             h={10}
